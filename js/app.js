@@ -88,46 +88,43 @@ document.addEventListener('DOMContentLoaded', function() {
         
         /**
          * Set up tab button hover effects
-         * Creates a slider that moves between buttons without extending
+         * Creates directional bottom borders based on hover sequence
          */
         setupButtonEffects: function() {
             const tabButtons = document.querySelectorAll('.tab-button');
-            const navSlider = document.querySelector('.nav-slider');
-            let currentButton = null;
+            let previousButton = null;
             
             // Handle mouse enter for each button
             tabButtons.forEach(button => {
-                button.addEventListener('mouseenter', function(e) {
-                    currentButton = this;
+                button.addEventListener('mouseenter', function() {
+                    // Skip animation if hovering the same button as before
+                    if (previousButton === this) {
+                        return;
+                    }
                     
-                    if (navSlider) {
-                        // Position slider directly under the current button
-                        const rect = this.getBoundingClientRect();
-                        navSlider.style.width = `${rect.width}px`;
-                        navSlider.style.left = `${this.offsetLeft}px`;
-                        navSlider.style.opacity = '1';
+                    // Remove all directional classes from this button
+                    this.classList.remove('border-from-left', 'border-from-right');
+                    
+                    // Determine direction based on previous button
+                    if (previousButton) {
+                        const prevIndex = Array.from(tabButtons).indexOf(previousButton);
+                        const currentIndex = Array.from(tabButtons).indexOf(this);
+                        
+                        if (prevIndex < currentIndex) {
+                            // Coming from left to right
+                            this.classList.add('border-from-left');
+                        } else {
+                            // Coming from right to left
+                            this.classList.add('border-from-right');
+                        }
+                    } else {
+                        // First hover, default to from-left
+                        this.classList.add('border-from-left');
                     }
-                });
-                
-                button.addEventListener('mouseleave', function(e) {
-                    if (navSlider && currentButton === this) {
-                        // Hide the slider when leaving a button
-                        navSlider.style.opacity = '0';
-                        currentButton = null;
-                    }
+                    
+                    previousButton = this;
                 });
             });
-            
-            // Handle tab-navigation mouseleave
-            const navArea = document.querySelector('.tab-navigation');
-            if (navArea) {
-                navArea.addEventListener('mouseleave', function() {
-                    if (navSlider) {
-                        navSlider.style.opacity = '0';
-                    }
-                    currentButton = null;
-                });
-            }
         },
         setupScrollEffects: function() {
             const header = document.querySelector('.site-header');
