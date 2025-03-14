@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get all tab buttons and content sections
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
-    
     // Add click event listeners to each tab button
     tabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
@@ -30,6 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update URL with hash without causing page reload
             history.replaceState(null, null, `#${tabId}`);
             
+            // Update the slider to match the active tab when clicking
+            const navSlider = document.querySelector('.nav-slider');
+            if (navSlider) {
+                positionSliderForTab(this);
+            }
+            
             // Scroll to top smoothly when changing tabs
             window.scrollTo({
                 top: 0,
@@ -37,6 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // Helper function to position slider for the active tab
+    function positionSliderForTab(button) {
+        const navSlider = document.querySelector('.nav-slider');
+        if (navSlider && button) {
+            navSlider.style.transition = 'left 0.3s ease, width 0.3s ease';
+            navSlider.style.width = `${button.offsetWidth}px`;
+            navSlider.style.left = `${button.offsetLeft}px`;
+            navSlider.style.opacity = '1';
+            
+            // Hide the slider after a brief delay
+            setTimeout(() => {
+                navSlider.style.opacity = '0';
+            }, 500);
+        }
+    }
     
     // Check for hash in URL or saved tab in sessionStorage
     const initializeTab = () => {

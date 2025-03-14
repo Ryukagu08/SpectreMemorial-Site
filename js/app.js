@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         init: function() {
             this.setupAnimations();
             this.setupImageLoader();
+            this.setupButtonEffects();
             this.setupScrollEffects();
             this.checkEnvironment();
         },
@@ -86,9 +87,48 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         /**
-         * Set up scroll effects
-         * Apply visual effects based on scroll position
+         * Set up tab button hover effects
+         * Creates a slider that moves between buttons without extending
          */
+        setupButtonEffects: function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const navSlider = document.querySelector('.nav-slider');
+            let currentButton = null;
+            
+            // Handle mouse enter for each button
+            tabButtons.forEach(button => {
+                button.addEventListener('mouseenter', function(e) {
+                    currentButton = this;
+                    
+                    if (navSlider) {
+                        // Position slider directly under the current button
+                        const rect = this.getBoundingClientRect();
+                        navSlider.style.width = `${rect.width}px`;
+                        navSlider.style.left = `${this.offsetLeft}px`;
+                        navSlider.style.opacity = '1';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function(e) {
+                    if (navSlider && currentButton === this) {
+                        // Hide the slider when leaving a button
+                        navSlider.style.opacity = '0';
+                        currentButton = null;
+                    }
+                });
+            });
+            
+            // Handle tab-navigation mouseleave
+            const navArea = document.querySelector('.tab-navigation');
+            if (navArea) {
+                navArea.addEventListener('mouseleave', function() {
+                    if (navSlider) {
+                        navSlider.style.opacity = '0';
+                    }
+                    currentButton = null;
+                });
+            }
+        },
         setupScrollEffects: function() {
             const header = document.querySelector('.site-header');
             let lastScrollTop = 0;

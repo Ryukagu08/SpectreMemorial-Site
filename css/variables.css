@@ -24,6 +24,9 @@
     --border-color: var(--spectre-yellow);
     --card-background: var(--spectre-grey);
     
+    /* Button effect variables */
+    --x: 50%;
+    
     /* Typography */
     --font-family-primary: 'DIN Condensed', Arial Narrow, Arial, sans-serif;
     --font-family-secondary: Arial, sans-serif;

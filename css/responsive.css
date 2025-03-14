@@ -6,19 +6,23 @@
         max-width: 1400px;
     }
     
-    .banner-title {
-        font-size: 80px;
+    .banner-logo img {
+        width: 600px;
     }
     
     .section-title {
         font-size: 42px;
     }
+    
+    .logo-image {
+        height: 45px;
+    }
 }
 
 /* Medium Desktops (992px to 1199px) */
 @media (max-width: 1199px) {
-    .banner-title {
-        font-size: 60px;
+    .banner-logo img {
+        width: 350px;
     }
     
     .feature-media, 
@@ -64,8 +68,8 @@
         order: 0;
     }
     
-    .banner-title {
-        font-size: 50px;
+    .banner-logo img {
+        width: 300px;
     }
     
     .section-title {
@@ -133,8 +137,12 @@
         text-align: center;
     }
     
-    .site-title {
+    .site-logo {
         margin-bottom: var(--spacing-sm);
+    }
+    
+    .logo-image {
+        height: 40px;
     }
     
     .banner-title {
@@ -187,8 +195,12 @@
 
 /* Mobile Portrait (up to 575px) */
 @media (max-width: 575px) {
-    .banner-title {
-        font-size: 32px;
+    .logo-image {
+        height: 35px;
+    }
+    
+    .banner-logo img {
+        width: 250px;
     }
     
     .banner-subtitle {

@@ -108,7 +108,7 @@
 .gallery-item:nth-child(6) { animation-delay: 0.35s; }
 
 /* Banner animation */
-.banner-title {
+.banner-logo {
     animation: slideInUp var(--transition-medium) 0.3s both;
 }
 
@@ -173,7 +173,7 @@
     .quote-card,
     .archive-item,
     .gallery-item,
-    .banner-title,
+    .banner-logo,
     .banner-subtitle,
     .banner-date,
     .tab-button.active,

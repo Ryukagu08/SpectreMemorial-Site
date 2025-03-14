@@ -2,7 +2,7 @@
 
 /* Button Components */
 .tab-button {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     background-color: var(--spectre-grey);
     color: var(--text-color);
     border: none;
@@ -17,26 +17,8 @@
     letter-spacing: 1px;
 }
 
-.tab-button::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--primary-color);
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform var(--transition-fast);
-}
-
 .tab-button:hover {
     background-color: #505050;
-}
-
-.tab-button:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
 }
 
 .tab-button.active {
@@ -44,20 +26,29 @@
     color: var(--spectre-black);
 }
 
-.tab-button.active::after {
-    transform: scaleX(1);
+/* Nav Slider */
+.nav-slider {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
 }
 
 /* Banner Components */
-.banner-title {
-    font-size: var(--font-size-xl);
+.banner-logo {
     margin-bottom: var(--spacing-md);
-    line-height: 1.1;
-    text-transform: uppercase;
-    color: var(--primary-color);
-    font-weight: var(--font-weight-black);
-    text-shadow: 0 0 10px rgba(255, 203, 0, 0.5);
-    letter-spacing: 3px;
+    max-width: 100%;
+}
+
+.banner-logo img {
+    max-width: 100%;
+    height: auto;
+    width: 500px;
+    filter: drop-shadow(0 0 10px rgba(255, 203, 0, 0.5));
 }
 
 .banner-subtitle {

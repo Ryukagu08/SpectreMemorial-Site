@@ -26,18 +26,15 @@
     align-items: center;
 }
 
-.site-title {
-    font-size: 36px;
-    letter-spacing: 2px;
-    color: var(--text-color);
-    position: relative;
-    text-transform: uppercase;
-    margin: 0;
+.site-logo {
+    display: flex;
+    align-items: center;
 }
 
-.site-title span {
-    color: var(--primary-color);
-    font-weight: var(--font-weight-black);
+.logo-image {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
 }
 
 /* Tabs layout */
@@ -45,9 +42,8 @@
     display: flex;
     list-style: none;
     gap: 4px;
-    border-bottom: 1px solid var(--spectre-grey);
-    padding-bottom: var(--spacing-sm);
-    margin-top: var(--spacing-lg);
+    margin: 0;
+    position: relative;
 }
 
 /* Tab Content Containers */
