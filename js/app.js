@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let currentButton = null;
             let previousButton = null;
             let hoverTimer = null;
+            let timerButtonId = null; // Track which button initiated the current timer
             const bufferTime = 200; // ms to wait before considering non-quick movement
             
             // Handle mouse enter for each button
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (hoverTimer) {
                         clearTimeout(hoverTimer);
                         hoverTimer = null;
+                        timerButtonId = null; // Reset timer tracking
                     }
                     
                     // Update buttons references
@@ -123,18 +125,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // Determine the direction and add appropriate class
                         if (prevIndex < currentIndex) {
-                            // Moving right
                             this.classList.add('border-from-left');
-                            
-                            // Make previous button's border exit to the right
-                            previousButton.classList.remove('border-from-left', 'border-from-right');
+                        } else {
+                            this.classList.add('border-from-right');
+                        }
+                        
+                        // Remove border from previous button with direction
+                        if (prevIndex < currentIndex) {
+                            // Moving right, remove from right
+                            previousButton.classList.remove('border-from-left');
                             previousButton.classList.add('border-to-right');
                         } else {
-                            // Moving left
-                            this.classList.add('border-from-right');
-                            
-                            // Make previous button's border exit to the left
-                            previousButton.classList.remove('border-from-left', 'border-from-right');
+                            // Moving left, remove from left
+                            previousButton.classList.remove('border-from-right');
                             previousButton.classList.add('border-to-left');
                         }
                         
@@ -150,17 +153,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 button.addEventListener('mouseleave', function() {
                     const buttonToRemove = this;
+                    const buttonId = Array.from(tabButtons).indexOf(buttonToRemove);
+                    
+                    // Store which button initiated this timer
+                    timerButtonId = buttonId;
                     
                     // Set a timer to wait and see if we hover another button quickly
                     hoverTimer = setTimeout(() => {
-                        // If timer completes and this is still the current button,
-                        // then we're not doing a quick movement between buttons
-                        if (currentButton === buttonToRemove) {
+                        // Only apply the disappear animation if:
+                        // 1. This button is still the current button, AND
+                        // 2. This button is the one that initiated the current timer
+                        if (currentButton === buttonToRemove && timerButtonId === buttonId) {
                             // Simple disappear for non-quick movement
                             currentButton.classList.remove('border-from-left', 'border-from-right');
                             currentButton = null;
                             previousButton = null;
                         }
+                        
+                        // Reset timer tracking
+                        hoverTimer = null;
+                        timerButtonId = null;
                     }, bufferTime);
                 });
             });
@@ -176,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             currentButton = null;
                             previousButton = null;
                         }
+                        
+                        // Also reset timer tracking
+                        hoverTimer = null;
+                        timerButtonId = null;
                     }, bufferTime + 100);
                 });
             }
