@@ -29,28 +29,26 @@
     transition: transform 0.3s ease-out;
 }
 
-/* These classes will be added by JavaScript */
+/* Direction-based appearance animations */
 .tab-button.border-from-left::after {
+    transform: scaleX(1);
     transform-origin: left;
 }
 
 .tab-button.border-from-right::after {
-    transform-origin: right;
-}
-
-.tab-button:hover::after {
     transform: scaleX(1);
-}
-
-/* Exit animations - directional disappearing */
-.tab-button.border-from-left:not(:hover)::after {
-    transform: scaleX(0);
     transform-origin: right;
 }
 
-.tab-button.border-from-right:not(:hover)::after {
+/* Exit animations that match travel direction */
+.tab-button.border-to-right::after {
     transform: scaleX(0);
-    transform-origin: left;
+    transform-origin: right;  /* Exit from right when moving right */
+}
+
+.tab-button.border-to-left::after {
+    transform: scaleX(0);
+    transform-origin: left;  /* Exit from left when moving left */
 }
 
 .tab-button.active {
