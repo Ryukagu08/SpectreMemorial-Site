@@ -1,0 +1,85 @@
+/* variables.css - Color and typography variables */
+
+:root {
+    /* Color Palette */
+    --spectre-yellow: #FFCB00;
+    --spectre-pink: #F73D72;
+    --spectre-green: #24EDAE;
+    --spectre-blue: #4BF9FC;
+    --spectre-black: #000000;
+    --spectre-white: #F2F2F2;
+    --spectre-grey: #414141;
+    --spectre-light-grey: #D4D4CC;
+    --spectre-red: #FF3A44;
+    --flashpoint-green: #C6EA34;
+    
+    /* Derived Colors */
+    --primary-color: var(--spectre-yellow); 
+    --secondary-color: var(--spectre-blue);
+    --accent-color: var(--spectre-pink);
+    --highlight-color: var(--spectre-green);
+    --background-color: var(--spectre-black);
+    --text-color: var(--spectre-white);
+    --text-color-secondary: var(--spectre-light-grey);
+    --border-color: var(--spectre-yellow);
+    --card-background: var(--spectre-grey);
+    
+    /* Typography */
+    --font-family-primary: 'DIN Condensed', Arial Narrow, Arial, sans-serif;
+    --font-family-secondary: Arial, sans-serif;
+    
+    /* Font Sizes */
+    --font-size-xl: 72px;
+    --font-size-lg: 36px;
+    --font-size-md: 24px;
+    --font-size-sm: 18px;
+    --font-size-xs: 16px;
+    
+    /* Font Weights */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+    
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 60px;
+    
+    /* Border Radius */
+    --border-radius: 0;
+    
+    /* Shadows */
+    --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.3);
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+    --transition-slow: 0.8s ease;
+    
+    /* Z-indices */
+    --z-index-low: 10;
+    --z-index-medium: 100;
+    --z-index-high: 1000;
+    
+    /* Layout */
+    --container-width: 90%;
+    --container-max-width: 1600px;
+    --header-height: 80px;
+    --footer-padding: 60px 0 30px;
+    
+    /* Grid */
+    --grid-gap: 30px;
+}
+
+@font-face {
+    font-family: 'DIN Condensed';
+    src: url('../fonts/DINCondensed-Bold.woff2') format('woff2'),
+         url('../fonts/DINCondensed-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

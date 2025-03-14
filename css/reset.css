@@ -1,0 +1,89 @@
+/* reset.css - Reset browser defaults */
+
+*, 
+*::before, 
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-normal);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    margin: 0 0 0.5em 0;
+    text-transform: uppercase;
+}
+
+p {
+    margin: 0 0 1rem 0;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+img, 
+picture, 
+video {
+    max-width: 100%;
+    display: block;
+}
+
+button, 
+input, 
+select, 
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    color: inherit;
+    line-height: 1.15;
+    margin: 0;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+/* Remove animations and transitions for people who prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    *, 
+    *::before, 
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
