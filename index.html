@@ -36,7 +36,13 @@
                         <li><button class="subtab-button" data-tab="community-beta">Beta</button></li>
                     </ul>
                 </li>
-                <li><button class="tab-button" data-tab="gallery">Gallery</button></li>
+                <li class="has-subtabs">
+                    <button class="tab-button" data-tab="gallery">Gallery</button>
+                    <ul class="subtab-navigation">
+                        <li><button class="subtab-button" data-tab="gallery-artworks">Artworks</button></li>
+                        <li><button class="subtab-button" data-tab="gallery-fanart">Fan Art</button></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </header>
@@ -458,94 +464,215 @@
         </div>
     </div>
 
-    <!-- Gallery Tab -->
+    <!-- Gallery Tab with Subtabs -->
     <div id="gallery" class="tab-content">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Gallery</h2>
-                <p class="section-description">Visual content from the game.</p>
-            </div>
+        <!-- Default Gallery Content -->
+        <div id="gallery-default" class="subtab-content active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Gallery</h2>
+                    <p class="section-description">Visual content from the Spectre Divide universe.</p>
+                </div>
+                
+                <div class="gallery-overview">
+                    <div class="feature-grid">
+                        <div class="feature-media">
+                            <img src="/api/placeholder/800/500" alt="Gallery Highlight">
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">VISUAL SHOWCASE</h3>
+                            <p class="feature-description">Explore the visual legacy of Spectre Divide through our collection of official artworks and community-created fan art. Select a category above to view specific collections.</p>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="archive-mosaic">
-                <div class="archive-item archive-item-large">
-                    <img src="/api/placeholder/800/500" alt="Placeholder Image">
-                    <div class="archive-content">
-                        <h3 class="archive-item-title">IMAGE TITLE</h3>
-                        <p class="archive-item-caption">Image description placeholder</p>
+                <!-- Featured gallery items -->
+                <h3 class="gallery-section-title">Featured Content</h3>
+                <div class="archive-mosaic">
+                    <div class="archive-item archive-item-large">
+                        <img src="/api/placeholder/800/500" alt="Featured Artwork">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">FEATURED ARTWORK</h3>
+                            <p class="archive-item-caption">Official art for Spectre Divide</p>
+                        </div>
                     </div>
-                </div>
-                <div class="archive-item archive-item-medium">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="archive-content">
-                        <h3 class="archive-item-title">IMAGE TITLE</h3>
-                        <p class="archive-item-caption">Image description placeholder</p>
+                    <div class="archive-item archive-item-medium">
+                        <img src="/api/placeholder/400/300" alt="Featured Fan Art">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">COMMUNITY SPOTLIGHT</h3>
+                            <p class="archive-item-caption">Featured fan creation by community member</p>
+                        </div>
                     </div>
-                </div>
-                <div class="archive-item archive-item-small">
-                    <img src="/api/placeholder/400/200" alt="Placeholder Image">
-                    <div class="archive-content">
-                        <h3 class="archive-item-title">IMAGE TITLE</h3>
-                        <p class="archive-item-caption">Image description placeholder</p>
-                    </div>
-                </div>
-                <div class="archive-item archive-item-small">
-                    <img src="/api/placeholder/400/200" alt="Placeholder Image">
-                    <div class="archive-content">
-                        <h3 class="archive-item-title">IMAGE TITLE</h3>
-                        <p class="archive-item-caption">Image description placeholder</p>
-                    </div>
-                </div>
-                <div class="archive-item archive-item-medium">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="archive-content">
-                        <h3 class="archive-item-title">IMAGE TITLE</h3>
-                        <p class="archive-item-caption">Image description placeholder</p>
-                    </div>
-                </div>
-                <div class="archive-item archive-item-small">
-                    <img src="/api/placeholder/400/200" alt="Placeholder Image">
-                    <div class="archive-content">
-                        <h3 class="archive-item-title">IMAGE TITLE</h3>
-                        <p class="archive-item-caption">Image description placeholder</p>
+                    <div class="archive-item archive-item-small">
+                        <img src="/api/placeholder/400/200" alt="Promotional Art">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">PROMOTIONAL ART</h3>
+                            <p class="archive-item-caption">Season promotional artwork</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Artworks Subtab - Updated with Comics and more generic content -->
+        <div id="gallery-artworks" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Official Artworks</h2>
+                    <p class="section-description">Visual assets from Spectre Divide's development and marketing.</p>
+                </div>
 
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="gallery-caption">
-                        <h3>IMAGE TITLE</h3>
+                <!-- Concept Art Section -->
+                <h3 class="gallery-section-title">Concept Art</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Character Design">
+                        <div class="gallery-caption">
+                            <h3>CHARACTER DESIGN</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Environment Art">
+                        <div class="gallery-caption">
+                            <h3>ENVIRONMENT ART</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Weapon Design">
+                        <div class="gallery-caption">
+                            <h3>WEAPON DESIGN</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="gallery-caption">
-                        <h3>IMAGE TITLE</h3>
+                
+                <!-- Promotional Art Section -->
+                <h3 class="gallery-section-title">Promotional Artwork</h3>
+                <div class="archive-mosaic">
+                    <div class="archive-item archive-item-large">
+                        <img src="/api/placeholder/800/500" alt="Season 0 Art">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">SEASON 0</h3>
+                            <p class="archive-item-caption">Official promotional artwork</p>
+                        </div>
+                    </div>
+                    <div class="archive-item archive-item-medium">
+                        <img src="/api/placeholder/400/300" alt="Season 1 Art">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">SEASON 1</h3>
+                            <p class="archive-item-caption">Official promotional artwork</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="gallery-caption">
-                        <h3>IMAGE TITLE</h3>
+                
+                <!-- Comics Section -->
+                <h3 class="gallery-section-title">Comics & Visual Stories</h3>
+                <div class="archive-mosaic">
+                    <div class="archive-item archive-item-large">
+                        <img src="/api/placeholder/800/500" alt="Official Comic">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">LORE SERIES</h3>
+                            <p class="archive-item-caption">Official comic series</p>
+                        </div>
+                    </div>
+                    <div class="archive-item archive-item-medium">
+                        <img src="/api/placeholder/400/300" alt="Character Story">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">CHARACTER STORIES</h3>
+                            <p class="archive-item-caption">Official narrative content</p>
+                        </div>
+                    </div>
+                    <div class="archive-item archive-item-small">
+                        <img src="/api/placeholder/400/200" alt="Event Comic">
+                        <div class="archive-content">
+                            <h3 class="archive-item-title">EVENT COMICS</h3>
+                            <p class="archive-item-caption">Special event narratives</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="gallery-caption">
-                        <h3>IMAGE TITLE</h3>
+                
+                <!-- Marketing Assets Section -->
+                <h3 class="gallery-section-title">Marketing Materials</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Banners">
+                        <div class="gallery-caption">
+                            <h3>BANNERS & POSTERS</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Logo Variations">
+                        <div class="gallery-caption">
+                            <h3>LOGO DESIGNS</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Social Media">
+                        <div class="gallery-caption">
+                            <h3>SOCIAL MEDIA ASSETS</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="gallery-caption">
-                        <h3>IMAGE TITLE</h3>
+            </div>
+        </div>
+        
+        <!-- Fan Art Subtab - Simplified structure -->
+        <div id="gallery-fanart" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Fan Art</h2>
+                    <p class="section-description">Creative works made by the Spectre Divide community.</p>
+                </div>
+                
+                <!-- Featured Artists Section -->
+                <div class="feature-grid">
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Featured Fan Artist">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">COMMUNITY CREATIONS</h3>
+                        <p class="feature-description">The Spectre Divide community includes talented artists who have created stunning interpretations of the game's world. This gallery celebrates their contributions to the game's visual legacy.</p>
+                        <p class="feature-description">All works are displayed with artist permission and proper attribution.</p>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/400/300" alt="Placeholder Image">
-                    <div class="gallery-caption">
-                        <h3>IMAGE TITLE</h3>
+
+                <!-- General Fan Art Gallery -->
+                <h3 class="gallery-section-title">Community Gallery</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Fan Art 1">
+                        <div class="gallery-caption">
+                            <h3>COMMUNITY ARTWORK</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Fan Art 2">
+                        <div class="gallery-caption">
+                            <h3>COMMUNITY ARTWORK</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Fan Art 3">
+                        <div class="gallery-caption">
+                            <h3>COMMUNITY ARTWORK</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Fan Art 4">
+                        <div class="gallery-caption">
+                            <h3>COMMUNITY ARTWORK</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Fan Art 5">
+                        <div class="gallery-caption">
+                            <h3>COMMUNITY ARTWORK</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Fan Art 6">
+                        <div class="gallery-caption">
+                            <h3>COMMUNITY ARTWORK</h3>
+                        </div>
                     </div>
                 </div>
             </div>
