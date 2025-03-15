@@ -18,29 +18,30 @@
 
 /* Weapon card */
 .weapon-card {
-    background-color: rgba(65, 65, 65, 0.5);
-    border-radius: var(--border-radius);
+    position: relative;
+    height: 350px;
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    transition: all var(--transition-medium);
+    cursor: pointer;
+    background-color: rgba(35, 35, 35, 0.8);
+    border-radius: var(--border-radius);
     border: 2px solid var(--border-color);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    display: flex;
-    flex-direction: column;
+    box-shadow: var(--shadow-md);
     animation: fadeIn var(--transition-medium) both;
 }
 
 .weapon-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(255, 203, 0, 0.2);
-    border-color: var(--primary-color);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 203, 0, 0.3);
+    z-index: 10;
 }
 
-/* Weapon image */
+/* Weapon image styling */
 .weapon-image {
     position: relative;
-    overflow: hidden;
     width: 100%;
-    height: 200px;
+    height: 100%;
+    transition: all var(--transition-medium);
 }
 
 .weapon-image img {
@@ -51,18 +52,35 @@
 }
 
 .weapon-card:hover .weapon-image img {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    filter: brightness(0.7) blur(2px);
 }
 
-/* Weapon details */
+/* Weapon details styling for the hover effect */
 .weapon-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     padding: var(--spacing-md);
-    flex: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0) 100%);
+    color: white;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    justify-content: flex-end;
+    transition: all var(--transition-medium);
+    transform: translateY(76%);
+    box-sizing: border-box;
 }
 
+/* Show full details on hover */
+.weapon-card:hover .weapon-details {
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* Adjust weapon name and type to always be visible */
 .weapon-name {
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-xs);
@@ -70,6 +88,8 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: var(--font-weight-bold);
+    transition: all var(--transition-fast);
+    transform: translateY(0);
 }
 
 .weapon-type {
@@ -78,16 +98,29 @@
     margin-bottom: var(--spacing-md);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+    transform: translateY(0);
 }
 
-/* Weapon Stats Panel Styles */
+/* Make the stats panel only visible on hover */
 .weapon-stats-panel {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-medium);
+    max-height: 0;
+    overflow: hidden;
     margin-bottom: var(--spacing-md);
     width: 100%;
     border-radius: var(--border-radius);
-    overflow: hidden;
     background-color: #191919;
     font-family: var(--font-family-primary);
+}
+
+.weapon-card:hover .weapon-stats-panel {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 1000px;
+    margin-bottom: var(--spacing-sm);
 }
 
 /* Stats header */
@@ -157,6 +190,9 @@
 /* Damage table */
 .damage-table {
     margin-top: 8px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all var(--transition-medium);
 }
 
 .damage-header {
@@ -210,6 +246,10 @@
     border-radius: 13px;
 }
 
+.head-icon, .body-icon, .leg-icon {
+    transition: all var(--transition-fast);
+}
+
 .head-icon {
     width: 20px;
     height: 20px;
@@ -234,6 +274,12 @@
     background-color: #dddddd;
 }
 
+.weapon-card:hover .head-icon, 
+.weapon-card:hover .body-icon, 
+.weapon-card:hover .leg-icon {
+    background-color: white;
+}
+
 /* Category-specific colors for stat bars */
 /* Short Range */
 .short-range .stat-bar {
@@ -252,18 +298,34 @@
 
 /* Category-specific styling for weapon cards on hover */
 /* Short Range */
-#archive-weapons .gallery-section-title:nth-of-type(1) + .weapon-category-description + .weapons-grid .weapon-card:hover {
-    border-color: var(--spectre-pink);
+.weapon-card:hover.short-range {
+    box-shadow: 0 15px 30px rgba(247, 61, 114, 0.3);
 }
 
-/* Mid & Long Range */
-#archive-weapons .gallery-section-title:nth-of-type(2) + .weapon-category-description + .weapons-grid .weapon-card:hover {
-    border-color: var(--spectre-blue);
+.weapon-card:hover.mid-long-range {
+    box-shadow: 0 15px 30px rgba(75, 249, 252, 0.3);
 }
 
-/* Pistol & Melee */
-#archive-weapons .gallery-section-title:nth-of-type(3) + .weapon-category-description + .weapons-grid .weapon-card:hover {
-    border-color: var(--spectre-green);
+.weapon-card:hover.pistol-melee {
+    box-shadow: 0 15px 30px rgba(36, 237, 174, 0.3);
+}
+
+/* Add a "View Stats" indicator */
+.weapon-details::after {
+    content: "HOVER FOR STATS";
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 12px;
+    color: var(--primary-color);
+    opacity: 0.8;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 1px;
+    transition: all var(--transition-fast);
+}
+
+.weapon-card:hover .weapon-details::after {
+    opacity: 0;
 }
 
 /* Staggered animations for weapon cards */
@@ -300,8 +362,8 @@
         gap: var(--spacing-lg);
     }
     
-    .weapon-image {
-        height: 180px;
+    .weapon-card {
+        height: 320px;
     }
     
     .stat-name {
@@ -318,10 +380,11 @@
     .weapon-card {
         max-width: 500px;
         margin: 0 auto;
+        height: 300px;
     }
     
-    .weapon-image {
-        height: 220px;
+    .weapon-details {
+        transform: translateY(70%);
     }
     
     .stat-name {
@@ -339,8 +402,12 @@
 }
 
 @media (max-width: 575px) {
-    .weapon-image {
-        height: 180px;
+    .weapon-card {
+        height: 280px;
+    }
+    
+    .weapon-details {
+        padding: var(--spacing-sm);
     }
     
     .weapon-name {
@@ -362,6 +429,33 @@
     
     .damage-cell {
         font-size: 14px;
+    }
+}
+
+/* Touch device support */
+@media (hover: none) {
+    .weapon-card {
+        height: auto;
+    }
+    
+    .weapon-image {
+        height: 200px;
+    }
+    
+    .weapon-details {
+        position: relative;
+        transform: translateY(0);
+        background: rgba(35, 35, 35, 0.9);
+    }
+    
+    .weapon-stats-panel {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: none;
+    }
+    
+    .weapon-details::after {
+        display: none;
     }
 }
 
@@ -429,10 +523,6 @@
         margin-bottom: 30px;
         max-width: 100%;
         box-shadow: none;
-    }
-    
-    .weapon-image {
-        max-height: 150px;
     }
 }
 
