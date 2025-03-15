@@ -30,17 +30,12 @@
         grid-column: span 6;
     }
     
-    .feature-grid-reverse .feature-media,
-    .feature-grid-reverse .feature-content {
-        grid-column: span 6;
-    }
-    
-    .feature-grid-reverse .feature-media {
-        grid-column: 7 / span 6;
-    }
-    
-    .feature-grid-reverse .feature-content {
+    .feature-grid.feature-grid-reverse .feature-content {
         grid-column: 1 / span 6;
+    }
+    
+    .feature-grid.feature-grid-reverse .feature-media {
+        grid-column: 7 / span 6;
     }
 }
 
@@ -53,19 +48,23 @@
     
     .feature-media, 
     .feature-content,
-    .feature-grid-reverse .feature-media,
-    .feature-grid-reverse .feature-content {
+    .feature-grid.feature-grid-reverse .feature-media,
+    .feature-grid.feature-grid-reverse .feature-content {
         grid-column: span 12;
     }
     
-    .feature-grid-reverse .feature-content {
+    .feature-grid.feature-grid-reverse .feature-content {
         border-left: 5px solid var(--primary-color);
         border-right: none;
-        order: 1;
     }
     
-    .feature-grid-reverse .feature-media {
-        order: 0;
+    /* Use grid-row to control the visual order */
+    .feature-grid.feature-grid-reverse .feature-media {
+        grid-row: 1;
+    }
+    
+    .feature-grid.feature-grid-reverse .feature-content {
+        grid-row: 2;
     }
     
     .banner-logo img {

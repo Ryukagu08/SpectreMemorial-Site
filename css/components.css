@@ -148,6 +148,10 @@
     border: 3px solid var(--primary-color);
 }
 
+.feature-grid-reverse .feature-media .community-banner {
+    object-position: right center;
+}
+
 .feature-title {
     font-size: var(--font-size-md);
     margin-bottom: var(--spacing-md);

@@ -112,12 +112,12 @@
 }
 
 /* Specific grid positioning for reversed layout */
-.feature-grid.feature-grid-reverse .feature-media {
-    grid-column: 6 / span 7;
-}
-
 .feature-grid.feature-grid-reverse .feature-content {
     grid-column: 1 / span 5;
+}
+
+.feature-grid.feature-grid-reverse .feature-media {
+    grid-column: 6 / span 7;
 }
 
 /* Timeline Layout */
