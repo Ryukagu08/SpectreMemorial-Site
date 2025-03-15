@@ -8,7 +8,7 @@
     padding: 0 var(--spacing-md);
 }
 
-/* Header - Now more subtle and aligned */
+/* Header */
 .site-header {
     padding: var(--spacing-sm) 0;
     position: sticky;
@@ -22,7 +22,7 @@
 
 .header-container {
     display: flex;
-    justify-content: center; /* Center the navigation */
+    justify-content: center;
     align-items: center;
 }
 
@@ -65,7 +65,7 @@
 
 /* Banner */
 .main-banner {
-    height: 90vh; /* Taller to accommodate larger logo */
+    height: 90vh;
     background-image: url('/api/placeholder/1920/1080');
     background-size: cover;
     background-position: center;
@@ -104,17 +104,19 @@
 
 .feature-media {
     grid-column: span 7;
+    max-height: 500px;
 }
 
 .feature-content {
     grid-column: span 5;
 }
 
-.feature-grid-reverse .feature-media {
+/* Specific grid positioning for reversed layout */
+.feature-grid.feature-grid-reverse .feature-media {
     grid-column: 6 / span 7;
 }
 
-.feature-grid-reverse .feature-content {
+.feature-grid.feature-grid-reverse .feature-content {
     grid-column: 1 / span 5;
 }
 

@@ -3,7 +3,7 @@
 /* Button Components */
 .tab-button {
     padding: var(--spacing-xs) var(--spacing-sm);
-    background-color: transparent; /* More subtle */
+    background-color: transparent;
     color: var(--text-color);
     border: none;
     border-radius: var(--border-radius);
@@ -19,7 +19,7 @@
 }
 
 .tab-button:hover {
-    background-color: rgba(255, 255, 255, 0.05); /* More subtle hover */
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .tab-button.active {
@@ -32,11 +32,11 @@
     position: absolute;
     bottom: 0;
     height: 3px;
-    background-color: var(--primary-color); /* Full yellow rail */
+    background-color: var(--primary-color);
     transition: left 0.2s ease, width 0.2s ease, opacity 0.2s ease;
     pointer-events: none;
     z-index: 5;
-    box-shadow: 0 0 8px rgba(255, 203, 0, 0.7); /* Glow effect for the entire rail */
+    box-shadow: 0 0 8px rgba(255, 203, 0, 0.7);
 }
 
 .button-rail-indicator::after {
@@ -46,7 +46,7 @@
     left: var(--highlight-left, 0px);
     width: var(--highlight-width, 40px);
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); /* Bright white highlight */
+    background-color: rgba(255, 255, 255, 0.7);
     transition: transform 0.1s ease;
     box-shadow: 0 0 12px var(--primary-color);
 }
@@ -56,7 +56,7 @@
     position: relative;
 }
 
-/* Banner Components - Enlarged logo */
+/* Banner Components */
 .banner-logo {
     margin-bottom: var(--spacing-lg);
     max-width: 100%;
@@ -65,8 +65,8 @@
 .banner-logo img {
     max-width: 100%;
     height: auto;
-    width: 800px; /* Much larger logo */
-    filter: drop-shadow(0 0 20px rgba(255, 203, 0, 0.6)); /* Enhanced glow */
+    width: 800px;
+    filter: drop-shadow(0 0 20px rgba(255, 203, 0, 0.6));
 }
 
 .banner-subtitle {
@@ -110,12 +110,17 @@
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-lg);
     border: 2px solid var(--border-color);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .feature-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform var(--transition-medium);
 }
 
@@ -125,7 +130,7 @@
 
 .feature-content {
     padding: var(--spacing-lg);
-    background-color: rgba(65, 65, 65, 0.5);
+    background-color: rgba(25, 25, 25, 0.7);
     border-radius: var(--border-radius);
     border-left: 5px solid var(--primary-color);
     display: flex;
@@ -133,9 +138,14 @@
     justify-content: center;
 }
 
+/* Styling for community section */
 .feature-grid-reverse .feature-content {
     border-left: none;
     border-right: 5px solid var(--primary-color);
+}
+
+.feature-grid-reverse .feature-media {
+    border: 3px solid var(--primary-color);
 }
 
 .feature-title {
@@ -143,6 +153,8 @@
     margin-bottom: var(--spacing-md);
     color: var(--primary-color);
     letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
 }
 
 .feature-description {
