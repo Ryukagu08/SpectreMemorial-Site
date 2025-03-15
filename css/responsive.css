@@ -37,6 +37,10 @@
     .feature-grid.feature-grid-reverse .feature-media {
         grid-column: 7 / span 6;
     }
+
+    .subtab-navigation {
+        min-width: 160px;
+    }
 }
 
 /* Tablets and Small Desktops (768px to 991px) */
@@ -115,6 +119,11 @@
     .archive-item-small {
         grid-column: span 3;
     }
+
+    /* Subtabs need more space on tablets */
+    .subtab-navigation {
+        min-width: 200px;
+    }
 }
 
 /* Mobile Landscape (576px to 767px) */
@@ -190,6 +199,46 @@
         left: 50%;
         transform: translateX(-50%);
     }
+
+    /* Adjust subtabs for mobile landscape */
+    .has-subtabs {
+        position: static;
+    }
+
+    .subtab-navigation {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        transform: translateY(100%);
+        padding: var(--spacing-md);
+        border-radius: 0;
+        border-width: 1px 0 0 0;
+        z-index: var(--z-index-high);
+    }
+
+    .has-subtabs.subtabs-visible .subtab-navigation {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .subtab-button {
+        flex: 0 0 auto;
+        width: auto;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        margin: 0;
+        text-align: center;
+        border-radius: var(--border-radius);
+    }
 }
 
 /* Mobile Portrait (up to 575px) */
@@ -254,6 +303,16 @@
     .community-grid {
         grid-template-columns: 1fr;
     }
+
+    .tab-button {
+        flex: 1 1 100%;
+        margin-bottom: 5px;
+    }
+
+    /* Adjust subtabs for mobile portrait */
+    .subtab-button {
+        flex: 1 1 calc(50% - 5px);
+    }
 }
 
 /* Landscape orientations */
@@ -274,6 +333,12 @@
     .banner-subtitle {
         font-size: 18px;
         margin-bottom: var(--spacing-sm);
+    }
+
+    /* Adjust subtabs for landscape */
+    .subtab-navigation {
+        max-height: 90vh;
+        overflow-y: auto;
     }
 }
 
@@ -331,6 +396,17 @@
         color: #000;
         border-top: 1px solid #ddd;
     }
+
+    /* Hide subtabs in print */
+    .subtab-navigation {
+        display: none;
+    }
+
+    /* Show all subtab content in print */
+    .subtab-content {
+        display: block !important;
+        page-break-after: always;
+    }
 }
 
 /* High contrast mode */
@@ -340,7 +416,8 @@
         --border-color: CanvasText;
     }
     
-    .tab-button.active {
+    .tab-button.active,
+    .subtab-button.active {
         border: 2px solid CanvasText;
     }
     
@@ -355,6 +432,10 @@
     .archive-item,
     .gallery-item,
     .quote-card {
+        border: 2px solid CanvasText;
+    }
+
+    .subtab-navigation {
         border: 2px solid CanvasText;
     }
 }

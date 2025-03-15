@@ -19,7 +19,14 @@
             <!-- Tab Navigation - Now centered as the only element in header -->
             <ul class="tab-navigation" id="tabNavigation">
                 <li><button class="tab-button active" data-tab="home">Home</button></li>
-                <li><button class="tab-button" data-tab="archive">Game Archive</button></li>
+                <li class="has-subtabs">
+                    <button class="tab-button" data-tab="archive">Game Archive</button>
+                    <ul class="subtab-navigation">
+                        <li><button class="subtab-button" data-tab="archive-maps">Maps</button></li>
+                        <li><button class="subtab-button" data-tab="archive-sponsors">Sponsors</button></li>
+                        <li><button class="subtab-button" data-tab="archive-weapons">Weapons</button></li>
+                    </ul>
+                </li>
                 <li><button class="tab-button" data-tab="timeline">Timeline</button></li>
                 <li><button class="tab-button" data-tab="community">Community</button></li>
                 <li><button class="tab-button" data-tab="gallery">Gallery</button></li>
@@ -76,44 +83,94 @@
         </div>
     </div>
 
-    <!-- Game Archive Tab -->
+    <!-- Game Archive Tab with Subtabs -->
     <div id="archive" class="tab-content">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Game Archive</h2>
-                <p class="section-description">Information and media from the game.</p>
-            </div>
-
-            <div class="feature-grid">
-                <div class="feature-media">
-                    <img src="/api/placeholder/800/500" alt="Placeholder Image">
+        <!-- This is the default/landing page for the Archive tab -->
+        <div id="archive-default" class="subtab-content active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Game Archive</h2>
+                    <p class="section-description">Information and media from the game.</p>
                 </div>
-                <div class="feature-content">
-                    <h3 class="feature-title">MAPS</h3>
-                    <p class="feature-description">This is placeholder text about game maps. Details about maps, locations and game environments would be displayed here.</p>
-                    <p class="feature-description">Additional information about game world and level design would continue in this section.</p>
-                </div>
-            </div>
-
-            <div class="feature-grid feature-grid-reverse">
-                <div class="feature-content">
-                    <h3 class="feature-title">CHARACTERS</h3>
-                    <p class="feature-description">This is placeholder text about game characters. Details about character types, classes and abilities would be displayed here.</p>
-                    <p class="feature-description">Additional information about characters and their gameplay styles would continue in this section.</p>
-                </div>
-                <div class="feature-media">
-                    <img src="/api/placeholder/800/500" alt="Placeholder Image">
+                
+                <!-- Overview content -->
+                <div class="archive-overview">
+                    <p>Select a category above to explore the Spectre Divide archive.</p>
+                    
+                    <div class="archive-highlights">
+                        <div class="feature-grid">
+                            <div class="feature-media">
+                                <img src="/api/placeholder/800/500" alt="Archive Highlight">
+                            </div>
+                            <div class="feature-content">
+                                <h3 class="feature-title">ARCHIVE HIGHLIGHTS</h3>
+                                <p class="feature-description">Explore the complete collection of maps, sponsors, and weapons from Spectre Divide. Our archive preserves the game's legacy for fans and newcomers alike.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="feature-grid">
-                <div class="feature-media">
-                    <img src="/api/placeholder/800/500" alt="Placeholder Image">
+        </div>
+        
+        <!-- Maps Subtab -->
+        <div id="archive-maps" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Maps</h2>
+                    <p class="section-description">Detailed information about the game's maps and environments.</p>
                 </div>
-                <div class="feature-content">
-                    <h3 class="feature-title">WEAPONS</h3>
-                    <p class="feature-description">This is placeholder text about game weapons. Details about weapon types, properties, and mechanics would be displayed here.</p>
-                    <p class="feature-description">Additional information about weapons and gameplay strategies would continue in this section.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Maps Overview">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">MAPS</h3>
+                        <p class="feature-description">This is placeholder text about game maps. Details about maps, locations and game environments would be displayed here.</p>
+                        <p class="feature-description">Additional information about game world and level design would continue in this section.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sponsors Subtab -->
+        <div id="archive-sponsors" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Sponsors</h2>
+                    <p class="section-description">Information about the in-game sponsors and their lore.</p>
+                </div>
+
+                <div class="feature-grid feature-grid-reverse">
+                    <div class="feature-content">
+                        <h3 class="feature-title">SPONSORS</h3>
+                        <p class="feature-description">This is placeholder text about game sponsors. Details about the corporations, organizations, and entities that sponsored competitors would be displayed here.</p>
+                        <p class="feature-description">Additional information about sponsor lore, benefits, and gameplay elements would continue in this section.</p>
+                    </div>
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Sponsors Overview">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weapons Subtab -->
+        <div id="archive-weapons" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Weapons</h2>
+                    <p class="section-description">Details on the arsenal available in Spectre Divide.</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Weapons Overview">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">WEAPONS</h3>
+                        <p class="feature-description">This is placeholder text about game weapons. Details about weapon types, properties, and mechanics would be displayed here.</p>
+                        <p class="feature-description">Additional information about weapons and gameplay strategies would continue in this section.</p>
+                    </div>
                 </div>
             </div>
         </div>

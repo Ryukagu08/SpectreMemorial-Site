@@ -27,6 +27,72 @@
     color: var(--spectre-black);
 }
 
+/* Subtabs Navigation */
+.has-subtabs {
+    position: relative;
+}
+
+.subtab-navigation {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: var(--z-index-high);
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    min-width: 180px;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-fast);
+}
+
+.has-subtabs:hover .subtab-navigation {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.subtab-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+    transition: all var(--transition-fast);
+    margin-bottom: 2px;
+}
+
+.subtab-button:hover {
+    background-color: rgba(255, 203, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.subtab-button.active {
+    background-color: var(--primary-color);
+    color: var(--spectre-black);
+}
+
+/* Subtab content containers */
+.subtab-content {
+    display: none;
+    padding: var(--spacing-lg) 0;
+}
+
+.subtab-content.active {
+    display: block;
+    animation: fadeIn var(--transition-medium);
+}
+
 /* Rail Indicator */
 .button-rail-indicator {
     position: absolute;
