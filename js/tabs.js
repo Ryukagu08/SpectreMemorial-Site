@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
     const subtabButtons = document.querySelectorAll('.subtab-button');
+    const hasSubtabsElements = document.querySelectorAll('.has-subtabs');
+    
+    // Track active tabs
+    let activeMainTab = null;
     
     // Add click event listeners to each tab button
     tabButtons.forEach(button => {
@@ -16,21 +20,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get the tab ID from data attribute
             const tabId = this.getAttribute('data-tab');
             
+            // If on mobile and button has subtabs, we'll handle the click differently
+            if (window.innerWidth <= 767 && this.parentNode.classList.contains('has-subtabs')) {
+                return; // Mobile behavior is managed separately
+            }
+            
             // Remove active class from all tabs
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
             
-            // Reset subtabs - hide all subtab content
-            resetSubtabs();
+            // Reset all subtabs - hide all subtab content
+            resetAllSubtabs();
             
             // Set new active tab
             this.classList.add('active');
             const tabContent = document.getElementById(tabId);
             tabContent.classList.add('active');
+            activeMainTab = tabId;
             
-            // If it's the archive tab, activate the default subtab
-            if (tabId === 'archive') {
-                const defaultSubtab = document.getElementById('archive-default');
+            // If it has subtabs, activate the default subtab
+            if (this.parentNode.classList.contains('has-subtabs')) {
+                const defaultSubtab = document.getElementById(`${tabId}-default`);
                 if (defaultSubtab) {
                     defaultSubtab.classList.add('active');
                 }
@@ -38,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Save current tab to session storage
             sessionStorage.setItem('activeTab', tabId);
+            sessionStorage.removeItem('activeSubtab'); // Clear subtab when changing tabs
             
             // Update URL without page reload
             updateURL(tabId);
@@ -49,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Close any open subtab menus on mobile
-            document.querySelectorAll('.has-subtabs').forEach(el => {
+            hasSubtabsElements.forEach(el => {
                 el.classList.remove('subtabs-visible');
             });
         });
@@ -60,29 +71,31 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Get the subtab ID
+            // Get the subtab ID and parent tab ID
             const subtabId = this.getAttribute('data-tab');
+            const parentTabId = subtabId.split('-')[0]; // First part before hyphen is parent tab ID
             
-            // First, ensure we're on the archive tab
+            // First, ensure we're on the correct main tab
             const currentActiveTab = document.querySelector('.tab-button.active');
-            const archiveTab = document.querySelector('.tab-button[data-tab="archive"]');
+            const parentTab = document.querySelector(`.tab-button[data-tab="${parentTabId}"]`);
             
-            // If we're not on the archive tab, activate it first
-            if (currentActiveTab.getAttribute('data-tab') !== 'archive') {
-                // Activate the archive tab programmatically
+            // If we're not on the correct parent tab, activate it first
+            if (currentActiveTab.getAttribute('data-tab') !== parentTabId) {
+                // Activate the parent tab programmatically
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
                 
-                archiveTab.classList.add('active');
-                const archiveContent = document.getElementById('archive');
-                archiveContent.classList.add('active');
+                parentTab.classList.add('active');
+                const parentContent = document.getElementById(parentTabId);
+                parentContent.classList.add('active');
+                activeMainTab = parentTabId;
                 
-                // Save archive as active tab
-                sessionStorage.setItem('activeTab', 'archive');
+                // Save as active tab
+                sessionStorage.setItem('activeTab', parentTabId);
             }
             
-            // Now handle the subtab
-            resetSubtabs();
+            // Now handle the subtab - first reset all subtabs within this parent
+            resetSubtabsForParent(parentTabId);
             
             // Set new active subtab
             button.classList.add('active');
@@ -93,10 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem('activeSubtab', subtabId);
             
             // Update URL - append the subtab to the URL
-            updateURL('archive', subtabId);
+            updateURL(parentTabId, subtabId);
             
             // Close the subtab menu if on mobile
-            document.querySelectorAll('.has-subtabs').forEach(el => {
+            hasSubtabsElements.forEach(el => {
                 el.classList.remove('subtabs-visible');
             });
             
@@ -110,43 +123,63 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Mobile-specific behavior for subtabs
     if (window.innerWidth <= 767) {
-        const archiveTab = document.querySelector('.has-subtabs .tab-button');
-        archiveTab.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Toggle the subtabs menu
-            const parent = this.parentNode;
-            parent.classList.toggle('subtabs-visible');
-            
-            // If we're showing subtabs, prevent the default tab behavior
-            if (parent.classList.contains('subtabs-visible')) {
-                return false;
-            } else {
-                // Otherwise, continue with normal tab behavior by manually clicking again
-                setTimeout(() => {
-                    this.click();
-                }, 10);
-            }
+        const subtabParents = document.querySelectorAll('.has-subtabs .tab-button');
+        subtabParents.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close other subtab menus first
+                hasSubtabsElements.forEach(el => {
+                    if (el !== this.parentNode) {
+                        el.classList.remove('subtabs-visible');
+                    }
+                });
+                
+                // Toggle the subtabs menu
+                const parent = this.parentNode;
+                parent.classList.toggle('subtabs-visible');
+                
+                // If we're showing subtabs, prevent the default tab behavior
+                if (parent.classList.contains('subtabs-visible')) {
+                    return false;
+                } else {
+                    // Otherwise, continue with normal tab behavior by manually clicking again
+                    setTimeout(() => {
+                        this.click();
+                    }, 10);
+                }
+            });
         });
         
         // Close subtabs when clicking outside
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.has-subtabs')) {
-                document.querySelectorAll('.has-subtabs').forEach(el => {
+                hasSubtabsElements.forEach(el => {
                     el.classList.remove('subtabs-visible');
                 });
             }
         });
     }
     
-    // Reset all subtabs
-    function resetSubtabs() {
+    // Reset all subtabs across all parent tabs
+    function resetAllSubtabs() {
         document.querySelectorAll('.subtab-content').forEach(subtab => {
             subtab.classList.remove('active');
         });
         
         subtabButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+    }
+    
+    // Reset subtabs for a specific parent tab
+    function resetSubtabsForParent(parentTabId) {
+        document.querySelectorAll(`.subtab-content[id^="${parentTabId}-"]`).forEach(subtab => {
+            subtab.classList.remove('active');
+        });
+        
+        document.querySelectorAll(`.subtab-button[data-tab^="${parentTabId}-"]`).forEach(btn => {
             btn.classList.remove('active');
         });
     }
@@ -157,8 +190,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (subtabId) {
             // Only add the subtab to URL if it's not the default
-            if (subtabId !== 'archive-default') {
-                newURL += `-${subtabId.replace('archive-', '')}`;
+            if (subtabId !== `${tabId}-default`) {
+                const subtabSuffix = subtabId.replace(`${tabId}-`, '');
+                newURL += `-${subtabSuffix}`;
             }
         }
         
@@ -175,16 +209,16 @@ document.addEventListener('DOMContentLoaded', function() {
             activeTab = hashParts[0];
             
             // Check if there's a subtab in the URL
-            if (hashParts.length > 1 && activeTab === 'archive') {
+            if (hashParts.length > 1) {
                 // Reconstruct subtab ID
-                activeSubtab = `archive-${hashParts[1]}`;
+                activeSubtab = `${activeTab}-${hashParts[1]}`;
             }
         } 
         // Then check sessionStorage
         else if (sessionStorage.getItem('activeTab')) {
             activeTab = sessionStorage.getItem('activeTab');
             
-            if (activeTab === 'archive' && sessionStorage.getItem('activeSubtab')) {
+            if (sessionStorage.getItem('activeSubtab')) {
                 activeSubtab = sessionStorage.getItem('activeSubtab');
             }
         }
@@ -203,12 +237,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Activate main tab
             tabButtons.forEach(btn => {
                 if (btn.getAttribute('data-tab') === tabId) {
+                    // We need to trigger click event for normal activation
                     btn.click();
                 }
             });
             
-            // If we have a subtab and the active tab is archive, activate subtab
-            if (subtabId && tabId === 'archive') {
+            // If we have a subtab, activate it after a short delay 
+            // to ensure the parent tab is fully activated
+            if (subtabId && document.getElementById(subtabId)) {
                 setTimeout(() => {
                     subtabButtons.forEach(btn => {
                         if (btn.getAttribute('data-tab') === subtabId) {
@@ -225,4 +261,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle browser navigation
     window.addEventListener('popstate', initializeNavigation);
+    
+    // Handle window resize for mobile/desktop view switching
+    window.addEventListener('resize', function() {
+        // Re-initialize subtab behavior if size crosses mobile breakpoint
+        const wasMobile = window.innerWidth <= 767;
+        
+        if (wasMobile !== (window.innerWidth <= 767)) {
+            // Remove any lingering mobile-specific classes
+            if (!wasMobile) {
+                hasSubtabsElements.forEach(el => {
+                    el.classList.remove('subtabs-visible');
+                });
+            }
+        }
+    });
 });

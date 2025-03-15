@@ -28,7 +28,14 @@
                     </ul>
                 </li>
                 <li><button class="tab-button" data-tab="timeline">Timeline</button></li>
-                <li><button class="tab-button" data-tab="community">Community</button></li>
+                <li class="has-subtabs">
+                    <button class="tab-button" data-tab="community">Community</button>
+                    <ul class="subtab-navigation">
+                        <li><button class="subtab-button" data-tab="community-discord">Discord</button></li>
+                        <li><button class="subtab-button" data-tab="community-alpha">Alpha</button></li>
+                        <li><button class="subtab-button" data-tab="community-beta">Beta</button></li>
+                    </ul>
+                </li>
                 <li><button class="tab-button" data-tab="gallery">Gallery</button></li>
             </ul>
         </div>
@@ -236,77 +243,214 @@
         </div>
     </div>
 
-    <!-- Community Tab -->
+    <!-- Community Tab with Subtabs -->
     <div id="community" class="tab-content">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Community</h2>
-                <p class="section-description">Content created by the community.</p>
+        <!-- Default Community Content -->
+        <div id="community-default" class="subtab-content active">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Community</h2>
+                </div>
+                
+                <div class="community-overview">
+                    <div class="feature-grid">
+                        <div class="feature-media">
+                            <img src="/api/placeholder/800/500" alt="Community Highlight">
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">COMMUNITY HIGHLIGHTS</h3>
+                            <p class="feature-description">The Spectre Divide community thrived across multiple platforms and testing phases. Explore the Discord server and memories from the Alpha and Beta tests.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="community-grid">
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Avatar">
+                            <div class="author-info">
+                                <p class="author-name">USERNAME</p>
+                                <p class="author-title">PLAYER TITLE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Avatar">
+                            <div class="author-info">
+                                <p class="author-name">USERNAME</p>
+                                <p class="author-title">PLAYER TITLE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="community-grid">
-                <div class="quote-card">
-                    <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
-                    <div class="quote-author">
-                        <img src="/api/placeholder/80/80" alt="Avatar">
-                        <div class="author-info">
-                            <p class="author-name">USERNAME</p>
-                            <p class="author-title">PLAYER TITLE</p>
-                        </div>
+        </div>
+        
+        <!-- Discord Community Subtab -->
+        <div id="community-discord" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Discord Community</h2>
+                    <p class="section-description">The hub of the Spectre Divide community.</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Discord Server Banner">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">THE DISCORD SERVER</h3>
+                        <p class="feature-description">The Spectre Divide Discord server was the central gathering place for the community throughout the game's lifetime. It hosted discussions, tournaments, developer Q&As, and formed lasting connections.</p>
                     </div>
                 </div>
 
-                <div class="quote-card">
-                    <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
-                    <div class="quote-author">
-                        <img src="/api/placeholder/80/80" alt="Avatar">
-                        <div class="author-info">
-                            <p class="author-name">USERNAME</p>
-                            <p class="author-title">PLAYER TITLE</p>
+                <div class="community-grid">
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Discord User Avatar">
+                            <div class="author-info">
+                                <p class="author-name">USERNAME</p>
+                                <p class="author-title">PLAYER TITLE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Discord User Avatar">
+                            <div class="author-info">
+                                <p class="author-name">USERNAME</p>
+                                <p class="author-title">PLAYER TITLE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Discord User Avatar">
+                            <div class="author-info">
+                                <p class="author-name">USERNAME</p>
+                                <p class="author-title">PLAYER TITLE</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="quote-card">
-                    <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
-                    <div class="quote-author">
-                        <img src="/api/placeholder/80/80" alt="Avatar">
-                        <div class="author-info">
-                            <p class="author-name">USERNAME</p>
-                            <p class="author-title">PLAYER TITLE</p>
-                        </div>
+            </div>
+        </div>
+        
+        <!-- Alpha Community Subtab -->
+        <div id="community-alpha" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Alpha Community</h2>
+                    <p class="section-description">Stories and memories from the Alpha testing phase.</p>
+                </div>
+                
+                <div class="feature-grid feature-grid-reverse">
+                    <div class="feature-content">
+                        <h3 class="feature-title">THE ALPHA COMMUNITY</h3>
+                        <p class="feature-description">The Alpha testers were the pioneers of Spectre Divide, experiencing the game in its earliest form and providing crucial feedback that would shape its development.</p>
+                        <p class="feature-description">This community developed unique strategies and memes during the formative phase of the game's life.</p>
+                    </div>
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Alpha Community Banner">
                     </div>
                 </div>
 
-                <div class="quote-card">
-                    <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
-                    <div class="quote-author">
-                        <img src="/api/placeholder/80/80" alt="Avatar">
-                        <div class="author-info">
-                            <p class="author-name">USERNAME</p>
-                            <p class="author-title">PLAYER TITLE</p>
+                <div class="community-grid">
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for Alpha tester quotes. Memories from the earliest days of Spectre Divide would appear here.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Alpha Tester Avatar">
+                            <div class="author-info">
+                                <p class="author-name">ALPHA USER</p>
+                                <p class="author-title">ALPHA TESTER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for Alpha tester quotes. Memories from the earliest days of Spectre Divide would appear here.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Alpha Tester Avatar">
+                            <div class="author-info">
+                                <p class="author-name">ALPHA USER</p>
+                                <p class="author-title">ALPHA TESTER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for Alpha tester quotes. Memories from the earliest days of Spectre Divide would appear here.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Alpha Tester Avatar">
+                            <div class="author-info">
+                                <p class="author-name">ALPHA USER</p>
+                                <p class="author-title">ALPHA TESTER</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="quote-card">
-                    <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
-                    <div class="quote-author">
-                        <img src="/api/placeholder/80/80" alt="Avatar">
-                        <div class="author-info">
-                            <p class="author-name">USERNAME</p>
-                            <p class="author-title">PLAYER TITLE</p>
-                        </div>
+            </div>
+        </div>
+        
+        <!-- Beta Community Subtab -->
+        <div id="community-beta" class="subtab-content">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Beta Community</h2>
+                    <p class="section-description">Stories and memories from the Beta testing phase.</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-media">
+                        <img src="/api/placeholder/800/500" alt="Beta Community Banner">
+                    </div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">THE BETA COMMUNITY</h3>
+                        <p class="feature-description">The Beta phase saw a significant influx of new players as Spectre Divide began to reach a wider audience. During this time, the meta evolved rapidly and many of the game's most beloved strategies emerged.</p>
+                        <p class="feature-description">Beta players were instrumental in refining game balance and creating the competitive community.</p>
                     </div>
                 </div>
 
-                <div class="quote-card">
-                    <p class="quote-text">This is a placeholder for community content. Quotes and stories from players would appear in this space.</p>
-                    <div class="quote-author">
-                        <img src="/api/placeholder/80/80" alt="Avatar">
-                        <div class="author-info">
-                            <p class="author-name">USERNAME</p>
-                            <p class="author-title">PLAYER TITLE</p>
+                <div class="community-grid">
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for Beta tester quotes. Stories from the vibrant Beta testing phase would appear here.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Beta Tester Avatar">
+                            <div class="author-info">
+                                <p class="author-name">BETA USER</p>
+                                <p class="author-title">BETA TESTER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for Beta tester quotes. Stories from the vibrant Beta testing phase would appear here.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Beta Tester Avatar">
+                            <div class="author-info">
+                                <p class="author-name">BETA USER</p>
+                                <p class="author-title">BETA TESTER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">This is a placeholder for Beta tester quotes. Stories from the vibrant Beta testing phase would appear here.</p>
+                        <div class="quote-author">
+                            <img src="/api/placeholder/80/80" alt="Beta Tester Avatar">
+                            <div class="author-info">
+                                <p class="author-name">BETA USER</p>
+                                <p class="author-title">BETA TESTER</p>
+                            </div>
                         </div>
                     </div>
                 </div>
