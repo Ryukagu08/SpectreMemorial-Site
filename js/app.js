@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         init: function() {
             this.setupAnimations();
             this.setupImageLoader();
-            this.setupButtonEffects();
+            this.setupButtonRailEffect();
             this.setupScrollEffects();
             this.checkEnvironment();
         },
@@ -87,113 +87,75 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         /**
-         * Set up tab button hover effects with directional borders
+         * Set up tab button rail effect
+         * Creates a highlight that follows the cursor within each button
          */
-        setupButtonEffects: function() {
+        setupButtonRailEffect: function() {
             const tabButtons = document.querySelectorAll('.tab-button');
-            let currentButton = null;
-            let previousButton = null;
-            let hoverTimer = null;
-            let timerButtonId = null; // Track which button initiated the current timer
-            const bufferTime = 200; // ms to wait before considering non-quick movement
+            const navContainer = document.querySelector('.tab-navigation');
             
-            // Handle mouse enter for each button
+            // Create rail indicator element
+            const railIndicator = document.createElement('span');
+            railIndicator.classList.add('button-rail-indicator');
+            navContainer.appendChild(railIndicator);
+            
+            // Hide the rail initially
+            railIndicator.style.opacity = '0';
+            
+            // Track which button we're currently hovering
+            let currentButton = null;
+            
+            // Mouse enter event for each button
             tabButtons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    // Clear any pending timer
-                    if (hoverTimer) {
-                        clearTimeout(hoverTimer);
-                        hoverTimer = null;
-                        timerButtonId = null; // Reset timer tracking
-                    }
-                    
-                    // Update buttons references
-                    previousButton = currentButton;
+                button.addEventListener('mouseenter', function(e) {
                     currentButton = this;
                     
-                    // Skip animation if hovering the same button
-                    if (previousButton === currentButton) {
-                        return;
-                    }
+                    // Position the rail indicator at the current button
+                    const buttonRect = this.getBoundingClientRect();
+                    const navRect = navContainer.getBoundingClientRect();
                     
-                    // Set direction based on movement pattern
-                    this.classList.remove('border-from-left', 'border-from-right');
+                    // Calculate relative position to the navigation container
+                    const relativeLeft = buttonRect.left - navRect.left;
                     
-                    if (previousButton) {
-                        const prevIndex = Array.from(tabButtons).indexOf(previousButton);
-                        const currentIndex = Array.from(tabButtons).indexOf(currentButton);
-                        
-                        // Determine the direction and add appropriate class
-                        if (prevIndex < currentIndex) {
-                            this.classList.add('border-from-left');
-                        } else {
-                            this.classList.add('border-from-right');
-                        }
-                        
-                        // Remove border from previous button with direction
-                        if (prevIndex < currentIndex) {
-                            // Moving right, remove from right
-                            previousButton.classList.remove('border-from-left');
-                            previousButton.classList.add('border-to-right');
-                        } else {
-                            // Moving left, remove from left
-                            previousButton.classList.remove('border-from-right');
-                            previousButton.classList.add('border-to-left');
-                        }
-                        
-                        // Reset previous button's classes after animation completes
-                        setTimeout(() => {
-                            previousButton.classList.remove('border-to-left', 'border-to-right');
-                        }, 300);
-                    } else {
-                        // Default to left entry for first hover
-                        this.classList.add('border-from-left');
-                    }
+                    // Make rail visible and position it
+                    railIndicator.style.left = `${relativeLeft}px`;
+                    railIndicator.style.width = `${buttonRect.width}px`;
+                    railIndicator.style.opacity = '1';
+                    
+                    // Initial position for the rail's highlight based on entry point
+                    updateRailHighlight(e);
                 });
                 
+                button.addEventListener('mousemove', updateRailHighlight);
+                
                 button.addEventListener('mouseleave', function() {
-                    const buttonToRemove = this;
-                    const buttonId = Array.from(tabButtons).indexOf(buttonToRemove);
+                    currentButton = null;
                     
-                    // Store which button initiated this timer
-                    timerButtonId = buttonId;
-                    
-                    // Set a timer to wait and see if we hover another button quickly
-                    hoverTimer = setTimeout(() => {
-                        // Only apply the disappear animation if:
-                        // 1. This button is still the current button, AND
-                        // 2. This button is the one that initiated the current timer
-                        if (currentButton === buttonToRemove && timerButtonId === buttonId) {
-                            // Simple disappear for non-quick movement
-                            currentButton.classList.remove('border-from-left', 'border-from-right');
-                            currentButton = null;
-                            previousButton = null;
-                        }
-                        
-                        // Reset timer tracking
-                        hoverTimer = null;
-                        timerButtonId = null;
-                    }, bufferTime);
+                    // Fade out the rail when leaving a button
+                    railIndicator.style.opacity = '0';
                 });
             });
             
-            // Handle mouse leaving the entire navigation
-            const navArea = document.querySelector('.tab-navigation');
-            if (navArea) {
-                navArea.addEventListener('mouseleave', function() {
-                    // Use a slightly longer buffer when leaving the nav area
-                    setTimeout(() => {
-                        if (currentButton) {
-                            currentButton.classList.remove('border-from-left', 'border-from-right');
-                            currentButton = null;
-                            previousButton = null;
-                        }
-                        
-                        // Also reset timer tracking
-                        hoverTimer = null;
-                        timerButtonId = null;
-                    }, bufferTime + 100);
-                });
+            // Handle rail highlight positioning based on mouse position
+            function updateRailHighlight(e) {
+                if (!currentButton) return;
+                
+                const buttonRect = currentButton.getBoundingClientRect();
+                const highlightWidth = Math.min(buttonRect.width * 0.3, 40); // Rail highlight width (30% of button or max 40px)
+                
+                // Calculate the position within the button (0 to 1)
+                const xRatio = (e.clientX - buttonRect.left) / buttonRect.width;
+                
+                // Clamp position within the button boundaries
+                const clampedRatio = Math.max(0, Math.min(1, xRatio));
+                
+                // Calculate highlight position, accounting for its width
+                const maxLeft = buttonRect.width - highlightWidth;
+                const highlightLeft = clampedRatio * maxLeft;
+                
+                // Update the rail highlight position
+                railIndicator.style.setProperty('--highlight-left', `${highlightLeft}px`);
+                railIndicator.style.setProperty('--highlight-width', `${highlightWidth}px`);
             }
         },
         
