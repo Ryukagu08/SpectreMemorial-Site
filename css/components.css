@@ -3,7 +3,7 @@
 /* Button Components */
 .tab-button {
     padding: var(--spacing-xs) var(--spacing-sm);
-    background-color: var(--spectre-grey);
+    background-color: transparent; /* More subtle */
     color: var(--text-color);
     border: none;
     border-radius: var(--border-radius);
@@ -15,10 +15,11 @@
     position: relative;
     overflow: hidden;
     letter-spacing: 1px;
+    margin: 0 2px;
 }
 
 .tab-button:hover {
-    background-color: #505050;
+    background-color: rgba(255, 255, 255, 0.05); /* More subtle hover */
 }
 
 .tab-button.active {
@@ -42,11 +43,10 @@
     content: '';
     position: absolute;
     bottom: 0;
-    left: var(--highlight-width, 0px);
+    left: var(--highlight-left, 0px);
     width: var(--highlight-width, 40px);
     height: 100%;
     background-color: rgba(255, 255, 255, 0.7); /* Bright white highlight */
-    transform: translateX(calc(var(--highlight-left, 0px) - var(--highlight-width, 0px)));
     transition: transform 0.1s ease;
     box-shadow: 0 0 12px var(--primary-color);
 }
@@ -56,17 +56,17 @@
     position: relative;
 }
 
-/* Banner Components */
+/* Banner Components - Enlarged logo */
 .banner-logo {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
     max-width: 100%;
 }
 
 .banner-logo img {
     max-width: 100%;
     height: auto;
-    width: 500px;
-    filter: drop-shadow(0 0 10px rgba(255, 203, 0, 0.5));
+    width: 800px; /* Much larger logo */
+    filter: drop-shadow(0 0 20px rgba(255, 203, 0, 0.6)); /* Enhanced glow */
 }
 
 .banner-subtitle {

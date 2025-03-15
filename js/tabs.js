@@ -1,35 +1,35 @@
 /**
  * tabs.js - Tab navigation functionality
- * Handles tab switching and maintains tab state
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all tab buttons and content sections
+    // Get all tab elements
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
+    
     // Add click event listeners to each tab button
     tabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Get the tab ID from the data-tab attribute
+            // Get the tab ID from data attribute
             const tabId = this.getAttribute('data-tab');
             
-            // Remove active class from all buttons and contents
+            // Remove active class from all tabs
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
             
-            // Add active class to current button and corresponding content
+            // Set new active tab
             this.classList.add('active');
             document.getElementById(tabId).classList.add('active');
             
-            // Save current tab to sessionStorage for persistence
+            // Save current tab to session storage
             sessionStorage.setItem('activeTab', tabId);
             
-            // Update URL with hash without causing page reload
+            // Update URL without page reload
             history.replaceState(null, null, `#${tabId}`);
             
-            // Scroll to top smoothly when changing tabs
+            // Smooth scroll to top
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Check for hash in URL or saved tab in sessionStorage
+    // Get active tab from URL or storage
     const initializeTab = () => {
         let activeTab;
         
-        // First check URL hash
+        // Check URL hash first
         if (window.location.hash) {
             activeTab = window.location.hash.substring(1);
         } 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             activeTab = 'home';
         }
         
-        // Activate the appropriate tab if it exists
+        // Activate tab if it exists
         if (document.getElementById(activeTab)) {
             tabButtons.forEach(btn => {
                 if (btn.getAttribute('data-tab') === activeTab) {
@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Initialize the correct tab
+    // Initialize tab on page load
     initializeTab();
     
-    // Handle back/forward browser navigation
+    // Handle browser navigation
     window.addEventListener('popstate', initializeTab);
 });

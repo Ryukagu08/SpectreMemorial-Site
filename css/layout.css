@@ -8,33 +8,22 @@
     padding: 0 var(--spacing-md);
 }
 
-/* Header */
+/* Header - Now more subtle and aligned */
 .site-header {
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-sm) 0;
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    border-bottom: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid rgba(255, 203, 0, 0.2);
     z-index: var(--z-index-high);
-    height: var(--header-height);
+    height: auto;
 }
 
 .header-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the navigation */
     align-items: center;
-}
-
-.site-logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-image {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
 }
 
 /* Tabs layout */
@@ -76,7 +65,7 @@
 
 /* Banner */
 .main-banner {
-    height: 80vh;
+    height: 90vh; /* Taller to accommodate larger logo */
     background-image: url('/api/placeholder/1920/1080');
     background-size: cover;
     background-position: center;
@@ -211,7 +200,7 @@
     color: var(--text-color);
     padding: var(--footer-padding);
     position: relative;
-    border-top: 2px solid var(--border-color);
+    border-top: 1px solid rgba(255, 203, 0, 0.2);
 }
 
 .footer-content {

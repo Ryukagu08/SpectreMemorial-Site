@@ -1,6 +1,5 @@
 /**
  * app.js - Main application functionality
- * Handles core site features and interactions
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -16,32 +15,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
         /**
          * Set up animations with intersection observer
-         * Only animate elements when they enter the viewport
          */
         setupAnimations: function() {
             const animatedElements = document.querySelectorAll(
                 '.feature-grid, .timeline-item, .quote-card, .archive-item, .gallery-item'
             );
             
-            // Skip if IntersectionObserver is not supported
             if (!('IntersectionObserver' in window)) return;
             
             const animationObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    // Add animation class when element enters viewport
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate');
-                        // Stop observing after animation is triggered
                         animationObserver.unobserve(entry.target);
                     }
                 });
             }, {
-                root: null,
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             });
             
-            // Start observing each element
             animatedElements.forEach(element => {
                 element.classList.add('will-animate');
                 animationObserver.observe(element);
@@ -50,17 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         /**
          * Set up lazy loading for images
-         * Only load images when they approach the viewport
          */
         setupImageLoader: function() {
             const images = document.querySelectorAll('img[data-src]');
             
-            // Skip if no images need lazy loading
             if (images.length === 0) return;
             
-            // Skip if IntersectionObserver is not supported
             if (!('IntersectionObserver' in window)) {
-                // Fallback to load all images immediately
                 images.forEach(img => {
                     img.src = img.dataset.src;
                     img.removeAttribute('data-src');
@@ -81,14 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 rootMargin: '100px 0px'
             });
             
-            images.forEach(image => {
-                imageObserver.observe(image);
-            });
+            images.forEach(image => imageObserver.observe(image));
         },
         
         /**
-         * Set up tab button rail effect
-         * Creates a highlight that follows the cursor within each button
+         * Set up tab button rail effect with cursor following
          */
         setupButtonRailEffect: function() {
             const tabButtons = document.querySelectorAll('.tab-button');
@@ -99,30 +85,26 @@ document.addEventListener('DOMContentLoaded', function() {
             railIndicator.classList.add('button-rail-indicator');
             navContainer.appendChild(railIndicator);
             
-            // Hide the rail initially
+            // Hide rail initially
             railIndicator.style.opacity = '0';
             
-            // Track which button we're currently hovering
+            // Track currently hovered button
             let currentButton = null;
             
-            // Mouse enter event for each button
+            // Handle button hover events
             tabButtons.forEach(button => {
                 button.addEventListener('mouseenter', function(e) {
                     currentButton = this;
                     
-                    // Position the rail indicator at the current button
+                    // Position rail under current button
                     const buttonRect = this.getBoundingClientRect();
                     const navRect = navContainer.getBoundingClientRect();
-                    
-                    // Calculate relative position to the navigation container
                     const relativeLeft = buttonRect.left - navRect.left;
                     
-                    // Make rail visible and position it
                     railIndicator.style.left = `${relativeLeft}px`;
                     railIndicator.style.width = `${buttonRect.width}px`;
                     railIndicator.style.opacity = '1';
                     
-                    // Initial position for the rail's highlight based on entry point
                     updateRailHighlight(e);
                 });
                 
@@ -130,70 +112,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 button.addEventListener('mouseleave', function() {
                     currentButton = null;
-                    
-                    // Fade out the rail when leaving a button
                     railIndicator.style.opacity = '0';
                 });
             });
             
-            // Handle rail highlight positioning based on mouse position
+            // Update highlight position based on cursor
             function updateRailHighlight(e) {
                 if (!currentButton) return;
                 
                 const buttonRect = currentButton.getBoundingClientRect();
-                const highlightWidth = Math.min(buttonRect.width * 0.3, 40); // Rail highlight width (30% of button or max 40px)
+                const highlightWidth = Math.min(buttonRect.width * 0.3, 40);
                 
-                // Calculate the position within the button (0 to 1)
+                // Calculate position ratio (0 to 1)
                 const xRatio = (e.clientX - buttonRect.left) / buttonRect.width;
-                
-                // Clamp position within the button boundaries
                 const clampedRatio = Math.max(0, Math.min(1, xRatio));
                 
-                // Calculate highlight position, accounting for its width
+                // Calculate highlight position
                 const maxLeft = buttonRect.width - highlightWidth;
                 const highlightLeft = clampedRatio * maxLeft;
                 
-                // Update the rail highlight position
+                // Update CSS variables
                 railIndicator.style.setProperty('--highlight-left', `${highlightLeft}px`);
                 railIndicator.style.setProperty('--highlight-width', `${highlightWidth}px`);
             }
         },
         
         /**
-         * Set up scroll effects
-         * Apply visual effects based on scroll position
+         * Setup header scroll effects
          */
         setupScrollEffects: function() {
             const header = document.querySelector('.site-header');
-            let lastScrollTop = 0;
             
             window.addEventListener('scroll', () => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                // Header transparency effect
                 if (scrollTop > 50) {
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
                 }
-                
-                // Store scroll position for direction detection
-                lastScrollTop = scrollTop;
             });
         },
         
         /**
-         * Check environment settings and apply appropriate modifications
-         * Handle dark mode, reduced motion preferences, etc.
+         * Check user environment preferences
          */
         checkEnvironment: function() {
             // Check for reduced motion preference
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReducedMotion) {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 document.body.classList.add('reduced-motion');
             }
             
-            // Check for dark mode preference (for potential light mode option)
+            // Check for dark/light mode preference
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             document.body.classList.add(prefersDarkMode ? 'dark-theme' : 'light-theme');
         }
