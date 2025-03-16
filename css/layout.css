@@ -118,21 +118,22 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.2);
-    transition: transform var(--transition-medium);
+    transform: scale(1.0);
+    transition: transform 1.2s ease;
 }
 
 .feature-media:hover img {
-    transform: scale(1.25);
+    transform: scale(1.1);
 }
 
 /* Archive-specific styles */
 .archive-overview .feature-media img {
-    transform: scale(1.33);
+    transform: scale(1.33); /* Restore original higher zoom level */
+    transition: transform 1.2s ease;
 }
 
 .archive-overview .feature-media:hover img {
-    transform: scale(1.4);
+    transform: scale(1.4); /* Restore original hover zoom level */
 }
 
 /* Specific grid positioning for reversed layout */
@@ -206,12 +207,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.2); /* Increased scale factor */
-    transition: transform var(--transition-medium);
+    transform: scale(1.0);
+    transition: transform 1.2s ease;
 }
 
 .archive-item:hover img {
-    transform: scale(1.25);
+    transform: scale(1.1);
 }
 
 .archive-item-large {
@@ -245,12 +246,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.2); /* Increased scale factor */
-    transition: transform var(--transition-medium);
+    transform: scale(1.0);
+    transition: transform 1.2s ease;
 }
 
 .gallery-item:hover img {
-    transform: scale(1.25);
+    transform: scale(1.1);
 }
 
 /* Footer Layout */
@@ -282,32 +283,12 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Feature images - reset starting scale */
-.feature-media img {
-    transform: scale(1.0);
-    transition: transform var(--transition-medium);
-}
-
-.feature-media:hover img {
-    transform: scale(1.1);
-}
-
-/* Archive items - reset starting scale */
-.archive-item img {
-    transform: scale(1.0);
-    transition: transform var(--transition-medium);
-}
-
-.archive-item:hover img {
-    transform: scale(1.1);
-}
-
-/* Gallery items - reset starting scale */
-.gallery-item img {
-    transform: scale(1.0);
-    transition: transform var(--transition-medium);
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
+/* Reduced motion preferences */
+@media (prefers-reduced-motion) {
+    .feature-media img,
+    .archive-overview .feature-media img,
+    .archive-item img,
+    .gallery-item img {
+        transition: none !important;
+    }
 }
