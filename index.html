@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/maps.css">
+    <link rel="stylesheet" href="css/sponsors.css">
     <link rel="stylesheet" href="css/weapons.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/scrollbar.css">
@@ -116,7 +117,7 @@
                     <div class="archive-highlights">
                         <div class="feature-grid">
                             <div class="feature-media">
-                                <img src="/api/placeholder/800/500" alt="Archive Highlight">
+                                <img src="assets/archive/archive-banner.webp" alt="Archive Highlight">
                             </div>
                             <div class="feature-content">
                                 <h3 class="feature-title">ARCHIVE HIGHLIGHTS</h3>
@@ -365,23 +366,179 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Sponsors</h2>
-                    <p class="section-description">Information about the in-game sponsors and their lore.</p>
+                    <p class="section-description">Meet our sponsors.</p>
                 </div>
-
-                <div class="feature-grid feature-grid-reverse">
-                    <div class="feature-content">
-                        <h3 class="feature-title">SPONSORS</h3>
-                        <p class="feature-description">This is placeholder text about game sponsors. Details about the corporations, organizations, and entities that sponsored competitors would be displayed here.</p>
-                        <p class="feature-description">Additional information about sponsor lore, benefits, and gameplay elements would continue in this section.</p>
+        
+                <div class="sponsor-card-featured" id="featuredSponsor">
+                    <div class="sponsor-banner">
+                        <img src="assets/archive/sponsors/banners/pinnacle-banner.webp" alt="Pinnacle International" class="sponsor-banner-image">
                     </div>
-                    <div class="feature-media">
-                        <img src="/api/placeholder/800/500" alt="Sponsors Overview">
+                    
+                    <div class="sponsor-content-wrapper">
+                        <div class="sponsor-header">
+                            <img src="assets/archive/sponsors/banners/pinnacle-logo.webp" alt="Pinnacle Logo" class="sponsor-logo-image">
+                            
+                            <div class="sponsor-info">
+                                <h3 class="sponsor-name">PINNACLE INTERNATIONAL</h3>
+                                <div class="sponsor-meta">
+                                    <div class="sponsor-district">
+                                        <span class="meta-label">District:</span>
+                                        <span class="meta-value">Five Stars</span>
+                                    </div>
+                                    <div class="sponsor-role">
+                                        <span class="meta-label">Role:</span>
+                                        <span class="meta-value">Assault</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="sponsor-abilities">
+                            <div class="abilities-art-bg">
+                                <img src="assets/archive/sponsors/abilities-art/pinnacle-art.webp" alt="Pinnacle Abilities" class="abilities-bg-image">
+                            </div>
+                            
+                            <div class="abilities-list">
+                                <div class="ability-item">
+                                    <div class="ability-icon">
+                                        <img src="assets/archive/sponsors/abilities/pinnacle-primary.webp" alt="Splinter Grenade" class="ability-icon-image">
+                                    </div>
+                                    <div class="ability-details">
+                                        <h4 class="ability-name">SPLINTER GRENADE <span class="ability-type">PRIMARY</span></h4>
+                                        <p class="ability-description">Throw a grenade that explodes into splinters, each dealing damage.</p>
+                                    </div>
+                                </div>
+        
+                                <div class="ability-item">
+                                    <div class="ability-icon">
+                                        <img src="assets/archive/sponsors/abilities/pinnacle-secondary.webp" alt="Adrena-Link" class="ability-icon-image">
+                                    </div>
+                                    <div class="ability-details">
+                                        <h4 class="ability-name">ADRENA-LINK <span class="ability-type">SECONDARY</span></h4>
+                                        <p class="ability-description">Instantly equip a Spectre-linked stim that heals you. While healing, you can switch to your Spectre to gain enhanced vision and movespeed.</p>
+                                    </div>
+                                </div>
+        
+                                <div class="ability-item">
+                                    <div class="ability-icon">
+                                        <img src="assets/archive/sponsors/abilities/pinnacle-tertiary.webp" alt="Flash Grenade" class="ability-icon-image">
+                                    </div>
+                                    <div class="ability-details">
+                                        <h4 class="ability-name">FLASH GRENADE <span class="ability-type">TERTIARY</span></h4>
+                                        <p class="ability-description">Throw a grenade that explodes and blinds all players in line of sight.</p>
+                                        <p class="ability-alt">ALT FIRE: An underhand throw that explodes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <h3 class="gallery-section-title">All Sponsors</h3>
+                <div class="sponsors-grid">
+                    <!-- Pinnacle -->
+                    <div class="sponsor-thumb active" data-sponsor="pinnacle">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/pinnacle-logo.webp" alt="Pinnacle" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Pinnacle</h4>
+                            <span class="sponsor-thumb-role">Assault</span>
+                        </div>
+                    </div>
+        
+                    <!-- Morrgen -->
+                    <div class="sponsor-thumb" data-sponsor="morrgen">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/morrgen-logo.webp" alt="Morrgen" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Morrgen</h4>
+                            <span class="sponsor-thumb-role">Disruptor</span>
+                        </div>
+                    </div>
+        
+                    <!-- Bloom -->
+                    <div class="sponsor-thumb" data-sponsor="bloom">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/bloom-logo.webp" alt="Bloom" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Bloom</h4>
+                            <span class="sponsor-thumb-role">Support</span>
+                        </div>
+                    </div>
+        
+                    <!-- Ryker -->
+                    <div class="sponsor-thumb" data-sponsor="ryker">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/ryker-logo.webp" alt="Ryker" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Ryker</h4>
+                            <span class="sponsor-thumb-role">Recon</span>
+                        </div>
+                    </div>
+        
+                    <!-- Vector -->
+                    <div class="sponsor-thumb" data-sponsor="vector">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/vector-logo.webp" alt="Vector" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Vector</h4>
+                            <span class="sponsor-thumb-role">Assault</span>
+                        </div>
+                    </div>
+        
+                    <!-- Ghostlink -->
+                    <div class="sponsor-thumb" data-sponsor="ghostlink">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/ghostlink-logo.webp" alt="Ghostlink" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Ghostlink</h4>
+                            <span class="sponsor-thumb-role">Disruptor</span>
+                        </div>
+                    </div>
+        
+                    <!-- Muu -->
+                    <div class="sponsor-thumb" data-sponsor="muu">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/muu-logo.webp" alt="Muu" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Muu</h4>
+                            <span class="sponsor-thumb-role">Support</span>
+                        </div>
+                    </div>
+        
+                    <!-- Umbra -->
+                    <div class="sponsor-thumb" data-sponsor="umbra">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/umbra-logo.webp" alt="Umbra" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Umbra</h4>
+                            <span class="sponsor-thumb-role">Recon</span>
+                        </div>
+                    </div>
+        
+                    <!-- Monark -->
+                    <div class="sponsor-thumb" data-sponsor="monark">
+                        <div class="sponsor-thumb-logo">
+                            <img src="assets/archive/sponsors/banners/monark-logo.webp" alt="Monark" class="sponsor-thumb-image">
+                        </div>
+                        <div class="sponsor-thumb-info">
+                            <h4 class="sponsor-thumb-name">Monark</h4>
+                            <span class="sponsor-thumb-role">Assault</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Weapons Subtab - Using template-based approach -->
+        <!-- Weapons Subtab -->
         <div id="archive-weapons" class="subtab-content">
             <div class="container">
                 <div class="section-header">
@@ -962,6 +1119,7 @@
     <script src="js/tabs.js"></script>
     <script src="js/app.js"></script>
     <script src="js/maps.js"></script>
+    <script src="js/sponsors.js"></script>
     <script src="js/weapon-template.js"></script>
 </body>
 </html>
