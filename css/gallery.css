@@ -1,40 +1,43 @@
 /* gallery.css - Styles for gallery components and layouts */
 
-/* Gallery overview */
+/* Common gallery elements */
 .gallery-overview {
     margin-bottom: var(--spacing-xl);
 }
 
-/* Gallery Grid Layouts */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+/* Gallery Navigation Buttons */
+.gallery-nav-buttons {
+    display: flex;
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-md);
 }
 
-/* Archive mosaic layout for featured items */
-.archive-mosaic {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(100px, auto);
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
+.gallery-nav-btn {
+    background-color: rgba(35, 35, 35, 0.7);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    transition: all var(--transition-fast);
 }
 
-.archive-item-large {
-    grid-column: span 8;
-    grid-row: span 2;
+.gallery-nav-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--spectre-black);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 203, 0, 0.4);
 }
 
-.archive-item-medium {
-    grid-column: span 4;
-    grid-row: span 2;
-}
-
-.archive-item-small {
-    grid-column: span 4;
-    grid-row: span 1;
+.gallery-nav-btn:focus {
+    animation: pulse 1.5s infinite;
+    outline: none;
 }
 
 /* Gallery Section Titles */
@@ -67,43 +70,70 @@
 }
 
 @keyframes slideRight {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
 }
 
-.gallery-section-title + .gallery-grid,
-.gallery-section-title + .archive-mosaic {
-    margin-top: var(--spacing-md);
+/* Gallery Grid Layout */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
 }
 
-.gallery-section-title + .archive-mosaic .archive-item {
-    border-color: var(--primary-color);
+/* Artwork Grid Layout - 16:9 Aspect Ratio */
+.artworks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 }
 
-/* Gallery section title animations */
-.gallery-section-title {
+/* Archive mosaic layout */
+.archive-mosaic {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.archive-item-large {
+    grid-column: span 8;
+    grid-row: span 2;
+}
+
+.archive-item-medium {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+.archive-item-small {
+    grid-column: span 4;
+    grid-row: span 1;
+}
+
+/* Gallery, artwork, and archive items */
+.gallery-item, .artwork-item, .archive-item, .fanart-item {
     position: relative;
     overflow: hidden;
-    animation: slideInRight var(--transition-medium) both;
-    animation-delay: 0.2s;
-}
-
-/* Archive Items */
-.archive-item {
-    background-color: rgba(65, 65, 65, 0.5);
     border-radius: var(--border-radius);
-    overflow: hidden;
     box-shadow: var(--shadow-md);
-    position: relative;
     border: 2px solid var(--border-color);
     animation: fadeIn var(--transition-medium) both;
 }
 
-.archive-item img {
+.gallery-item, .archive-item {
+    height: 250px;
+}
+
+.artwork-item {
+    aspect-ratio: 16/9;
+    height: auto;
+}
+
+.gallery-item img, .artwork-item img, .archive-item img, .fanart-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -111,10 +141,49 @@
     transition: transform var(--transition-medium);
 }
 
-.archive-item:hover img {
+.gallery-item:hover img, .artwork-item:hover img, .archive-item:hover img, .fanart-item:hover img {
     transform: scale(1.1);
 }
 
+/* Ensure videos don't scale on hover in any context */
+.archive-item:hover video.video-content, 
+.video-item:hover video.video-content {
+    transform: none;
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-sm);
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white;
+    transform: translateY(100%);
+    transition: transform var(--transition-fast);
+}
+
+.gallery-item:hover .gallery-caption, 
+.artwork-item:hover .gallery-caption, 
+.fanart-item:hover .gallery-caption {
+    transform: translateY(0);
+}
+
+.gallery-caption h3 {
+    font-size: var(--font-size-xs);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.gallery-caption p {
+    font-size: 14px;
+    color: var(--text-color-secondary);
+    margin: 0;
+}
+
+/* Archive content */
 .archive-content {
     position: absolute;
     bottom: 0;
@@ -138,18 +207,88 @@
     color: var(--text-color-secondary);
 }
 
-/* Gallery Items */
-.gallery-item {
+/* Comic Container Styles */
+.comic-pages {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    justify-content: center;
+}
+
+.comic-page {
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
-    height: 250px;
+    border: 2px solid var(--primary-color);
+    box-shadow: var(--shadow-md);
+    flex: 0 0 calc(50% - var(--spacing-md));
+    max-width: 500px;
+    transition: transform var(--transition-medium);
+    animation: fadeIn var(--transition-medium) both;
+}
+
+.comic-page:first-child {
+    animation-delay: 0.1s;
+}
+
+.comic-page:last-child {
+    animation-delay: 0.2s;
+}
+
+.comic-page:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 203, 0, 0.3);
+}
+
+.comic-page img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Contest layout styles */
+.contest-container {
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.contest-entry {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
     border: 2px solid var(--border-color);
     animation: fadeIn var(--transition-medium) both;
 }
 
-.gallery-item img {
+.contest-first-place {
+    width: 100%;
+    height: 400px;
+    animation-delay: 0.1s;
+}
+
+.contest-runners-up {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.contest-second-place, .contest-third-place {
+    height: 300px;
+}
+
+.contest-second-place {
+    animation-delay: 0.2s;
+}
+
+.contest-third-place {
+    animation-delay: 0.25s;
+}
+
+.contest-entry img, .contest-entry video.video-content {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -157,50 +296,146 @@
     transition: transform var(--transition-medium);
 }
 
-.gallery-item:hover img {
+.contest-entry:hover img {
     transform: scale(1.1);
 }
 
-.gallery-caption {
+/* Disable hover effect for videos */
+.contest-entry:hover video.video-content {
+    transform: none;
+}
+
+.contest-content {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
     color: white;
-    transform: translateY(100%);
-    transition: transform var(--transition-fast);
+    z-index: 2;
 }
 
-.gallery-item:hover .gallery-caption {
-    transform: translateY(0);
+.contest-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Fanart specific styles */
-#gallery-fanart .gallery-item {
+.contest-caption {
+    font-size: var(--font-size-xs);
+    color: var(--text-color-secondary);
+    margin: 0;
+}
+
+/* Fanart Grid Layout */
+.fanart-mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 120px;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Fanart item variants */
+.fanart-item.fanart-wide {
+    grid-column: span 6;
+    grid-row: span 2;
+}
+
+.fanart-item.fanart-tall-wide {
+    grid-column: span 4;
+    grid-row: span 4;
+}
+
+.fanart-item.fanart-square {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+.fanart-item.fanart-medium {
+    grid-column: span 5;
+    grid-row: span 2;
+}
+
+.fanart-item.fanart-small {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.fanart-item.fanart-portrait {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+.fanart-item.fanart-landscape {
+    grid-column: span 5;
+    grid-row: span 2;
+}
+
+.fanart-item.fanart-square-small {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+.fanart-item.fanart-portrait-small {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+/* Video styling */
+.archive-item.video-item, .contest-entry.video-item {
     position: relative;
+    overflow: visible;
+    background-color: var(--spectre-black);
 }
 
-#gallery-fanart .gallery-item::after {
-    content: '';
+.archive-item.video-item .archive-content,
+.contest-entry.video-item .contest-content {
+    bottom: auto;
+    top: 0;
+    height: auto;
+    max-height: 40%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.archive-item.video-item .archive-content *,
+.contest-entry.video-item .contest-content * {
+    pointer-events: auto;
+}
+
+.archive-item video.video-content,
+.contest-entry video.video-content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: var(--spectre-black);
+    /* Remove transform transition for videos */
+    transition: filter var(--transition-fast);
+}
+
+.archive-item.video-item video.video-content[poster],
+.contest-entry.video-item video.video-content[poster] {
+    object-fit: contain;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.archive-item .video-controls-area,
+.contest-entry .video-controls-area {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    opacity: 0.8;
-    transition: all var(--transition-fast);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: transparent;
+    z-index: 5;
 }
 
-#gallery-fanart .gallery-item:hover::after {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-/* Special styling for fan art section quotes */
+/* Special styling for fan art section */
 #gallery-fanart .quote-card {
     border: none;
     background: none;
@@ -211,79 +446,31 @@
     display: none;
 }
 
-#gallery-fanart .quote-author img {
-    border: none;
+/* Animation delays - consolidated */
+.gallery-item:nth-child(1), .artwork-item:nth-child(1), .archive-item:nth-child(1), .fanart-item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-item:nth-child(2), .artwork-item:nth-child(2), .archive-item:nth-child(2), .fanart-item:nth-child(2) { animation-delay: 0.15s; }
+.gallery-item:nth-child(3), .artwork-item:nth-child(3), .archive-item:nth-child(3), .fanart-item:nth-child(3) { animation-delay: 0.2s; }
+.gallery-item:nth-child(4), .artwork-item:nth-child(4), .archive-item:nth-child(4), .fanart-item:nth-child(4) { animation-delay: 0.25s; }
+.gallery-item:nth-child(5), .artwork-item:nth-child(5), .archive-item:nth-child(5), .fanart-item:nth-child(5) { animation-delay: 0.3s; }
+.gallery-item:nth-child(6), .artwork-item:nth-child(6), .archive-item:nth-child(6), .fanart-item:nth-child(6) { animation-delay: 0.35s; }
+.gallery-item:nth-child(7), .artwork-item:nth-child(7), .archive-item:nth-child(7), .fanart-item:nth-child(7) { animation-delay: 0.4s; }
+.gallery-item:nth-child(8), .artwork-item:nth-child(8), .archive-item:nth-child(8), .fanart-item:nth-child(8) { animation-delay: 0.45s; }
+.gallery-item:nth-child(9), .artwork-item:nth-child(9), .archive-item:nth-child(9), .fanart-item:nth-child(9) { animation-delay: 0.5s; }
+
+/* Animation for gallery navigation buttons */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 203, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 203, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 203, 0, 0); }
 }
 
-#gallery-fanart .author-name {
-    margin: 0;
+/* Media Queries - consolidated and optimized */
+@media (max-width: 1199px) {
+    .fanart-mosaic-grid {
+        grid-auto-rows: 100px;
+    }
 }
 
-/* Fan art special hover effect */
-#gallery-fanart .gallery-item:hover img {
-    filter: brightness(1.1);
-}
-
-/* Staggered animations for gallery items */
-.gallery-item:nth-child(1) { animation-delay: 0.1s; }
-.gallery-item:nth-child(2) { animation-delay: 0.15s; }
-.gallery-item:nth-child(3) { animation-delay: 0.2s; }
-.gallery-item:nth-child(4) { animation-delay: 0.25s; }
-.gallery-item:nth-child(5) { animation-delay: 0.3s; }
-.gallery-item:nth-child(6) { animation-delay: 0.35s; }
-
-/* Archive item animations */
-.archive-item:nth-child(1) { animation-delay: 0.1s; }
-.archive-item:nth-child(2) { animation-delay: 0.15s; }
-.archive-item:nth-child(3) { animation-delay: 0.2s; }
-.archive-item:nth-child(4) { animation-delay: 0.25s; }
-.archive-item:nth-child(5) { animation-delay: 0.3s; }
-.archive-item:nth-child(6) { animation-delay: 0.35s; }
-
-/* Staggered gallery item animations */
-#gallery-artworks .gallery-item,
-#gallery-fanart .gallery-item {
-    opacity: 0;
-    animation: fadeIn var(--transition-medium) forwards;
-}
-
-/* Staggered timing for gallery items */
-#gallery-artworks .gallery-item:nth-child(1),
-#gallery-fanart .gallery-item:nth-child(1) { 
-    animation-delay: 0.2s; 
-}
-
-#gallery-artworks .gallery-item:nth-child(2),
-#gallery-fanart .gallery-item:nth-child(2) { 
-    animation-delay: 0.3s; 
-}
-
-#gallery-artworks .gallery-item:nth-child(3),
-#gallery-fanart .gallery-item:nth-child(3) { 
-    animation-delay: 0.4s; 
-}
-
-#gallery-artworks .gallery-item:nth-child(4),
-#gallery-fanart .gallery-item:nth-child(4) { 
-    animation-delay: 0.5s; 
-}
-
-#gallery-artworks .gallery-item:nth-child(5),
-#gallery-fanart .gallery-item:nth-child(5) { 
-    animation-delay: 0.6s; 
-}
-
-#gallery-artworks .gallery-item:nth-child(6),
-#gallery-fanart .gallery-item:nth-child(6) { 
-    animation-delay: 0.7s; 
-}
-
-/* Hover effects specific to gallery context */
-.gallery-section-title + .gallery-grid .gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-/* Media Queries */
 @media (max-width: 991px) {
     .archive-mosaic {
         grid-template-columns: repeat(6, 1fr);
@@ -293,12 +480,50 @@
         grid-column: span 6;
     }
     
-    .archive-item-medium {
+    .archive-item-medium, .archive-item-small {
         grid-column: span 3;
     }
     
-    .archive-item-small {
-        grid-column: span 3;
+    .artworks-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .comic-pages {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .comic-page {
+        flex: 0 0 100%;
+        max-width: 600px;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .contest-first-place {
+        height: 350px;
+    }
+    
+    .contest-second-place, .contest-third-place {
+        height: 250px;
+    }
+    
+    .fanart-mosaic-grid {
+        grid-auto-rows: 90px;
+    }
+    
+    .fanart-item.fanart-tall-wide {
+        grid-column: span 4;
+    }
+    
+    .fanart-item.fanart-medium,
+    .fanart-item.fanart-landscape {
+        grid-column: span 6;
+    }
+    
+    .fanart-item.fanart-portrait-small {
+        grid-column: span 2;
     }
 }
 
@@ -312,35 +537,131 @@
         height: 250px;
     }
     
-    .gallery-grid {
+    .gallery-grid, .artworks-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .archive-item.video-item .archive-content {
+        max-height: 50%;
+    }
+    
+    .contest-runners-up {
+        grid-template-columns: 1fr;
+    }
+    
+    .contest-first-place {
+        height: 300px;
+    }
+    
+    .contest-second-place, .contest-third-place {
+        height: 300px;
+    }
+    
+    .fanart-mosaic-grid {
+        grid-template-columns: repeat(8, 1fr);
+        grid-auto-rows: 80px;
+    }
+    
+    .fanart-item.fanart-wide {
+        grid-column: span 8;
+    }
+    
+    .fanart-item.fanart-square,
+    .fanart-item.fanart-tall-wide {
+        grid-column: span 4;
+    }
+    
+    .contest-container {
+        padding: var(--spacing-md);
+    }
+    
+    .gallery-nav-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .gallery-nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .archive-item.video-item {
+        height: auto;
+        min-height: 250px;
+    }
+    
+    .contest-first-place,
+    .contest-second-place, 
+    .contest-third-place {
+        height: 250px;
+    }
+    
+    .contest-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .contest-title {
+        font-size: 16px;
+    }
+    
+    .contest-caption {
+        font-size: 14px;
+    }
+    
+    .fanart-mosaic-grid {
+        grid-template-columns: repeat(6, 1fr);
+        grid-auto-rows: 60px;
+        gap: 5px;
+    }
+    
+    .fanart-item.fanart-wide {
+        grid-column: span 6;
+    }
+    
+    .fanart-item.fanart-square {
+        grid-column: span 3;
+    }
+    
+    .fanart-item .gallery-caption h3 {
+        font-size: 12px;
+        margin-bottom: 0;
+    }
+    
+    .fanart-item .gallery-caption p {
+        font-size: 10px;
+        margin-bottom: 0;
     }
 }
 
 /* Print styles */
 @media print {
-    .feature-media, 
-    .archive-item, 
-    .gallery-item {
+    .gallery-item, .artwork-item, .archive-item, .fanart-item, .comic-page, .contest-entry {
         border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+    
+    .contest-container {
+        background-color: transparent;
+        border: 1px solid #ccc;
     }
 }
 
 /* High contrast mode */
 @media (forced-colors: active) {
-    .feature-media,
-    .archive-item,
-    .gallery-item {
+    .gallery-item, .artwork-item, .archive-item, .fanart-item, .comic-page, .contest-entry {
         border: 2px solid CanvasText;
     }
 }
 
-/* Disable animations for users who prefer reduced motion */
+/* Reduced motion preferences */
 @media (prefers-reduced-motion) {
-    .gallery-item,
-    .archive-item,
-    .gallery-section-title,
-    .gallery-section-title::after {
+    .gallery-item, .artwork-item, .archive-item, .fanart-item,
+    .gallery-section-title, .gallery-section-title::after,
+    .archive-item video.video-content, .comic-page,
+    .contest-container, .contest-entry, .contest-entry video.video-content,
+    .gallery-nav-btn:focus {
         animation: none !important;
         transition: none !important;
     }
