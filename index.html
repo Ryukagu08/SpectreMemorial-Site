@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/maps.css">
     <link rel="stylesheet" href="css/weapons.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/scrollbar.css">
@@ -132,17 +133,228 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Maps</h2>
-                    <p class="section-description">Detailed information about the game's maps and environments.</p>
+                    <p class="section-description">The battlegrounds of Sentai Crews.</p>
                 </div>
 
-                <div class="feature-grid">
-                    <div class="feature-media">
-                        <img src="/api/placeholder/800/500" alt="Maps Overview">
+                <!-- Featured Map Display -->
+                <div class="map-featured" id="featuredMap">
+                    <div class="map-featured-image">
+                        <img src="assets/archive/maps/canal.webp" alt="Canal" class="main-map-image">
+                        <div class="map-minimap-overlay">
+                            <img src="assets/archive/maps/canal-minimap.webp" alt="Canal Minimap" class="minimap-image">
+                        </div>
                     </div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">MAPS</h3>
-                        <p class="feature-description">This is placeholder text about game maps. Details about maps, locations and game environments would be displayed here.</p>
-                        <p class="feature-description">Additional information about game world and level design would continue in this section.</p>
+                    <div class="map-featured-content">
+                        <h3 class="map-title">CANAL</h3>
+                        <p class="map-description">
+                            The 'Canal' area within Breakwater’s Shadows district is a disputed space claimed by Shadows but fully controlled by Port. 
+                            By day, dockhands move the essential cargo and marine supplies that keep Breakwater’s coastal trade moving. 
+                            As dusk falls, the lines between Shadows and Port blur; whispers of smuggling, secret warehouses and shady deals are passed through hushed conversations.  
+                            Santai players leverage the massive fast-recall platform and the cover of cargo-strewn docks to dominate the map.
+                        </p>
+                        <div class="map-tags">
+                            <span class="map-tag">Breakwater</span>
+                            <span class="map-tag">Shadows</span>
+                            <span class="map-tag">Port</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Selection Grid -->
+                <h3 class="gallery-section-title">All Maps</h3>
+                <div class="maps-grid">
+                    <!-- Canal Map Card -->
+                    <div class="map-card active" data-map="canal">
+                        <div class="map-card-image">
+                            <img src="assets/archive/maps/canal.webp" alt="Canal" class="map-thumbnail">
+                            <div class="map-overlay">
+                                <img src="assets/archive/maps/canal-minimap.webp" alt="Canal Minimap" class="map-overlay-minimap">
+                            </div>
+                        </div>
+                        <div class="map-card-content">
+                            <h4 class="map-card-title">CANAL</h4>
+                        </div>
+                    </div>
+
+                    <!-- Commons Map Card -->
+                    <div class="map-card" data-map="commons">
+                        <div class="map-card-image">
+                            <img src="assets/archive/maps/commons.webp" alt="Commons" class="map-thumbnail">
+                            <div class="map-overlay">
+                                <img src="assets/archive/maps/commons-minimap.webp" alt="Commons Minimap" class="map-overlay-minimap">
+                            </div>
+                        </div>
+                        <div class="map-card-content">
+                            <h4 class="map-card-title">COMMONS</h4>
+                        </div>
+                    </div>
+
+                    <!-- Metro Map Card -->
+                    <div class="map-card" data-map="metro">
+                        <div class="map-card-image">
+                            <img src="assets/archive/maps/metro.webp" alt="Metro" class="map-thumbnail">
+                            <div class="map-overlay">
+                                <img src="assets/archive/maps/metro-minimap.webp" alt="Metro Minimap" class="map-overlay-minimap">
+                            </div>
+                        </div>
+                        <div class="map-card-content">
+                            <h4 class="map-card-title">METRO</h4>
+                        </div>
+                    </div>
+
+                    <!-- Mill Map Card -->
+                    <div class="map-card" data-map="mill">
+                        <div class="map-card-image">
+                            <img src="assets/archive/maps/mill.webp" alt="Mill" class="map-thumbnail">
+                            <div class="map-overlay">
+                                <img src="assets/archive/maps/mill-minimap.webp" alt="Mill Minimap" class="map-overlay-minimap">
+                            </div>
+                        </div>
+                        <div class="map-card-content">
+                            <h4 class="map-card-title">MILL</h4>
+                        </div>
+                    </div>
+
+                    <!-- Skyway Map Card -->
+                    <div class="map-card" data-map="skyway">
+                        <div class="map-card-image">
+                            <img src="assets/archive/maps/skyway.webp" alt="Skyway" class="map-thumbnail">
+                            <div class="map-overlay">
+                                <img src="assets/archive/maps/skyway-minimap.webp" alt="Skyway Minimap" class="map-overlay-minimap">
+                            </div>
+                        </div>
+                        <div class="map-card-content">
+                            <h4 class="map-card-title">SKYWAY</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Details Sections (Hidden initially) -->
+                <div class="map-details-container">
+                    <!-- Canal Details -->
+                    <div class="map-details" id="canal-details">
+                        <div class="map-details-content">
+                            <h3 class="map-details-title">CANAL</h3>
+                            <p class="map-details-description">
+                                A dock area featuring cargo docks and a fast-recall platform, 
+                                offering players strategic cover and movement advantages.
+                            </p>
+                            <div class="map-details-features">
+                                <div class="map-feature">
+                                    <h4>KEY LOCATIONS</h4>
+                                    <ul>
+                                        <li>B Main</li>
+                                        <li>A Main</li>
+                                        <li>Mid</li>
+                                        <li>Sewer</li>
+                                    </ul>
+                                </div>
+                                <div class="map-feature">
+                                    <h4>TACTICAL NOTES</h4>
+                                    <p>Elevated fast-recall platform. Multiple elevated positions make the use of Duality particularly effective.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commons Details -->
+                    <div class="map-details" id="commons-details">
+                        <div class="map-details-content">
+                            <h3 class="map-details-title">COMMONS</h3>
+                            <p class="map-details-description">
+                                A fighting area located on the far western edge of the Communa district along the Inner Canal, featuring urban elements and competitive gameplay.
+                            </p>
+                            <div class="map-details-features">
+                                <div class="map-feature">
+                                    <h4>KEY LOCATIONS</h4>
+                                    <ul>
+                                        <li>B Main</li>
+                                        <li>A Main</li>
+                                        <li>Mid</li>
+                                        <li>Market</li>
+                                    </ul>
+                                </div>
+                                <div class="map-feature">
+                                    <h4>TACTICAL NOTES</h4>
+                                    <p>Central areas provide high-traffic engagement zones. Vertical play is rewarded with numerous balconies and overlooks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metro Details -->
+                    <div class="map-details" id="metro-details">
+                        <div class="map-details-content">
+                            <h3 class="map-details-title">METRO</h3>
+                            <p class="map-details-description">
+                                A derelict transit hub with abandoned tunnels and trains, now a battleground for scavengers and rival crews.
+                            </p>
+                            <div class="map-details-features">
+                                <div class="map-feature">
+                                    <h4>KEY LOCATIONS</h4>
+                                    <ul>
+                                        <li>B Main</li>
+                                        <li>Platform</li>
+                                        <li>Nest</li>
+                                        <li>Transfer</li>
+                                    </ul>
+                                </div>
+                                <div class="map-feature">
+                                    <h4>TACTICAL NOTES</h4>
+                                    <p>Close-quarters combat, platforms that offer mid-range engagements.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mill Details -->
+                    <div class="map-details" id="mill-details">
+                        <div class="map-details-content">
+                            <h3 class="map-details-title">MILL</h3>
+                            <p class="map-details-description">
+                                An abandoned industrial complex with overgrown vegetation, featuring catwalks and tunnels repurposed for combat.
+                            </p>
+                            <div class="map-details-features">
+                                <div class="map-feature">
+                                    <h4>KEY LOCATIONS</h4>
+                                    <ul>
+                                        <li>B Main</li>
+                                        <li>A Main</li>
+                                        <li>Hall</li>
+                                        <li>Banana</li>
+                                    </ul>
+                                </div>
+                                <div class="map-feature">
+                                    <h4>TACTICAL NOTES</h4>
+                                    <p>Height advantage is significant on the numerous catwalks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skyway Details -->
+                    <div class="map-details" id="skyway-details">
+                        <div class="map-details-content">
+                            <h3 class="map-details-title">SKYWAY</h3>
+                            <p class="map-details-description">
+                                A construction site connecting Breakwater to a neighboring city-state, featuring custom Fast Recall Zones that enable creative movement for Santai combatants.
+                            </p>
+                            <div class="map-details-features">
+                                <div class="map-feature">
+                                    <h4>KEY LOCATIONS</h4>
+                                    <ul>
+                                        <li>B Main</li>
+                                        <li>Jail</li>
+                                        <li>Mid</li>
+                                        <li>Drop</li>
+                                    </ul>
+                                </div>
+                                <div class="map-feature">
+                                    <h4>TACTICAL NOTES</h4>
+                                    <p>Several fast-recall zones offer a quick way to traverse the site.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -749,6 +961,7 @@
 
     <script src="js/tabs.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/maps.js"></script>
     <script src="js/weapon-template.js"></script>
 </body>
 </html>
