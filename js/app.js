@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.setupButtonRailEffect();
             this.setupScrollEffects();
             this.checkEnvironment();
-            this.setupVideoHandling();
             this.setupGalleryNavigation();
         },
         
@@ -153,77 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     header.classList.remove('scrolled');
                 }
-            });
-        },
-        
-        /**
-         * Setup video handling and optimization
-         */
-        setupVideoHandling: function() {
-            const videos = document.querySelectorAll('.archive-item.video-item video');
-            
-            if (videos.length === 0) return;
-            
-            videos.forEach(video => {
-                // Mark video items as loading before the poster loads
-                const videoItem = video.closest('.video-item');
-                if (videoItem) {
-                    videoItem.classList.add('loading');
-                    
-                    // When poster is loaded, remove loading state
-                    if (video.poster) {
-                        const img = new Image();
-                        img.onload = function() {
-                            videoItem.classList.remove('loading');
-                        };
-                        img.src = video.poster;
-                    } else {
-                        videoItem.classList.remove('loading');
-                    }
-                }
-                
-                // Track play/pause state for styling
-                video.addEventListener('play', function() {
-                    this.setAttribute('data-playing', 'true');
-                });
-                
-                video.addEventListener('pause', function() {
-                    this.removeAttribute('data-playing');
-                });
-                
-                // Optimize performance by pausing videos when not in view
-                if ('IntersectionObserver' in window) {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (!entry.isIntersecting && !video.paused) {
-                                // Pause video when it scrolls out of view
-                                video.pause();
-                            }
-                        });
-                    }, { threshold: 0.2 });
-                    
-                    observer.observe(video.parentElement);
-                }
-                
-                // Handle poster aspect ratio for better loading appearance
-                if (video.poster) {
-                    video.addEventListener('loadedmetadata', function() {
-                        const aspectRatio = this.videoWidth / this.videoHeight;
-                        this.parentElement.style.setProperty('--video-aspect-ratio', aspectRatio);
-                    });
-                }
-                
-                // Set preload metadata for better performance
-                video.setAttribute('preload', 'metadata');
-            });
-            
-            // Reinitialize when tabs change to handle videos in different tabs
-            const tabButtons = document.querySelectorAll('.tab-button, .subtab-button');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Small delay to ensure content is loaded
-                    setTimeout(this.setupVideoHandling.bind(this), 100);
-                });
             });
         },
         

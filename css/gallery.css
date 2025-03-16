@@ -262,7 +262,7 @@
 
 .contest-first-place {
     width: 100%;
-    height: 400px;
+    height: 700px;
     animation-delay: 0.1s;
 }
 
@@ -273,7 +273,7 @@
 }
 
 .contest-second-place, .contest-third-place {
-    height: 300px;
+    height: 400px;
 }
 
 .contest-second-place {
@@ -294,6 +294,19 @@
 
 .contest-entry:hover img {
     transform: scale(1.1);
+}
+
+/* Contest content (moved to top) */
+.contest-content-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-md);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 70%, transparent 100%);
+    color: white;
+    z-index: 2;
+    transition: opacity 0.8s ease;
 }
 
 .contest-content {
@@ -320,6 +333,23 @@
     font-size: var(--font-size-xs);
     color: var(--text-color-secondary);
     margin: 0;
+}
+
+/* YouTube Embed Styling */
+.youtube-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.youtube-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 /* Fanart Grid Layout */
@@ -375,55 +405,6 @@
 .fanart-item.fanart-portrait-small {
     grid-column: span 3;
     grid-row: span 3;
-}
-
-/* Video styling */
-.archive-item.video-item, .contest-entry.video-item {
-    position: relative;
-    overflow: visible;
-    background-color: var(--spectre-black);
-}
-
-.archive-item.video-item .archive-content,
-.contest-entry.video-item .contest-content {
-    bottom: auto;
-    top: 0;
-    height: auto;
-    max-height: 40%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.archive-item.video-item .archive-content *,
-.contest-entry.video-item .contest-content * {
-    pointer-events: auto;
-}
-
-.archive-item video.video-content,
-.contest-entry video.video-content {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: var(--spectre-black);
-    transition: filter var(--transition-fast);
-}
-
-.archive-item.video-item video.video-content[poster],
-.contest-entry.video-item video.video-content[poster] {
-    object-fit: contain;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.archive-item .video-controls-area,
-.contest-entry .video-controls-area {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background: transparent;
-    z-index: 5;
 }
 
 /* Special styling for fan art section */
@@ -493,11 +474,11 @@
     }
     
     .contest-first-place {
-        height: 350px;
+        height: 500px;
     }
     
     .contest-second-place, .contest-third-place {
-        height: 250px;
+        height: 300px;
     }
     
     .fanart-mosaic-grid {
@@ -532,16 +513,10 @@
         grid-template-columns: 1fr;
     }
     
-    .archive-item.video-item .archive-content {
-        max-height: 50%;
-    }
-    
-    .contest-runners-up {
-        grid-template-columns: 1fr;
-    }
+    /* Removed the line that would make contest-runners-up stack vertically */
     
     .contest-first-place {
-        height: 300px;
+        height: 400px;
     }
     
     .contest-second-place, .contest-third-place {
@@ -574,17 +549,15 @@
 }
 
 @media (max-width: 575px) {
-    .archive-item.video-item {
-        height: auto;
-        min-height: 250px;
+    .contest-first-place {
+        height: 350px;
     }
     
-    .contest-first-place,
-    .contest-second-place, 
-    .contest-third-place {
+    .contest-second-place, .contest-third-place {
         height: 250px;
     }
     
+    .contest-content-top,
     .contest-content {
         padding: var(--spacing-sm);
     }
@@ -642,8 +615,7 @@
     .gallery-item img, .artwork-item img, .archive-item img, .fanart-item img,
     .gallery-caption, .archive-content, .contest-content,
     .comic-page, .comic-page img,
-    .contest-entry img, 
-    .archive-item video.video-content, .contest-entry video.video-content,
+    .contest-entry img,
     .gallery-nav-btn:focus {
         transition: none !important;
         animation: none !important;
