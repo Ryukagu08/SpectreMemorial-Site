@@ -140,15 +140,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 const parent = this.parentNode;
                 parent.classList.toggle('subtabs-visible');
                 
-                // If we're showing subtabs, prevent the default tab behavior
-                if (parent.classList.contains('subtabs-visible')) {
-                    return false;
-                } else {
-                    // Otherwise, continue with normal tab behavior by manually clicking again
-                    setTimeout(() => {
-                        this.click();
-                    }, 10);
+                // Get the tab ID from data attribute
+                const tabId = this.getAttribute('data-tab');
+                
+                // Always activate the main tab content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Set new active tab
+                this.classList.add('active');
+                const tabContent = document.getElementById(tabId);
+                tabContent.classList.add('active');
+                activeMainTab = tabId;
+                
+                // Activate the default subtab for this tab
+                resetAllSubtabs();
+                const defaultSubtab = document.getElementById(`${tabId}-default`);
+                if (defaultSubtab) {
+                    defaultSubtab.classList.add('active');
                 }
+                
+                // Save current tab to session storage
+                sessionStorage.setItem('activeTab', tabId);
+                sessionStorage.removeItem('activeSubtab');
+                
+                // Update URL without page reload
+                updateURL(tabId);
             });
         });
         

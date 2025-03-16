@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.setupScrollEffects();
             this.checkEnvironment();
             this.setupGalleryNavigation();
+            this.setupMobileNav();
         },
         
         /**
@@ -185,6 +186,63 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Trigger a click on the subtab button to navigate to that tab
                     if (subtabButton) {
                         subtabButton.click();
+                    }
+                });
+            });
+        },
+
+        /**
+         * Setup mobile navigation collapsible functionality
+         */
+        setupMobileNav: function() {
+            const toggleButton = document.querySelector('.nav-toggle-button');
+            const tabNavigation = document.querySelector('.tab-navigation');
+            
+            if (!toggleButton || !tabNavigation) return;
+            
+            // Always set up the click handler for the toggle button
+            toggleButton.addEventListener('click', function() {
+                // Toggle active classes
+                this.classList.toggle('active');
+                tabNavigation.classList.toggle('expanded');
+                
+                // Accessibility
+                const isExpanded = tabNavigation.classList.contains('expanded');
+                this.setAttribute('aria-expanded', isExpanded);
+                console.log('Toggle button clicked, expanded:', isExpanded); // Debug log
+            });
+            
+            // Initialize the navigation state
+            if (!tabNavigation.classList.contains('collapsible-nav-initialized')) {
+                tabNavigation.classList.add('collapsible-nav-initialized');
+                
+                // Start with navigation collapsed on mobile
+                if (window.innerWidth <= 767) {
+                    tabNavigation.classList.remove('expanded');
+                } else {
+                    tabNavigation.classList.add('expanded');
+                }
+            }
+            
+            // Set up resize handler
+            window.addEventListener('resize', function() {
+                // Expand navigation on larger screens
+                if (window.innerWidth > 767) {
+                    tabNavigation.classList.add('expanded');
+                } else if (!toggleButton.classList.contains('active')) {
+                    // Only collapse on small screens if toggle is not active
+                    tabNavigation.classList.remove('expanded');
+                }
+            });
+            
+            // Close mobile nav when clicking on a tab
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (window.innerWidth <= 767) {
+                        // Close the navigation
+                        toggleButton.classList.remove('active');
+                        tabNavigation.classList.remove('expanded');
+                        toggleButton.setAttribute('aria-expanded', 'false');
                     }
                 });
             });

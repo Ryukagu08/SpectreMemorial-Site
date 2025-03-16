@@ -126,23 +126,81 @@
     }
 }
 
+/* Mobile Navigation Toggle Button (visible only on mobile) */
+.nav-toggle-button {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: var(--z-index-high);
+    padding: 0;
+}
+
+.nav-toggle-button .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 6px 0;
+    transition: all 0.3s ease;
+}
+
 /* Mobile Landscape (576px to 767px) */
 @media (max-width: 767px) {
+    /* Show the toggle button */
+    .nav-toggle-button {
+        display: block;
+    }
+    
+    /* Setup for collapsible navigation */
     .tab-navigation {
         flex-wrap: wrap;
+        justify-content: center;
         gap: 8px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        width: 100%;
+    }
+    
+    /* When nav is open */
+    .tab-navigation.expanded {
+        max-height: 500px; /* Adjust as needed */
+        margin-top: 15px;
+    }
+    
+    /* Animation for hamburger to X */
+    .nav-toggle-button.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .nav-toggle-button.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle-button.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
     }
     
     .tab-button {
-        flex: 1 1 calc(50% - 8px);
+        flex: 0 0 auto;
+        min-width: 120px;
         text-align: center;
         padding: var(--spacing-xs) var(--spacing-sm);
         font-size: 14px;
+        margin: 4px;
     }
     
     .header-container {
         flex-direction: column;
         text-align: center;
+        position: relative; /* For absolute positioning of toggle button */
+        padding-top: 10px; /* Space for the toggle button */
     }
     
     .site-logo {
@@ -212,6 +270,8 @@
         left: 0;
         right: 0;
         width: 100%;
+        max-height: 50vh; /* Limit height to half the viewport */
+        overflow-y: auto; /* Make it scrollable */
         opacity: 0;
         visibility: hidden;
         display: flex;
@@ -223,6 +283,7 @@
         border-radius: 0;
         border-width: 1px 0 0 0;
         z-index: var(--z-index-high);
+        backdrop-filter: blur(10px); /* Add blur effect for better visibility */
     }
 
     .has-subtabs.subtabs-visible .subtab-navigation {
@@ -233,9 +294,10 @@
 
     .subtab-button {
         flex: 0 0 auto;
+        min-width: 130px;
         width: auto;
         padding: var(--spacing-xs) var(--spacing-sm);
-        margin: 0;
+        margin: 5px;
         text-align: center;
         border-radius: var(--border-radius);
     }
@@ -243,6 +305,17 @@
 
 /* Mobile Portrait (up to 575px) */
 @media (max-width: 575px) {
+    .tab-navigation {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .tab-button {
+        width: 100%;
+        margin: 3px 0;
+        padding: 10px;
+    }
+    
     .logo-image {
         height: 35px;
     }
@@ -304,14 +377,10 @@
         grid-template-columns: 1fr;
     }
 
-    .tab-button {
-        flex: 1 1 100%;
-        margin-bottom: 5px;
-    }
-
-    /* Adjust subtabs for mobile portrait */
+    /* Increase spacing for touch targets */
     .subtab-button {
-        flex: 1 1 calc(50% - 5px);
+        padding: 12px var(--spacing-sm);
+        margin-bottom: 6px;
     }
 }
 
@@ -339,6 +408,63 @@
     .subtab-navigation {
         max-height: 90vh;
         overflow-y: auto;
+    }
+}
+
+/* Touch Device Support - Remove hover effects */
+@media (hover: none) {
+    .tab-button:hover,
+    .feature-media:hover,
+    .gallery-item:hover,
+    .archive-item:hover,
+    .fanart-item:hover,
+    .comic-page:hover,
+    .contest-entry:hover,
+    .quote-card:hover,
+    .map-card:hover,
+    .sponsor-thumb:hover,
+    .gallery-nav-btn:hover,
+    .weapon-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    .feature-media:hover img,
+    .gallery-item:hover img,
+    .archive-item:hover img,
+    .weapon-image:hover img {
+        transform: none !important;
+    }
+    
+    .gallery-caption,
+    .archive-content,
+    .contest-content,
+    .map-overlay {
+        /* Make captions always visible on touch devices */
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Improve button rail handling for touch */
+    .button-rail-indicator {
+        display: none;
+    }
+    
+    /* Better hover states for weapon cards on touch */
+    .weapon-card .weapon-stats-panel {
+        opacity: 1;
+        height: auto;
+    }
+    
+    .weapon-details::after {
+        display: none; /* Remove "HOVER FOR STATS" text on touch devices */
+    }
+    
+    /* Show gallery captions by default on touch */
+    .gallery-item .gallery-caption,
+    .artwork-item .gallery-caption,
+    .fanart-item .gallery-caption {
+        transform: translateY(0);
     }
 }
 
