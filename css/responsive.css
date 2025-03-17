@@ -89,15 +89,35 @@
 
 .fullscreen-nav .has-subtabs .tab-button {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-.fullscreen-nav .has-subtabs .tab-button::after {
-    content: "▼";
+/* Remove default arrow for buttons that will have toggle button */
+.fullscreen-nav .has-subtabs .tab-button.with-toggle-button::after {
+    display: none;
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 12px;
-    margin-left: 8px;
+    color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
     transition: transform 0.3s ease;
+}
+
+.has-subtabs.subtabs-visible .dropdown-toggle {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .fullscreen-nav .has-subtabs.subtabs-visible .tab-button::after {
@@ -126,6 +146,7 @@
     padding: var(--spacing-xs);
     margin-top: 5px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .fullscreen-nav .subtab-button {

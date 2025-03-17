@@ -1,5 +1,6 @@
 /**
  * tabs.js - Tab navigation functionality
+ * Desktop-only version - mobile handled by mobile-menu.js
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,18 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event listeners to each tab button
     tabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Skip for cloned buttons in the fullscreen navigation
-            if (e.target.closest('.fullscreen-nav')) return;
-            
             e.preventDefault();
             
             // Get the tab ID from data attribute
             const tabId = this.getAttribute('data-tab');
-            
-            // If on mobile and button has subtabs, we'll handle the click differently
-            if (window.innerWidth <= 767 && this.parentNode.classList.contains('has-subtabs')) {
-                return; // Mobile behavior is managed separately
-            }
             
             // Remove active class from all tabs
             tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -38,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set new active tab
             this.classList.add('active');
             const tabContent = document.getElementById(tabId);
-            tabContent.classList.add('active');
+            if (tabContent) tabContent.classList.add('active');
             activeMainTab = tabId;
             
             // If it has subtabs, activate the default subtab
@@ -61,20 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: 0,
                 behavior: 'smooth'
             });
-
-            // Close any open subtab menus on mobile
-            hasSubtabsElements.forEach(el => {
-                el.classList.remove('subtabs-visible');
-            });
         });
     });
     
     // Handle subtab buttons
     subtabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Skip for cloned buttons in the fullscreen navigation
-            if (e.target.closest('.fullscreen-nav')) return;
-            
             e.preventDefault();
             
             // Get the subtab ID and parent tab ID
@@ -86,14 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const parentTab = document.querySelector(`.tab-button[data-tab="${parentTabId}"]`);
             
             // If we're not on the correct parent tab, activate it first
-            if (currentActiveTab.getAttribute('data-tab') !== parentTabId) {
+            if (currentActiveTab && currentActiveTab.getAttribute('data-tab') !== parentTabId) {
                 // Activate the parent tab programmatically
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
                 
-                parentTab.classList.add('active');
+                if (parentTab) parentTab.classList.add('active');
                 const parentContent = document.getElementById(parentTabId);
-                parentContent.classList.add('active');
+                if (parentContent) parentContent.classList.add('active');
                 activeMainTab = parentTabId;
                 
                 // Save as active tab
@@ -104,20 +89,15 @@ document.addEventListener('DOMContentLoaded', function() {
             resetSubtabsForParent(parentTabId);
             
             // Set new active subtab
-            button.classList.add('active');
+            this.classList.add('active');
             const subtabContent = document.getElementById(subtabId);
-            subtabContent.classList.add('active');
+            if (subtabContent) subtabContent.classList.add('active');
             
             // Save current subtab to session storage
             sessionStorage.setItem('activeSubtab', subtabId);
             
             // Update URL - append the subtab to the URL
             updateURL(parentTabId, subtabId);
-            
-            // Close the subtab menu if on mobile
-            hasSubtabsElements.forEach(el => {
-                el.classList.remove('subtabs-visible');
-            });
             
             // Smooth scroll to top
             window.scrollTo({
@@ -126,6 +106,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    
+    // Handle desktop hover behavior for subtabs
+    if (window.innerWidth > 767) {
+        hasSubtabsElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.classList.add('subtabs-visible');
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.classList.remove('subtabs-visible');
+            });
+        });
+    }
     
     // Reset all subtabs across all parent tabs
     function resetAllSubtabs() {
