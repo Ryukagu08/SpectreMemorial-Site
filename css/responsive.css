@@ -120,6 +120,12 @@
     transform: translateY(-50%) rotate(180deg);
 }
 
+/* Make dropdown icon white when tab is active with yellow glow */
+.has-subtabs .tab-button.active .dropdown-toggle,
+.has-subtabs .tab-button.active::after {
+    color: white;
+}
+
 .fullscreen-nav .has-subtabs.subtabs-visible .tab-button::after {
     transform: rotate(180deg);
 }
@@ -435,6 +441,13 @@
     /* Show the toggle button */
     .nav-toggle-button {
         display: block;
+    }
+    
+    /* Remove yellow border and adjust header for mobile */
+    .site-header {
+        border-bottom: none;
+        background-color: transparent;
+        box-shadow: none;
     }
     
     /* Layout */
