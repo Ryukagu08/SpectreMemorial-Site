@@ -242,23 +242,3 @@
 #gallery-fanart .gallery-item:hover img {
     filter: brightness(1.1);
 }
-
-/* Disable animations for users who prefer reduced motion */
-@media (prefers-reduced-motion) {
-    .tab-content.active,
-    .feature-grid,
-    .timeline-item,
-    .quote-card,
-    .archive-item,
-    .gallery-item,
-    .banner-logo,
-    .banner-subtitle,
-    .banner-date,
-    .tab-button.active,
-    .timeline::before,
-    .gallery-section-title,
-    .gallery-section-title::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}

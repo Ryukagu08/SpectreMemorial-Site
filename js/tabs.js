@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event listeners to each tab button
     tabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
+            // Skip for cloned buttons in the fullscreen navigation
+            if (e.target.closest('.fullscreen-nav')) return;
+            
             e.preventDefault();
             
             // Get the tab ID from data attribute
@@ -69,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle subtab buttons
     subtabButtons.forEach(button => {
         button.addEventListener('click', function(e) {
+            // Skip for cloned buttons in the fullscreen navigation
+            if (e.target.closest('.fullscreen-nav')) return;
+            
             e.preventDefault();
             
             // Get the subtab ID and parent tab ID
@@ -120,64 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-    
-    // Mobile-specific behavior for subtabs
-    if (window.innerWidth <= 767) {
-        const subtabParents = document.querySelectorAll('.has-subtabs .tab-button');
-        subtabParents.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Close other subtab menus first
-                hasSubtabsElements.forEach(el => {
-                    if (el !== this.parentNode) {
-                        el.classList.remove('subtabs-visible');
-                    }
-                });
-                
-                // Toggle the subtabs menu
-                const parent = this.parentNode;
-                parent.classList.toggle('subtabs-visible');
-                
-                // Get the tab ID from data attribute
-                const tabId = this.getAttribute('data-tab');
-                
-                // Always activate the main tab content
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                // Set new active tab
-                this.classList.add('active');
-                const tabContent = document.getElementById(tabId);
-                tabContent.classList.add('active');
-                activeMainTab = tabId;
-                
-                // Activate the default subtab for this tab
-                resetAllSubtabs();
-                const defaultSubtab = document.getElementById(`${tabId}-default`);
-                if (defaultSubtab) {
-                    defaultSubtab.classList.add('active');
-                }
-                
-                // Save current tab to session storage
-                sessionStorage.setItem('activeTab', tabId);
-                sessionStorage.removeItem('activeSubtab');
-                
-                // Update URL without page reload
-                updateURL(tabId);
-            });
-        });
-        
-        // Close subtabs when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.has-subtabs')) {
-                hasSubtabsElements.forEach(el => {
-                    el.classList.remove('subtabs-visible');
-                });
-            }
-        });
-    }
     
     // Reset all subtabs across all parent tabs
     function resetAllSubtabs() {
@@ -278,19 +226,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle browser navigation
     window.addEventListener('popstate', initializeNavigation);
-    
-    // Handle window resize for mobile/desktop view switching
-    window.addEventListener('resize', function() {
-        // Re-initialize subtab behavior if size crosses mobile breakpoint
-        const wasMobile = window.innerWidth <= 767;
-        
-        if (wasMobile !== (window.innerWidth <= 767)) {
-            // Remove any lingering mobile-specific classes
-            if (!wasMobile) {
-                hasSubtabsElements.forEach(el => {
-                    el.classList.remove('subtabs-visible');
-                });
-            }
-        }
-    });
 });

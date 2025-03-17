@@ -1,6 +1,142 @@
-/* responsive.css - Responsive design breakpoints */
+/* responsive.css - Consolidated responsive design styles */
 
-/* Large Desktops (1200px and up) */
+/* ============================
+   Mobile Menu Fullscreen Styles 
+   ============================ */
+   .mobile-menu-active {
+    overflow: hidden; /* Prevent body scrolling when menu is open */
+}
+
+.fullscreen-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: var(--z-index-high);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fullscreen-nav.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fullscreen-nav .tab-navigation {
+    flex-direction: column;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 400px;
+}
+
+.fullscreen-nav .tab-button {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/* Mobile Navigation Toggle Button */
+.nav-toggle-button {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: var(--z-index-high);
+    padding: 0;
+}
+
+.nav-toggle-button .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 6px 0;
+    transition: all 0.3s ease;
+}
+
+/* Animation for hamburger to X */
+.nav-toggle-button.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.nav-toggle-button.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle-button.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Dropdown styling for mobile subtabs */
+.fullscreen-nav .has-subtabs {
+    position: relative;
+}
+
+.fullscreen-nav .has-subtabs .tab-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fullscreen-nav .has-subtabs .tab-button::after {
+    content: "▼";
+    font-size: 12px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.fullscreen-nav .has-subtabs.subtabs-visible .tab-button::after {
+    transform: rotate(180deg);
+}
+
+.fullscreen-nav .subtab-navigation {
+    position: static;
+    opacity: 0;
+    max-height: 0;
+    visibility: visible;
+    transform: none;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+    width: 100%;
+}
+
+.fullscreen-nav .has-subtabs.subtabs-visible .subtab-navigation {
+    opacity: 1;
+    max-height: 300px;
+    padding: var(--spacing-xs);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.fullscreen-nav .subtab-button {
+    text-align: center;
+    padding: 12px;
+    margin: 3px 0;
+}
+
+/* ============================
+   Large Desktops (1200px and up)
+   ============================ */
 @media (min-width: 1200px) {
     .container {
         max-width: 1400px;
@@ -19,8 +155,11 @@
     }
 }
 
-/* Medium Desktops (992px to 1199px) */
+/* ============================
+   Medium Desktops (992px to 1199px)
+   ============================ */
 @media (max-width: 1199px) {
+    /* Layout */
     .banner-logo img {
         width: 350px;
     }
@@ -41,10 +180,38 @@
     .subtab-navigation {
         min-width: 160px;
     }
+    
+    /* Maps */
+    .map-featured-image,
+    .map-featured-content {
+        grid-column: span 6;
+    }
+    
+    .map-minimap-overlay {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Gallery */
+    .fanart-mosaic-grid {
+        grid-auto-rows: 100px;
+    }
+    
+    /* Weapons */
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+    
+    .stat-name {
+        flex: 0 0 100px;
+    }
 }
 
-/* Tablets and Small Desktops (768px to 991px) */
+/* ============================
+   Tablets and Small Desktops (768px to 991px)
+   ============================ */
 @media (max-width: 991px) {
+    /* Layout */
     .feature-grid,
     .feature-grid-reverse {
         grid-template-columns: 1fr;
@@ -79,6 +246,7 @@
         font-size: 32px;
     }
     
+    /* Timeline */
     .timeline::before {
         left: 30px;
     }
@@ -100,10 +268,12 @@
         border-left: 4px solid var(--primary-color);
     }
     
+    /* Community */
     .community-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
     
+    /* Archive */
     .archive-mosaic {
         grid-template-columns: repeat(6, 1fr);
     }
@@ -124,78 +294,129 @@
     .subtab-navigation {
         min-width: 200px;
     }
+    
+    /* Maps */
+    .map-featured {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-featured-image,
+    .map-featured-content {
+        grid-column: span 12;
+    }
+    
+    .map-featured-image {
+        aspect-ratio: 16/9;
+        max-height: 400px;
+    }
+    
+    .maps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    
+    /* Gallery */
+    .artworks-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .comic-pages {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .comic-page {
+        flex: 0 0 100%;
+        max-width: 600px;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .contest-first-place {
+        height: 500px;
+    }
+    
+    .contest-second-place, .contest-third-place {
+        height: 300px;
+    }
+    
+    .fanart-mosaic-grid {
+        grid-auto-rows: 90px;
+    }
+    
+    .fanart-item.fanart-tall-wide {
+        grid-column: span 4;
+    }
+    
+    .fanart-item.fanart-medium,
+    .fanart-item.fanart-landscape {
+        grid-column: span 6;
+    }
+    
+    .fanart-item.fanart-portrait-small {
+        grid-column: span 2;
+    }
+    
+    /* Sponsors */
+    .abilities-art-bg {
+        opacity: 0.5;
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+    
+    .abilities-bg-image {
+        position: absolute;
+        left: 0;
+        transform: none;
+        object-position: center;
+    }
+    
+    .abilities-list {
+        max-width: 100%;
+    }
+    
+    .sponsor-header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .sponsor-logo-image {
+        margin-right: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .sponsor-meta {
+        justify-content: center;
+    }
+    
+    /* Weapons */
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .weapon-card {
+        height: 320px;
+    }
+    
+    .stat-name {
+        flex: 0 0 90px;
+    }
 }
 
-/* Mobile Navigation Toggle Button (visible only on mobile) */
-.nav-toggle-button {
-    display: none;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: var(--z-index-high);
-    padding: 0;
-}
-
-.nav-toggle-button .bar {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--primary-color);
-    margin: 6px 0;
-    transition: all 0.3s ease;
-}
-
-/* Mobile Landscape (576px to 767px) */
+/* ============================
+   Mobile - Show Burger Menu (767px and down)
+   ============================ */
 @media (max-width: 767px) {
     /* Show the toggle button */
     .nav-toggle-button {
         display: block;
     }
     
-    /* Setup for collapsible navigation */
-    .tab-navigation {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease;
-        width: 100%;
-    }
-    
-    /* When nav is open */
-    .tab-navigation.expanded {
-        max-height: 500px; /* Adjust as needed */
-        margin-top: 15px;
-    }
-    
-    /* Animation for hamburger to X */
-    .nav-toggle-button.active .bar:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    
-    .nav-toggle-button.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .nav-toggle-button.active .bar:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-    
-    .tab-button {
-        flex: 0 0 auto;
-        min-width: 120px;
-        text-align: center;
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: 14px;
-        margin: 4px;
-    }
-    
+    /* Layout */
     .header-container {
         flex-direction: column;
         text-align: center;
@@ -235,6 +456,7 @@
         font-size: 16px;
     }
     
+    /* Archive */
     .archive-mosaic {
         display: block;
     }
@@ -244,10 +466,22 @@
         height: 250px;
     }
     
+    /* Gallery */
     .gallery-grid {
         grid-template-columns: 1fr;
     }
     
+    .gallery-nav-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .gallery-nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Footer */
     .footer-column {
         flex: 0 0 100%;
         text-align: center;
@@ -257,65 +491,82 @@
         left: 50%;
         transform: translateX(-50%);
     }
-
-    /* Adjust subtabs for mobile landscape */
-    .has-subtabs {
-        position: static;
-    }
-
-    .subtab-navigation {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        max-height: 50vh; /* Limit height to half the viewport */
-        overflow-y: auto; /* Make it scrollable */
-        opacity: 0;
-        visibility: hidden;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        transform: translateY(100%);
+    
+    /* Maps */
+    .map-featured-content {
         padding: var(--spacing-md);
-        border-radius: 0;
-        border-width: 1px 0 0 0;
-        z-index: var(--z-index-high);
-        backdrop-filter: blur(10px); /* Add blur effect for better visibility */
     }
-
-    .has-subtabs.subtabs-visible .subtab-navigation {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+    
+    .map-minimap-overlay {
+        width: 100px;
+        height: 100px;
+        bottom: var(--spacing-sm);
+        right: var(--spacing-sm);
     }
-
-    .subtab-button {
-        flex: 0 0 auto;
-        min-width: 130px;
-        width: auto;
-        padding: var(--spacing-xs) var(--spacing-sm);
-        margin: 5px;
-        text-align: center;
-        border-radius: var(--border-radius);
+    
+    .maps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .map-details-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Sponsors */
+    .sponsor-banner {
+        height: 150px; /* Smaller height on mobile */
+    }
+    
+    .ability-item {
+        flex-direction: column;
+    }
+    
+    .ability-icon {
+        width: 100%;
+        height: 60px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 203, 0, 0.3);
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .sponsor-thumb-logo {
+        height: 80px;
+    }
+    
+    /* Weapons */
+    .weapons-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .weapon-card {
+        max-width: 500px;
+        margin: 0 auto;
+        height: 300px;
+    }
+    
+    .stat-name {
+        flex: 0 0 90px;
+        font-size: 13px;
+    }
+    
+    .stat-value {
+        font-size: 13px;
+    }
+    
+    .stats-description {
+        font-size: 13px;
     }
 }
 
-/* Mobile Portrait (up to 575px) */
+/* ============================
+   Mobile Portrait (up to 575px)
+   ============================ */
 @media (max-width: 575px) {
-    .tab-navigation {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .tab-button {
-        width: 100%;
-        margin: 3px 0;
-        padding: 10px;
-    }
-    
+    /* Layout */
     .logo-image {
         height: 35px;
     }
@@ -337,6 +588,7 @@
         font-size: 24px;
     }
     
+    /* Timeline */
     .timeline-content {
         padding: var(--spacing-sm);
     }
@@ -376,15 +628,97 @@
     .community-grid {
         grid-template-columns: 1fr;
     }
-
-    /* Increase spacing for touch targets */
-    .subtab-button {
-        padding: 12px var(--spacing-sm);
-        margin-bottom: 6px;
+    
+    /* Maps & Sponsors */
+    .maps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Contest */
+    .contest-first-place {
+        height: 350px;
+    }
+    
+    .contest-second-place, .contest-third-place {
+        height: 250px;
+    }
+    
+    .contest-content-top,
+    .contest-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .contest-title {
+        font-size: 16px;
+    }
+    
+    .contest-caption {
+        font-size: 14px;
+    }
+    
+    /* Fanart */
+    .fanart-mosaic-grid {
+        grid-template-columns: repeat(6, 1fr);
+        grid-auto-rows: 60px;
+        gap: 5px;
+    }
+    
+    .fanart-item.fanart-wide {
+        grid-column: span 6;
+    }
+    
+    .fanart-item.fanart-square {
+        grid-column: span 3;
+    }
+    
+    .fanart-item .gallery-caption h3 {
+        font-size: 12px;
+        margin-bottom: 0;
+    }
+    
+    .fanart-item .gallery-caption p {
+        font-size: 10px;
+        margin-bottom: 0;
+    }
+    
+    /* Weapons */
+    .weapon-card {
+        height: 280px;
+    }
+    
+    .weapon-details {
+        padding: var(--spacing-sm);
+    }
+    
+    .weapon-name {
+        font-size: 16px;
+    }
+    
+    .weapon-type {
+        font-size: 14px;
+    }
+    
+    .stats-row, .stats-header {
+        padding: 8px 15px;
+    }
+    
+    .stats-description {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .damage-cell {
+        font-size: 14px;
     }
 }
 
-/* Landscape orientations */
+/* ============================
+   Landscape orientations
+   ============================ */
 @media (max-height: 500px) and (orientation: landscape) {
     .main-banner {
         height: 100vh;
@@ -404,14 +738,24 @@
         margin-bottom: var(--spacing-sm);
     }
 
-    /* Adjust subtabs for landscape */
-    .subtab-navigation {
-        max-height: 90vh;
-        overflow-y: auto;
+    /* Mobile fullscreen menu adjustments for landscape */
+    .fullscreen-nav .tab-navigation {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-height: 70vh;
+    }
+    
+    .fullscreen-nav .tab-button {
+        width: auto;
+        min-width: 200px;
+        margin: 5px;
     }
 }
 
-/* Touch Device Support - Remove hover effects */
+/* ============================
+   Touch Device Support - Remove hover effects
+   ============================ */
 @media (hover: none) {
     .tab-button:hover,
     .feature-media:hover,
@@ -466,9 +810,27 @@
     .fanart-item .gallery-caption {
         transform: translateY(0);
     }
+    
+    /* Touch device support for weapons */
+    .weapon-card {
+        height: auto;
+    }
+    
+    .weapon-image {
+        position: relative;
+        height: 200px;
+    }
+    
+    .weapon-details {
+        position: relative;
+        height: auto;
+        background: rgba(35, 35, 35, 0.9);
+    }
 }
 
-/* Print styles */
+/* ============================
+   Print styles
+   ============================ */
 @media print {
     body {
         background-color: white;
@@ -522,20 +884,57 @@
         color: #000;
         border-top: 1px solid #ddd;
     }
-
+    
     /* Hide subtabs in print */
     .subtab-navigation {
         display: none;
     }
-
+    
     /* Show all subtab content in print */
     .subtab-content {
         display: block !important;
         page-break-after: always;
     }
+    
+    /* Specific styles for weapon cards */
+    .weapon-card {
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+    
+    .weapon-name {
+        color: #000;
+    }
+    
+    .weapon-stats-panel {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        color: #000;
+        height: auto;
+        opacity: 1;
+    }
+    
+    .stats-header {
+        background-color: #eee;
+        color: #000;
+    }
+    
+    .stats-row {
+        color: #333;
+    }
+    
+    .stat-bar-background {
+        background-color: #eee;
+    }
+    
+    .stat-bar {
+        background-color: #999 !important;
+    }
 }
 
-/* High contrast mode */
+/* ============================
+   High contrast mode
+   ============================ */
 @media (forced-colors: active) {
     :root {
         --primary-color: CanvasText;
@@ -563,5 +962,73 @@
 
     .subtab-navigation {
         border: 2px solid CanvasText;
+    }
+    
+    .gallery-item, .artwork-item, .archive-item, .fanart-item, .comic-page, .contest-entry {
+        border: 2px solid CanvasText;
+    }
+    
+    .weapon-card {
+        border: 2px solid CanvasText;
+    }
+    
+    .stat-bar-background, .damage-icon, .damage-cell {
+        background-color: Canvas;
+        border: 1px solid CanvasText;
+    }
+    
+    .stat-bar {
+        background-color: Highlight !important;
+    }
+    
+    .head-icon, .body-icon, .leg-icon {
+        background-color: CanvasText;
+    }
+}
+
+/* ============================
+   Reduced motion preferences
+   ============================ */
+@media (prefers-reduced-motion) {
+    *, 
+    *::before, 
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .tab-content.active,
+    .feature-grid,
+    .timeline-item,
+    .quote-card,
+    .archive-item,
+    .gallery-item,
+    .banner-logo,
+    .banner-subtitle,
+    .banner-date,
+    .tab-button.active,
+    .timeline::before,
+    .gallery-section-title,
+    .gallery-section-title::after,
+    .feature-media img,
+    .archive-overview .feature-media img,
+    .archive-item img,
+    .gallery-item img,
+    .map-featured-image img,
+    .map-card .map-thumbnail,
+    .map-overlay-minimap,
+    .map-card,
+    .map-overlay,
+    .sponsor-banner-image,
+    .sponsor-logo-image,
+    .ability-icon-image,
+    .sponsor-thumb,
+    .ability-item,
+    .abilities-bg-image,
+    .sponsor-thumb-image {
+        transition: none !important;
+        animation: none !important;
     }
 }
