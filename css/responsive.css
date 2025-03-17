@@ -804,61 +804,45 @@
    Touch Device Support - Remove hover effects
    ============================ */
 @media (hover: none) {
-    .tab-button:hover,
-    .feature-media:hover,
-    .gallery-item:hover,
-    .archive-item:hover,
-    .fanart-item:hover,
-    .comic-page:hover,
-    .contest-entry:hover,
-    .quote-card:hover,
-    .map-card:hover,
-    .sponsor-thumb:hover,
-    .gallery-nav-btn:hover,
-    .weapon-card:hover {
+    /* Disable hover effects */
+    [class]:hover {
         transform: none !important;
         box-shadow: none !important;
     }
     
-    .feature-media:hover img,
-    .gallery-item:hover img,
-    .archive-item:hover img,
-    .weapon-image:hover img {
+    [class]:hover img {
         transform: none !important;
     }
     
+    /* Make captions visible */
     .gallery-caption,
     .archive-content,
     .contest-content,
-    .map-overlay {
-        /* Make captions always visible on touch devices */
+    .map-overlay,
+    .gallery-item .gallery-caption,
+    .artwork-item .gallery-caption,
+    .fanart-item .gallery-caption {
         opacity: 1 !important;
-        transform: none !important;
+        transform: translateY(0) !important;
     }
     
-    /* Improve button rail handling for touch */
+    /* Hide rail indicator */
     .button-rail-indicator {
         display: none;
     }
     
-    /* Better weapon card handling on touch devices */
+    /* Weapon card complete optimization */
     .weapon-card {
-        height: auto;
-        cursor: default;
-        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
-        pointer-events: none; /* Completely disable all click interactions */
+        height: auto !important; /* Override mobile height */
+        pointer-events: none;
+        -webkit-tap-highlight-color: transparent;
     }
     
-    /* Re-enable pointer events for scrolling within weapon details */
     .weapon-stats-panel {
-        pointer-events: auto;
-        overflow-y: auto;
-    }
-    
-    /* Make weapon details always fully visible */
-    .weapon-card .weapon-stats-panel {
         opacity: 1;
         height: auto;
+        pointer-events: auto;
+        overflow-y: auto;
     }
     
     .weapon-details {
@@ -869,24 +853,9 @@
     }
     
     .weapon-details::after {
-        display: none; /* Remove "HOVER FOR STATS" text on touch devices */
+        display: none;
     }
     
-    /* Prevent black overlay by disabling transitions and active states */
-    .weapon-card:active, 
-    .weapon-card:focus {
-        background-color: rgba(35, 35, 35, 0.8) !important;
-        outline: none;
-    }
-    
-    /* Show gallery captions by default on touch */
-    .gallery-item .gallery-caption,
-    .artwork-item .gallery-caption,
-    .fanart-item .gallery-caption {
-        transform: translateY(0);
-    }
-    
-    /* Original weapon image styling */
     .weapon-image {
         position: relative;
         height: 200px;
