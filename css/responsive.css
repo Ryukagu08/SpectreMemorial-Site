@@ -519,6 +519,19 @@
     .footer-column {
         flex: 0 0 100%;
         text-align: center;
+        margin-bottom: 8px; /* Reduced from var(--spacing-lg) */
+    }
+    
+    .footer-content {
+        margin-bottom: 10px;
+    }
+    
+    .footer-title {
+        margin-bottom: 5px;
+    }
+    
+    .site-footer {
+        padding: 15px 0 8px; /* More compact on mobile */
     }
     
     .footer-title:after {
@@ -828,14 +841,42 @@
         display: none;
     }
     
-    /* Better hover states for weapon cards on touch */
+    /* Better weapon card handling on touch devices */
+    .weapon-card {
+        height: auto;
+        cursor: default;
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+        pointer-events: none; /* Completely disable all click interactions */
+    }
+    
+    /* Re-enable pointer events for scrolling within weapon details */
+    .weapon-stats-panel {
+        pointer-events: auto;
+        overflow-y: auto;
+    }
+    
+    /* Make weapon details always fully visible */
     .weapon-card .weapon-stats-panel {
         opacity: 1;
         height: auto;
     }
     
+    .weapon-details {
+        position: relative;
+        height: auto !important;
+        min-height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.7) 100%) !important;
+    }
+    
     .weapon-details::after {
         display: none; /* Remove "HOVER FOR STATS" text on touch devices */
+    }
+    
+    /* Prevent black overlay by disabling transitions and active states */
+    .weapon-card:active, 
+    .weapon-card:focus {
+        background-color: rgba(35, 35, 35, 0.8) !important;
+        outline: none;
     }
     
     /* Show gallery captions by default on touch */
@@ -845,20 +886,10 @@
         transform: translateY(0);
     }
     
-    /* Touch device support for weapons */
-    .weapon-card {
-        height: auto;
-    }
-    
+    /* Original weapon image styling */
     .weapon-image {
         position: relative;
         height: 200px;
-    }
-    
-    .weapon-details {
-        position: relative;
-        height: auto;
-        background: rgba(35, 35, 35, 0.9);
     }
 }
 

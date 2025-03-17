@@ -351,11 +351,11 @@
 /* Footer Components */
 .footer-title {
     color: var(--primary-color);
-    margin-bottom: var(--spacing-md);
-    font-size: var(--font-size-sm);
+    margin-bottom: 8px;
+    font-size: 14px;
     text-transform: uppercase;
     position: relative;
-    padding-bottom: var(--spacing-sm);
+    padding-bottom: 5px;
     letter-spacing: 1px;
 }
 
@@ -364,12 +364,19 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 40px;
-    height: 3px;
+    width: 30px;
+    height: 2px;
     background-color: var(--primary-color);
 }
 
 .footer-bottom {
-    font-size: var(--font-size-xs);
+    font-size: 12px; /* Reduced from var(--font-size-xs) */
     color: var(--text-color-secondary);
+}
+
+/* Added specific styling for footer paragraphs */
+.footer-column p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    line-height: 1.4;
 }
