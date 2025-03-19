@@ -219,11 +219,6 @@
         height: 120px;
     }
     
-    /* Gallery */
-    .fanart-mosaic-grid {
-        grid-auto-rows: 100px;
-    }
-    
     /* Weapons */
     .weapons-grid {
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -365,23 +360,6 @@
     
     .contest-second-place, .contest-third-place {
         height: 300px;
-    }
-    
-    .fanart-mosaic-grid {
-        grid-auto-rows: 90px;
-    }
-    
-    .fanart-item.fanart-tall-wide {
-        grid-column: span 4;
-    }
-    
-    .fanart-item.fanart-medium,
-    .fanart-item.fanart-landscape {
-        grid-column: span 6;
-    }
-    
-    .fanart-item.fanart-portrait-small {
-        grid-column: span 2;
     }
     
     /* Sponsors */
@@ -705,31 +683,6 @@
     
     .contest-caption {
         font-size: 14px;
-    }
-    
-    /* Fanart */
-    .fanart-mosaic-grid {
-        grid-template-columns: repeat(6, 1fr);
-        grid-auto-rows: 60px;
-        gap: 5px;
-    }
-    
-    .fanart-item.fanart-wide {
-        grid-column: span 6;
-    }
-    
-    .fanart-item.fanart-square {
-        grid-column: span 3;
-    }
-    
-    .fanart-item .gallery-caption h3 {
-        font-size: 12px;
-        margin-bottom: 0;
-    }
-    
-    .fanart-item .gallery-caption p {
-        font-size: 10px;
-        margin-bottom: 0;
     }
     
     /* Weapons */
