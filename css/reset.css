@@ -19,7 +19,7 @@ html {
 
 body {
     margin: 0;
-    font-family: var(--font-family-primary);
+    font-family: var(--font-family-secondary);
     font-weight: var(--font-weight-normal);
     color: var(--text-color);
     background-color: var(--background-color);

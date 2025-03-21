@@ -171,10 +171,6 @@
         max-width: 1400px;
     }
     
-    .banner-logo img {
-        width: 600px;
-    }
-    
     .section-title {
         font-size: 42px;
     }
@@ -207,6 +203,10 @@
     .sponsors-grid {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
+
+    .banner-overlay {
+        aspect-ratio: 16 / 11;
+    }
 }
 
 /* ============================
@@ -214,9 +214,6 @@
    ============================ */
 @media (max-width: 1199px) {
     /* Layout */
-    .banner-logo img {
-        width: 350px;
-    }
     
     .feature-media, 
     .feature-content {
@@ -306,10 +303,6 @@
     
     .feature-grid.feature-grid-reverse .feature-content {
         grid-row: 2;
-    }
-    
-    .banner-logo img {
-        width: 300px;
     }
     
     .section-title {
@@ -770,10 +763,6 @@
     /* Layout */
     .logo-image {
         height: 35px;
-    }
-    
-    .banner-logo img {
-        width: 250px;
     }
     
     .banner-subtitle {
