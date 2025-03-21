@@ -2,13 +2,10 @@
     margin-bottom: var(--spacing-xl);
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: var(--border-radius);
-    border: none; /* Removed border */
-    box-shadow: 0 0 15px 2px rgba(255, 203, 0, 0.3); /* Added yellow glow */
+    border: 1px solid var(--primary-color);
+    box-shadow: var(--shadow-md);
     position: relative;
-    overflow: hidden; /* Changed to hidden to prevent content overflow */
-    height: 800px; /* Increased fixed height to avoid scrolling */
-    display: flex;
-    flex-direction: column;
+    overflow: visible;
 }
 
 /* Fixed height container for banners */
@@ -21,25 +18,20 @@
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
     background-color: rgba(0, 0, 0, 0.9); /* Dark background for banners */
-    flex-shrink: 0; /* Prevent banner from shrinking */
 }
 
 /* Scale banner to fit height without cropping */
 .sponsor-banner-image {
-    height: 200px; /* Fixed height */
+    max-height: 100%; /* Limit to container height */
     width: auto; /* Maintain aspect ratio */
-    max-width: 80%; /* Ensure it doesn't overflow horizontally */
+    max-width: 100%; /* Ensure it doesn't overflow horizontally */
     object-fit: contain; /* Preserve aspect ratio without cropping */
-    transition: opacity 0.3s ease; /* Changed to opacity transition instead of transform */
+    transition: transform 1.2s ease;
 }
 
 .sponsor-content-wrapper {
     padding: 0;
     position: relative;
-    flex-grow: 1; /* Fill remaining space */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Prevent content from expanding the card */
 }
 
 .sponsor-header {
@@ -50,8 +42,6 @@
     z-index: 2;
     background: none;
     border: none;
-    height: 100px; /* Fixed height for header */
-    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .sponsor-logo-image {
@@ -61,7 +51,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: var(--spacing-xs);
     object-fit: contain;
-    transition: opacity 0.3s ease; /* Changed to opacity transition */
+    transition: transform 1.2s ease;
 }
 
 .sponsor-info {
@@ -94,20 +84,18 @@
 .sponsor-abilities {
     position: relative;
     padding: var(--spacing-lg);
-    flex-grow: 1; /* Take remaining space */
-    overflow: hidden; /* Hide overflow */
-    display: flex;
-    align-items: center;
+    min-height: 350px;
+    overflow: visible;
 }
 
 .abilities-art-bg {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 40%;
-    height: 100%;
+    left: -3%;
+    top: -5px;
+    width: 45%;
+    height: 120%;
     z-index: 1;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .abilities-bg-image {
@@ -119,20 +107,18 @@
     object-fit: contain;
     max-height: none;
     max-width: none;
-    transition: opacity 0.3s ease; /* Changed to opacity transition */
+    transition: transform 1.2s ease;
 }
 
 .abilities-list {
     position: relative;
     z-index: 2;
-    width: 60%; /* Fixed width instead of max-width */
+    max-width: 60%;
     margin-left: auto;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     border-left: 3px solid var(--primary-color);
-    overflow-y: auto; /* Allow vertical scrolling if needed */
-    max-height: 450px; /* Set maximum height */
 }
 
 .ability-item {
@@ -289,19 +275,10 @@
     color: var(--text-color-secondary);
 }
 
-.sponsor-card-featured.updating .sponsor-banner-image,
-.sponsor-card-featured.updating .sponsor-logo-image,
-.sponsor-card-featured.updating .abilities-bg-image {
-    opacity: 0;
+.sponsor-card-featured.updating {
+    animation: pulse 0.3s ease;
 }
 
-.sponsor-card-featured .sponsor-banner-image,
-.sponsor-card-featured .sponsor-logo-image,
-.sponsor-card-featured .abilities-bg-image {
-    opacity: 1;
-}
-
-/* Replace the card pulse with targeted fades */
 @keyframes pulse {
     0% { opacity: 1; }
     50% { opacity: 0.7; }
