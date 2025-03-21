@@ -265,55 +265,218 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!featuredCard || !sponsorData) return;
             
-            featuredCard.classList.add('updating');
+            // Get sponsor color for animations
+            let sponsorColorRGB;
+            switch(sponsorId) {
+                case 'pinnacle':
+                case 'umbra':
+                    sponsorColorRGB = '255, 58, 68'; // Red
+                    break;
+                case 'morrgen':
+                    sponsorColorRGB = '75, 249, 252'; // Teal blue
+                    break;
+                case 'bloom':
+                    sponsorColorRGB = '198, 234, 52'; // Yellowish green
+                    break;
+                case 'ryker':
+                    sponsorColorRGB = '255, 138, 0'; // Orange
+                    break;
+                case 'vector':
+                    sponsorColorRGB = '155, 48, 255'; // Purple
+                    break;
+                case 'ghostlink':
+                    sponsorColorRGB = '224, 240, 255'; // White slightly blueish
+                    break;
+                case 'muu':
+                    sponsorColorRGB = '221, 51, 251'; // Purple-pink
+                    break;
+                case 'monark':
+                    sponsorColorRGB = '36, 237, 174'; // Blueish green
+                    break;
+                default:
+                    sponsorColorRGB = '255, 203, 0'; // Default yellow
+            }
             
-            featuredCard.querySelector('.sponsor-banner-image').src = sponsorData.bannerImage;
-            featuredCard.querySelector('.sponsor-banner-image').alt = sponsorData.name;
-            featuredCard.querySelector('.sponsor-logo-image').src = sponsorData.logoImage;
-            featuredCard.querySelector('.sponsor-logo-image').alt = `${sponsorData.name} Logo`;
-            featuredCard.querySelector('.abilities-bg-image').src = sponsorData.abilitiesArt;
-            featuredCard.querySelector('.abilities-bg-image').alt = `${sponsorData.name} Abilities`;
+            // Set the CSS variable for animations
+            featuredCard.style.setProperty('--sponsor-color-rgb', sponsorColorRGB);
             
-            featuredCard.querySelector('.sponsor-name').textContent = sponsorData.name;
-            featuredCard.querySelector('.sponsor-district .meta-value').textContent = sponsorData.district;
-            featuredCard.querySelector('.sponsor-role .meta-value').textContent = sponsorData.role;
+            // Start fade-out animation
+            featuredCard.classList.add('updating-out');
             
-            const abilityItems = featuredCard.querySelectorAll('.ability-item');
-            this.updateAbilityItem(abilityItems[0], sponsorData.abilities.primary, 'PRIMARY');
-            this.updateAbilityItem(abilityItems[1], sponsorData.abilities.secondary, 'SECONDARY');
-            this.updateAbilityItem(abilityItems[2], sponsorData.abilities.tertiary, 'TERTIARY');
-            
+            // After fade out, update content and start fade-in
             setTimeout(() => {
-                featuredCard.classList.remove('updating');
-            }, 300);
+                // Update banner and logo images
+                featuredCard.querySelector('.sponsor-banner-image').src = sponsorData.bannerImage;
+                featuredCard.querySelector('.sponsor-banner-image').alt = sponsorData.name;
+                featuredCard.querySelector('.sponsor-logo-image').src = sponsorData.logoImage;
+                featuredCard.querySelector('.sponsor-logo-image').alt = `${sponsorData.name} Logo`;
+                
+                // Update abilities art
+                featuredCard.querySelector('.sponsor-art-image').src = sponsorData.abilitiesArt;
+                featuredCard.querySelector('.sponsor-art-image').alt = `${sponsorData.name} Abilities`;
+                
+                // Update text content
+                featuredCard.querySelector('.sponsor-name').textContent = sponsorData.name;
+                
+                // Update district and role in metadata
+                const metaValues = featuredCard.querySelectorAll('.meta-value');
+                if (metaValues.length >= 2) {
+                    metaValues[0].textContent = sponsorData.district;
+                    metaValues[1].textContent = sponsorData.role;
+                }
+                
+                // Update sponsor-specific styling using data attribute
+                featuredCard.className = 'sponsor-showcase';
+                featuredCard.setAttribute('data-sponsor', sponsorId);
+                
+                // Update abilities - Reset animations by recreating them
+                const abilitiesContainer = featuredCard.querySelector('.abilities-container');
+                if (abilitiesContainer) {
+                    const oldAbilityCards = abilitiesContainer.querySelectorAll('.ability-card');
+                    
+                    // Store the old cards info to recreate them
+                    const abilitiesData = [];
+                    oldAbilityCards.forEach((card, index) => {
+                        let abilityType;
+                        switch(index) {
+                            case 0: abilityType = 'PRIMARY'; break;
+                            case 1: abilityType = 'SECONDARY'; break;
+                            case 2: abilityType = 'TERTIARY'; break;
+                        }
+                        
+                        abilitiesData.push({
+                            abilityInfo: sponsorData.abilities[abilityType.toLowerCase()],
+                            type: abilityType
+                        });
+                    });
+                    
+                    // Clear and recreate ability cards
+                    abilitiesContainer.innerHTML = '';
+                    abilitiesData.forEach(data => {
+                        if (!data.abilityInfo) return;
+                        
+                        const newCard = this.createAbilityCard(data.abilityInfo, data.type);
+                        abilitiesContainer.appendChild(newCard);
+                    });
+                }
+                
+                // Start fade-in animation
+                featuredCard.classList.add('updating-in');
+                
+                // Remove animation classes after completion
+                setTimeout(() => {
+                    featuredCard.classList.remove('updating-out', 'updating-in');
+                }, 500);
+                
+            }, 400); // Wait for the fade-out to complete
         },
         
-        updateAbilityItem: function(item, abilityData, type) {
-            if (!item) return;
+        createAbilityCard: function(abilityData, type) {
+            if (!abilityData) return null;
             
-            const icon = item.querySelector('.ability-icon-image');
+            // Create container
+            const card = document.createElement('div');
+            card.className = 'ability-card';
+            
+            // Create icon container
+            const iconContainer = document.createElement('div');
+            iconContainer.className = 'ability-icon-container';
+            
+            // Create icon
+            const icon = document.createElement('img');
+            icon.className = 'ability-icon';
             icon.src = abilityData.icon;
             icon.alt = abilityData.name;
+            iconContainer.appendChild(icon);
             
-            const nameEl = item.querySelector('.ability-name');
-            nameEl.innerHTML = `${abilityData.name} <span class="ability-type">${type}</span>`;
+            // Create details container
+            const details = document.createElement('div');
+            details.className = 'ability-details';
             
-            const descEl = item.querySelector('.ability-description');
-            descEl.textContent = abilityData.description;
+            // Create header with name and type
+            const header = document.createElement('div');
+            header.className = 'ability-header';
             
-            const altEl = item.querySelector('.ability-alt');
-            if (altEl) {
-                if (abilityData.alt) {
+            const name = document.createElement('span');
+            name.className = 'ability-name';
+            name.textContent = abilityData.name;
+            
+            const typeSpan = document.createElement('span');
+            typeSpan.className = 'ability-type';
+            typeSpan.textContent = type;
+            
+            header.appendChild(name);
+            header.appendChild(typeSpan);
+            
+            // Create description
+            const description = document.createElement('p');
+            description.className = 'ability-description';
+            description.textContent = abilityData.description;
+            
+            // Add to details
+            details.appendChild(header);
+            details.appendChild(description);
+            
+            // Add alt if available
+            if (abilityData.alt) {
+                const alt = document.createElement('p');
+                alt.className = 'ability-alt';
+                alt.textContent = abilityData.alt;
+                details.appendChild(alt);
+            }
+            
+            // Assemble card
+            card.appendChild(iconContainer);
+            card.appendChild(details);
+            
+            return card;
+        },
+        
+        updateAbilityCard: function(card, abilityData, type) {
+            if (!card || !abilityData) return;
+            
+            // Update icon
+            const icon = card.querySelector('.ability-icon');
+            if (icon) {
+                icon.src = abilityData.icon;
+                icon.alt = abilityData.name;
+            }
+            
+            // Update name and type
+            const nameElem = card.querySelector('.ability-name');
+            if (nameElem) {
+                nameElem.textContent = abilityData.name;
+            }
+            
+            const typeElem = card.querySelector('.ability-type');
+            if (typeElem) {
+                typeElem.textContent = type;
+            }
+            
+            // Update description
+            const descElem = card.querySelector('.ability-description');
+            if (descElem) {
+                descElem.textContent = abilityData.description;
+            }
+            
+            // Update or remove alt fire description
+            const altEl = card.querySelector('.ability-alt');
+            if (abilityData.alt) {
+                if (altEl) {
                     altEl.textContent = abilityData.alt;
                     altEl.style.display = 'block';
                 } else {
-                    altEl.style.display = 'none';
+                    // Create alt element if it doesn't exist
+                    const newAltEl = document.createElement('p');
+                    newAltEl.className = 'ability-alt';
+                    newAltEl.textContent = abilityData.alt;
+                    const detailsElem = card.querySelector('.ability-details');
+                    if (detailsElem) {
+                        detailsElem.appendChild(newAltEl);
+                    }
                 }
-            } else if (abilityData.alt) {
-                const newAltEl = document.createElement('p');
-                newAltEl.className = 'ability-alt';
-                newAltEl.textContent = abilityData.alt;
-                item.querySelector('.ability-details').appendChild(newAltEl);
+            } else if (altEl) {
+                altEl.style.display = 'none';
             }
         },
         
@@ -326,6 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
+    // Initialize if we're on the sponsors tab
     const sponsorsTab = document.getElementById('archive-sponsors');
     if (sponsorsTab) {
         SponsorController.init();
