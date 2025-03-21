@@ -1,9 +1,13 @@
-/**
- * maps.js - Map selection and display functionality
- */
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Maps interaction functionality
+    function preloadImage(src) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = src;
+        });
+    }
+    
     const MapController = {
         init: function() {
             this.mapData = {
@@ -45,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             this.bindEvents();
-            this.showActiveMapDetails('canal'); // Default map
+            this.showActiveMapDetails('canal');
         },
         
         bindEvents: function() {
@@ -53,18 +57,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const self = this;
             
             mapCards.forEach(card => {
+                const mapId = card.getAttribute('data-map');
+                
+                card.addEventListener('mouseenter', () => {
+                    const mapData = self.mapData[mapId];
+                    if (mapData) {
+                        preloadImage(mapData.mainImage);
+                        preloadImage(mapData.minimapImage);
+                    }
+                });
+                
                 card.addEventListener('click', function() {
-                    const mapId = this.getAttribute('data-map');
-                    
-                    // Update active card
                     mapCards.forEach(c => c.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Update featured map and show details
                     self.updateFeaturedMap(mapId);
                     self.showActiveMapDetails(mapId);
-                    
-                    // Removed: Auto-scroll to featured map
                 });
             });
         },
@@ -75,53 +83,52 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!featuredMap || !mapData) return;
             
-            // Update images
-            const mainImage = featuredMap.querySelector('.main-map-image');
-            const minimapImage = featuredMap.querySelector('.minimap-image');
+            featuredMap.classList.add('updating-out');
             
-            mainImage.src = mapData.mainImage;
-            mainImage.alt = mapData.title;
-            minimapImage.src = mapData.minimapImage;
-            minimapImage.alt = `${mapData.title} Minimap`;
-            
-            // Update content
-            const title = featuredMap.querySelector('.map-title');
-            const description = featuredMap.querySelector('.map-description');
-            const tagsContainer = featuredMap.querySelector('.map-tags');
-            
-            title.textContent = mapData.title;
-            description.textContent = mapData.description;
-            
-            // Clear and recreate tags
-            tagsContainer.innerHTML = '';
-            mapData.tags.forEach(tag => {
-                const tagEl = document.createElement('span');
-                tagEl.classList.add('map-tag');
-                tagEl.textContent = tag;
-                tagsContainer.appendChild(tagEl);
-            });
-            
-            // Add an animation to indicate change
-            featuredMap.classList.add('updating');
-            setTimeout(() => featuredMap.classList.remove('updating'), 300);
+            setTimeout(() => {
+                const mainImage = featuredMap.querySelector('.main-map-image');
+                const minimapImage = featuredMap.querySelector('.minimap-image');
+                
+                mainImage.src = mapData.mainImage;
+                mainImage.alt = mapData.title;
+                minimapImage.src = mapData.minimapImage;
+                minimapImage.alt = `${mapData.title} Minimap`;
+                
+                const title = featuredMap.querySelector('.map-title');
+                const description = featuredMap.querySelector('.map-description');
+                const tagsContainer = featuredMap.querySelector('.map-tags');
+                
+                title.textContent = mapData.title;
+                description.textContent = mapData.description;
+                
+                tagsContainer.innerHTML = '';
+                mapData.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.classList.add('map-tag');
+                    tagEl.textContent = tag;
+                    tagsContainer.appendChild(tagEl);
+                });
+                
+                featuredMap.classList.add('updating-in');
+                
+                setTimeout(() => {
+                    featuredMap.classList.remove('updating-out', 'updating-in');
+                }, 500);
+                
+            }, 400);
         },
         
         showActiveMapDetails: function(mapId) {
-            // Hide all details sections
             const allDetails = document.querySelectorAll('.map-details');
             allDetails.forEach(detail => detail.classList.remove('active'));
             
-            // Show the selected map's details
             const activeDetails = document.getElementById(`${mapId}-details`);
             if (activeDetails) {
                 activeDetails.classList.add('active');
-                
-                // Removed: Auto-scroll to details section
             }
         }
     };
     
-    // Check if we're on the maps tab before initializing
     const mapsTab = document.getElementById('archive-maps');
     if (mapsTab) {
         MapController.init();

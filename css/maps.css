@@ -1,4 +1,3 @@
-/* Map layout styles */
 .map-featured {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -9,6 +8,36 @@
     overflow: hidden;
     border: 2px solid var(--border-color);
     box-shadow: var(--shadow-md);
+}
+
+@keyframes mapFadeOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.98);
+    }
+}
+
+@keyframes mapFadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.map-featured.updating-out {
+    animation: mapFadeOutLeft 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.map-featured.updating-in {
+    animation: mapFadeInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .map-featured-image {
@@ -96,7 +125,6 @@
     letter-spacing: 0.5px;
 }
 
-/* Map selection grid */
 .maps-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -199,7 +227,6 @@
     text-align: center;
 }
 
-/* Map details sections */
 .map-details-container {
     margin-top: var(--spacing-xl);
 }
@@ -272,7 +299,6 @@
     border-radius: 50%;
 }
 
-/* Staggered animations for map cards */
 .maps-grid .map-card:nth-child(1) { animation-delay: 0.1s; }
 .maps-grid .map-card:nth-child(2) { animation-delay: 0.15s; }
 .maps-grid .map-card:nth-child(3) { animation-delay: 0.2s; }

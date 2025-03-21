@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function preloadImage(src) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = src;
+        });
+    }
+    
     const SponsorController = {
         init: function() {
             this.sponsorData = {
@@ -246,9 +255,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const self = this;
             
             sponsorThumbs.forEach(thumb => {
+                const sponsorId = thumb.getAttribute('data-sponsor');
+                
+                thumb.addEventListener('mouseenter', () => {
+                    const sponsorData = self.sponsorData[sponsorId];
+                    if (sponsorData) {
+                        preloadImage(sponsorData.bannerImage);
+                        preloadImage(sponsorData.logoImage);
+                        preloadImage(sponsorData.abilitiesArt);
+                        
+                        if (sponsorData.abilities) {
+                            Object.values(sponsorData.abilities).forEach(ability => {
+                                preloadImage(ability.icon);
+                            });
+                        }
+                    }
+                });
+                
                 thumb.addEventListener('click', function() {
-                    const sponsorId = this.getAttribute('data-sponsor');
-                    
                     if (self.sponsorData[sponsorId]) {
                         sponsorThumbs.forEach(t => t.classList.remove('active'));
                         this.classList.add('active');
@@ -265,76 +289,64 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!featuredCard || !sponsorData) return;
             
-            // Get sponsor color for animations
             let sponsorColorRGB;
             switch(sponsorId) {
                 case 'pinnacle':
                 case 'umbra':
-                    sponsorColorRGB = '255, 58, 68'; // Red
+                    sponsorColorRGB = '255, 58, 68';
                     break;
                 case 'morrgen':
-                    sponsorColorRGB = '75, 249, 252'; // Teal blue
+                    sponsorColorRGB = '75, 249, 252';
                     break;
                 case 'bloom':
-                    sponsorColorRGB = '198, 234, 52'; // Yellowish green
+                    sponsorColorRGB = '198, 234, 52';
                     break;
                 case 'ryker':
-                    sponsorColorRGB = '255, 138, 0'; // Orange
+                    sponsorColorRGB = '255, 138, 0';
                     break;
                 case 'vector':
-                    sponsorColorRGB = '155, 48, 255'; // Purple
+                    sponsorColorRGB = '155, 48, 255';
                     break;
                 case 'ghostlink':
-                    sponsorColorRGB = '224, 240, 255'; // White slightly blueish
+                    sponsorColorRGB = '224, 240, 255';
                     break;
                 case 'muu':
-                    sponsorColorRGB = '221, 51, 251'; // Purple-pink
+                    sponsorColorRGB = '221, 51, 251';
                     break;
                 case 'monark':
-                    sponsorColorRGB = '36, 237, 174'; // Blueish green
+                    sponsorColorRGB = '36, 237, 174';
                     break;
                 default:
-                    sponsorColorRGB = '255, 203, 0'; // Default yellow
+                    sponsorColorRGB = '255, 203, 0';
             }
             
-            // Set the CSS variable for animations
             featuredCard.style.setProperty('--sponsor-color-rgb', sponsorColorRGB);
-            
-            // Start fade-out animation
             featuredCard.classList.add('updating-out');
             
-            // After fade out, update content and start fade-in
             setTimeout(() => {
-                // Update banner and logo images
                 featuredCard.querySelector('.sponsor-banner-image').src = sponsorData.bannerImage;
                 featuredCard.querySelector('.sponsor-banner-image').alt = sponsorData.name;
                 featuredCard.querySelector('.sponsor-logo-image').src = sponsorData.logoImage;
                 featuredCard.querySelector('.sponsor-logo-image').alt = `${sponsorData.name} Logo`;
                 
-                // Update abilities art
                 featuredCard.querySelector('.sponsor-art-image').src = sponsorData.abilitiesArt;
                 featuredCard.querySelector('.sponsor-art-image').alt = `${sponsorData.name} Abilities`;
                 
-                // Update text content
                 featuredCard.querySelector('.sponsor-name').textContent = sponsorData.name;
                 
-                // Update district and role in metadata
                 const metaValues = featuredCard.querySelectorAll('.meta-value');
                 if (metaValues.length >= 2) {
                     metaValues[0].textContent = sponsorData.district;
                     metaValues[1].textContent = sponsorData.role;
                 }
                 
-                // Update sponsor-specific styling using data attribute
                 featuredCard.className = 'sponsor-showcase';
                 featuredCard.setAttribute('data-sponsor', sponsorId);
                 
-                // Update abilities - Reset animations by recreating them
                 const abilitiesContainer = featuredCard.querySelector('.abilities-container');
                 if (abilitiesContainer) {
                     const oldAbilityCards = abilitiesContainer.querySelectorAll('.ability-card');
                     
-                    // Store the old cards info to recreate them
                     const abilitiesData = [];
                     oldAbilityCards.forEach((card, index) => {
                         let abilityType;
@@ -350,7 +362,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     });
                     
-                    // Clear and recreate ability cards
                     abilitiesContainer.innerHTML = '';
                     abilitiesData.forEach(data => {
                         if (!data.abilityInfo) return;
@@ -360,40 +371,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 
-                // Start fade-in animation
                 featuredCard.classList.add('updating-in');
                 
-                // Remove animation classes after completion
                 setTimeout(() => {
                     featuredCard.classList.remove('updating-out', 'updating-in');
                 }, 500);
                 
-            }, 400); // Wait for the fade-out to complete
+            }, 400);
         },
         
         createAbilityCard: function(abilityData, type) {
             if (!abilityData) return null;
             
-            // Create container
             const card = document.createElement('div');
             card.className = 'ability-card';
             
-            // Create icon container
             const iconContainer = document.createElement('div');
             iconContainer.className = 'ability-icon-container';
             
-            // Create icon
             const icon = document.createElement('img');
             icon.className = 'ability-icon';
             icon.src = abilityData.icon;
             icon.alt = abilityData.name;
             iconContainer.appendChild(icon);
             
-            // Create details container
             const details = document.createElement('div');
             details.className = 'ability-details';
             
-            // Create header with name and type
             const header = document.createElement('div');
             header.className = 'ability-header';
             
@@ -408,16 +412,13 @@ document.addEventListener('DOMContentLoaded', function() {
             header.appendChild(name);
             header.appendChild(typeSpan);
             
-            // Create description
             const description = document.createElement('p');
             description.className = 'ability-description';
             description.textContent = abilityData.description;
             
-            // Add to details
             details.appendChild(header);
             details.appendChild(description);
             
-            // Add alt if available
             if (abilityData.alt) {
                 const alt = document.createElement('p');
                 alt.className = 'ability-alt';
@@ -425,59 +426,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 details.appendChild(alt);
             }
             
-            // Assemble card
             card.appendChild(iconContainer);
             card.appendChild(details);
             
             return card;
-        },
-        
-        updateAbilityCard: function(card, abilityData, type) {
-            if (!card || !abilityData) return;
-            
-            // Update icon
-            const icon = card.querySelector('.ability-icon');
-            if (icon) {
-                icon.src = abilityData.icon;
-                icon.alt = abilityData.name;
-            }
-            
-            // Update name and type
-            const nameElem = card.querySelector('.ability-name');
-            if (nameElem) {
-                nameElem.textContent = abilityData.name;
-            }
-            
-            const typeElem = card.querySelector('.ability-type');
-            if (typeElem) {
-                typeElem.textContent = type;
-            }
-            
-            // Update description
-            const descElem = card.querySelector('.ability-description');
-            if (descElem) {
-                descElem.textContent = abilityData.description;
-            }
-            
-            // Update or remove alt fire description
-            const altEl = card.querySelector('.ability-alt');
-            if (abilityData.alt) {
-                if (altEl) {
-                    altEl.textContent = abilityData.alt;
-                    altEl.style.display = 'block';
-                } else {
-                    // Create alt element if it doesn't exist
-                    const newAltEl = document.createElement('p');
-                    newAltEl.className = 'ability-alt';
-                    newAltEl.textContent = abilityData.alt;
-                    const detailsElem = card.querySelector('.ability-details');
-                    if (detailsElem) {
-                        detailsElem.appendChild(newAltEl);
-                    }
-                }
-            } else if (altEl) {
-                altEl.style.display = 'none';
-            }
         },
         
         setActiveSponsor: function(sponsorId) {
@@ -489,7 +441,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Initialize if we're on the sponsors tab
     const sponsorsTab = document.getElementById('archive-sponsors');
     if (sponsorsTab) {
         SponsorController.init();
