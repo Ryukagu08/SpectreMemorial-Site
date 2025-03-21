@@ -1,12 +1,11 @@
 .sponsor-card-featured {
-    height: 800px; /* Fixed height to prevent resizing between sponsors */
+    height: 900px;
     margin-bottom: var(--spacing-xl);
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: var(--border-radius);
-    border: 1px solid var(--primary-color);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 0 15px rgba(255, 203, 0, 0.5);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -18,17 +17,18 @@
     overflow: hidden;
     position: relative;
     display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    background-color: rgba(0, 0, 0, 0.9); /* Dark background for banners */
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-shrink: 0; /* Prevent banner from shrinking */
 }
 
 /* Scale banner to fit height without cropping */
 .sponsor-banner-image {
-    max-height: 100%; /* Limit to container height */
-    width: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Ensure it doesn't overflow horizontally */
-    object-fit: contain; /* Preserve aspect ratio without cropping */
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
     transition: transform 1.2s ease;
 }
 
@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: visible;
 }
 
 .sponsor-header {
@@ -47,6 +48,7 @@
     z-index: 2;
     background: none;
     border: none;
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .sponsor-logo-image {
@@ -99,7 +101,7 @@
     left: -3%;
     top: -5px;
     width: 45%;
-    height: 120%;
+    height: 100%;
     z-index: 1;
     overflow: visible;
 }
@@ -125,7 +127,6 @@
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     border-left: 3px solid var(--primary-color);
-    overflow-y: auto; /* Allow scrolling for content that exceeds container */
     max-height: 100%;
 }
 
