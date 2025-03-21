@@ -542,6 +542,26 @@
         height: 150px; /* Smaller height on mobile */
     }
     
+    /* Reset sponsor card height to auto on mobile */
+    .sponsor-card-featured {
+        height: auto;
+        display: block;
+    }
+    
+    .sponsor-content-wrapper {
+        display: block;
+    }
+    
+    .sponsor-abilities {
+        display: block;
+        min-height: 350px;
+    }
+    
+    .abilities-list {
+        max-height: none;
+        overflow: visible;
+    }
+    
     .ability-item {
         flex-direction: column;
     }
