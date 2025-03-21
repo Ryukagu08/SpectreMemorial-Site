@@ -10,14 +10,18 @@
 
 /* Header */
 .site-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
     padding: var(--spacing-sm) 0;
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-bottom: 1px solid rgba(255, 203, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: var(--z-index-high);
-    height: auto;
+    height: 60px;
 }
 
 .header-container {
@@ -38,7 +42,6 @@
 /* Tab Content Containers */
 .tab-content {
     display: none;
-    padding: var(--spacing-lg) 0;
 }
 
 .tab-content.active {

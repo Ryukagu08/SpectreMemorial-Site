@@ -495,7 +495,9 @@
     .site-header {
         border-bottom: none;
         background-color: transparent;
+        backdrop-filter: none;
         box-shadow: none;
+        height: 80px;
     }
     
     /* Layout */
