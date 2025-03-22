@@ -142,7 +142,7 @@
     width: 100%;
     border-radius: var(--border-radius);
     background-color: #191919;
-    font-family: var(--font-family-primary);
+    font-family: var(--font-family-secondary);
     transform: none; /* No transform */
 }
 

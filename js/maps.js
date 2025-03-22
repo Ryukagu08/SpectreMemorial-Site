@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     function preloadImage(src) {
         return new Promise((resolve, reject) => {
             const img = new Image();
@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
             img.src = src;
         });
     }
-    
+
     const MapController = {
-        init: function() {
+        init: function () {
             this.mapData = {
                 canal: {
                     title: 'CANAL',
                     description: "The 'Canal' area within Breakwater's Shadows district is a disputed space claimed by Shadows but fully controlled by Port. By day, dockhands move the essential cargo and marine supplies that keep Breakwater's coastal trade moving. As dusk falls, the lines between Shadows and Port blur; whispers of smuggling, secret warehouses and shady deals are passed through hushed conversations. Santai players leverage the massive fast-recall platform and the cover of cargo-strewn docks to dominate the map.",
                     mainImage: 'assets/archive/maps/canal.webp',
                     minimapImage: 'assets/archive/maps/canal-minimap.webp',
-                    tags: ['Breakwater','Shadows', 'Port']
+                    tags: ['Breakwater', 'Shadows', 'Port']
                 },
                 commons: {
                     title: 'COMMONS',
@@ -47,18 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     tags: ['Breakwater', 'South']
                 }
             };
-            
+
             this.bindEvents();
             this.showActiveMapDetails('canal');
         },
-        
-        bindEvents: function() {
+
+        bindEvents: function () {
             const mapCards = document.querySelectorAll('.map-card');
             const self = this;
-            
+
             mapCards.forEach(card => {
                 const mapId = card.getAttribute('data-map');
-                
+
                 card.addEventListener('mouseenter', () => {
                     const mapData = self.mapData[mapId];
                     if (mapData) {
@@ -66,41 +66,41 @@ document.addEventListener('DOMContentLoaded', function() {
                         preloadImage(mapData.minimapImage);
                     }
                 });
-                
-                card.addEventListener('click', function() {
+
+                card.addEventListener('click', function () {
                     mapCards.forEach(c => c.classList.remove('active'));
                     this.classList.add('active');
-                    
+
                     self.updateFeaturedMap(mapId);
                     self.showActiveMapDetails(mapId);
                 });
             });
         },
-        
-        updateFeaturedMap: function(mapId) {
+
+        updateFeaturedMap: function (mapId) {
             const mapData = this.mapData[mapId];
             const featuredMap = document.getElementById('featuredMap');
-            
+
             if (!featuredMap || !mapData) return;
-            
+
             featuredMap.classList.add('updating-out');
-            
+
             setTimeout(() => {
                 const mainImage = featuredMap.querySelector('.main-map-image');
                 const minimapImage = featuredMap.querySelector('.minimap-image');
-                
+
                 mainImage.src = mapData.mainImage;
                 mainImage.alt = mapData.title;
                 minimapImage.src = mapData.minimapImage;
                 minimapImage.alt = `${mapData.title} Minimap`;
-                
+
                 const title = featuredMap.querySelector('.map-title');
                 const description = featuredMap.querySelector('.map-description');
                 const tagsContainer = featuredMap.querySelector('.map-tags');
-                
+
                 title.textContent = mapData.title;
                 description.textContent = mapData.description;
-                
+
                 tagsContainer.innerHTML = '';
                 mapData.tags.forEach(tag => {
                     const tagEl = document.createElement('span');
@@ -108,27 +108,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     tagEl.textContent = tag;
                     tagsContainer.appendChild(tagEl);
                 });
-                
+
                 featuredMap.classList.add('updating-in');
-                
+
                 setTimeout(() => {
                     featuredMap.classList.remove('updating-out', 'updating-in');
                 }, 500);
-                
+
             }, 400);
         },
-        
-        showActiveMapDetails: function(mapId) {
+
+        showActiveMapDetails: function (mapId) {
             const allDetails = document.querySelectorAll('.map-details');
             allDetails.forEach(detail => detail.classList.remove('active'));
-            
+
             const activeDetails = document.getElementById(`${mapId}-details`);
             if (activeDetails) {
                 activeDetails.classList.add('active');
             }
         }
     };
-    
+
     const mapsTab = document.getElementById('archive-maps');
     if (mapsTab) {
         MapController.init();

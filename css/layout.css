@@ -10,14 +10,18 @@
 
 /* Header */
 .site-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
     padding: var(--spacing-sm) 0;
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-bottom: 1px solid rgba(255, 203, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: var(--z-index-high);
-    height: auto;
+    height: 60px;
 }
 
 .header-container {
@@ -38,7 +42,6 @@
 /* Tab Content Containers */
 .tab-content {
     display: none;
-    padding: var(--spacing-lg) 0;
 }
 
 .tab-content.active {
@@ -65,15 +68,13 @@
 
 /* Banner */
 .main-banner {
-    height: 90vh;
-    background-image: url('/api/placeholder/1920/1080');
-    background-size: cover;
-    background-position: center;
+    height: 80vh;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-bottom: var(--spacing-lg)
 }
 
 .banner-overlay {
@@ -82,7 +83,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%);
+    z-index: 1;
+}
+
+.banner-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .banner-content {
@@ -90,7 +98,7 @@
     z-index: 2;
     color: white;
     text-align: center;
-    max-width: 900px;
+    width: 100vh;
     padding: 0 var(--spacing-md);
 }
 

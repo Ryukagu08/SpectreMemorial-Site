@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     function preloadImage(src) {
         return new Promise((resolve, reject) => {
             const img = new Image();
@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
             img.src = src;
         });
     }
-    
+
     const SponsorController = {
-        init: function() {
+        init: function () {
             this.sponsorData = {
                 pinnacle: {
                     name: 'PINNACLE INTERNATIONAL',
@@ -245,25 +245,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             };
-            
+
             this.bindEvents();
             this.setActiveSponsor('pinnacle');
         },
-        
-        bindEvents: function() {
+
+        bindEvents: function () {
             const sponsorThumbs = document.querySelectorAll('.sponsor-thumb');
             const self = this;
-            
+
             sponsorThumbs.forEach(thumb => {
                 const sponsorId = thumb.getAttribute('data-sponsor');
-                
+
                 thumb.addEventListener('mouseenter', () => {
                     const sponsorData = self.sponsorData[sponsorId];
                     if (sponsorData) {
                         preloadImage(sponsorData.bannerImage);
                         preloadImage(sponsorData.logoImage);
                         preloadImage(sponsorData.abilitiesArt);
-                        
+
                         if (sponsorData.abilities) {
                             Object.values(sponsorData.abilities).forEach(ability => {
                                 preloadImage(ability.icon);
@@ -271,26 +271,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 });
-                
-                thumb.addEventListener('click', function() {
+
+                thumb.addEventListener('click', function () {
                     if (self.sponsorData[sponsorId]) {
                         sponsorThumbs.forEach(t => t.classList.remove('active'));
                         this.classList.add('active');
-                        
+
                         self.updateFeaturedSponsor(sponsorId);
                     }
                 });
             });
         },
-        
-        updateFeaturedSponsor: function(sponsorId) {
+
+        updateFeaturedSponsor: function (sponsorId) {
             const sponsorData = this.sponsorData[sponsorId];
             const featuredCard = document.getElementById('featuredSponsor');
-            
+
             if (!featuredCard || !sponsorData) return;
-            
+
             let sponsorColorRGB;
-            switch(sponsorId) {
+            switch (sponsorId) {
                 case 'pinnacle':
                 case 'umbra':
                     sponsorColorRGB = '255, 58, 68';
@@ -319,120 +319,120 @@ document.addEventListener('DOMContentLoaded', function() {
                 default:
                     sponsorColorRGB = '255, 203, 0';
             }
-            
+
             featuredCard.style.setProperty('--sponsor-color-rgb', sponsorColorRGB);
             featuredCard.classList.add('updating-out');
-            
+
             setTimeout(() => {
                 featuredCard.querySelector('.sponsor-banner-image').src = sponsorData.bannerImage;
                 featuredCard.querySelector('.sponsor-banner-image').alt = sponsorData.name;
                 featuredCard.querySelector('.sponsor-logo-image').src = sponsorData.logoImage;
                 featuredCard.querySelector('.sponsor-logo-image').alt = `${sponsorData.name} Logo`;
-                
+
                 featuredCard.querySelector('.sponsor-art-image').src = sponsorData.abilitiesArt;
                 featuredCard.querySelector('.sponsor-art-image').alt = `${sponsorData.name} Abilities`;
-                
+
                 featuredCard.querySelector('.sponsor-name').textContent = sponsorData.name;
-                
+
                 const metaValues = featuredCard.querySelectorAll('.meta-value');
                 if (metaValues.length >= 2) {
                     metaValues[0].textContent = sponsorData.district;
                     metaValues[1].textContent = sponsorData.role;
                 }
-                
+
                 featuredCard.className = 'sponsor-showcase';
                 featuredCard.setAttribute('data-sponsor', sponsorId);
-                
+
                 const abilitiesContainer = featuredCard.querySelector('.abilities-container');
                 if (abilitiesContainer) {
                     const oldAbilityCards = abilitiesContainer.querySelectorAll('.ability-card');
-                    
+
                     const abilitiesData = [];
                     oldAbilityCards.forEach((card, index) => {
                         let abilityType;
-                        switch(index) {
+                        switch (index) {
                             case 0: abilityType = 'PRIMARY'; break;
                             case 1: abilityType = 'SECONDARY'; break;
                             case 2: abilityType = 'TERTIARY'; break;
                         }
-                        
+
                         abilitiesData.push({
                             abilityInfo: sponsorData.abilities[abilityType.toLowerCase()],
                             type: abilityType
                         });
                     });
-                    
+
                     abilitiesContainer.innerHTML = '';
                     abilitiesData.forEach(data => {
                         if (!data.abilityInfo) return;
-                        
+
                         const newCard = this.createAbilityCard(data.abilityInfo, data.type);
                         abilitiesContainer.appendChild(newCard);
                     });
                 }
-                
+
                 featuredCard.classList.add('updating-in');
-                
+
                 setTimeout(() => {
                     featuredCard.classList.remove('updating-out', 'updating-in');
                 }, 500);
-                
+
             }, 400);
         },
-        
-        createAbilityCard: function(abilityData, type) {
+
+        createAbilityCard: function (abilityData, type) {
             if (!abilityData) return null;
-            
+
             const card = document.createElement('div');
             card.className = 'ability-card';
-            
+
             const iconContainer = document.createElement('div');
             iconContainer.className = 'ability-icon-container';
-            
+
             const icon = document.createElement('img');
             icon.className = 'ability-icon';
             icon.src = abilityData.icon;
             icon.alt = abilityData.name;
             iconContainer.appendChild(icon);
-            
+
             const details = document.createElement('div');
             details.className = 'ability-details';
-            
+
             const header = document.createElement('div');
             header.className = 'ability-header';
-            
+
             const name = document.createElement('span');
             name.className = 'ability-name';
             name.textContent = abilityData.name;
-            
+
             const typeSpan = document.createElement('span');
             typeSpan.className = 'ability-type';
             typeSpan.textContent = type;
-            
+
             header.appendChild(name);
             header.appendChild(typeSpan);
-            
+
             const description = document.createElement('p');
             description.className = 'ability-description';
             description.textContent = abilityData.description;
-            
+
             details.appendChild(header);
             details.appendChild(description);
-            
+
             if (abilityData.alt) {
                 const alt = document.createElement('p');
                 alt.className = 'ability-alt';
                 alt.textContent = abilityData.alt;
                 details.appendChild(alt);
             }
-            
+
             card.appendChild(iconContainer);
             card.appendChild(details);
-            
+
             return card;
         },
-        
-        setActiveSponsor: function(sponsorId) {
+
+        setActiveSponsor: function (sponsorId) {
             const sponsorThumb = document.querySelector(`.sponsor-thumb[data-sponsor="${sponsorId}"]`);
             if (sponsorThumb) {
                 sponsorThumb.classList.add('active');
@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     };
-    
+
     const sponsorsTab = document.getElementById('archive-sponsors');
     if (sponsorsTab) {
         SponsorController.init();
