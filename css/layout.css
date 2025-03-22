@@ -42,15 +42,16 @@
 /* Tab Content Containers */
 .tab-content {
     display: none;
-    padding-top: 70px;
+    padding-top: 70px; /* Add padding to push content below fixed header */
 }
 
 .tab-content.active {
     display: block;
 }
 
+/* Exception for home tab that has a full-height banner */
 #home.tab-content {
-    padding-top: 0;
+    padding-top: 0; /* No padding needed for home since it has a banner */
 }
 
 /* Section layouts */
