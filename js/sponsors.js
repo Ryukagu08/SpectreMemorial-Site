@@ -393,6 +393,7 @@ document.addEventListener('DOMContentLoaded', function () {
             icon.className = 'ability-icon';
             icon.src = abilityData.icon;
             icon.alt = abilityData.name;
+            icon.loading = "lazy"
             iconContainer.appendChild(icon);
 
             const details = document.createElement('div');

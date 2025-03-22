@@ -468,6 +468,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const img = document.createElement('img');
       img.src = weapon.image;
       img.alt = weapon.name;
+      img.loading = "lazy";
       imageContainer.appendChild(img);
 
       // Create the details container
