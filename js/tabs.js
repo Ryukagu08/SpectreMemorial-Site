@@ -154,6 +154,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        document.title = `${tabId !== 'home' ? `${tabId.charAt(0).toLocaleUpperCase('en-US') + tabId.slice(1)} |` : ''} Spectre Divide Memorial`;
+
         history.replaceState(null, null, newURL);
     }
 
