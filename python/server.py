@@ -1,7 +1,6 @@
 import http.server
 import socketserver
 
-DEBUG = False  # Turn on server-side debugging
 PORT = 8000
 
 
@@ -15,10 +14,6 @@ class CORSHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Expires", "0")
 
         super().end_headers()
-
-    def log_message(self, format, *args):
-        if not DEBUG:
-            pass
 
 
 Handler = CORSHTTPRequestHandler

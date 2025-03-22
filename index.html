@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/lazy-loading.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/maps.css">
     <link rel="stylesheet" href="css/sponsors.css">
     <link rel="stylesheet" href="css/weapons.css">
@@ -137,6 +138,19 @@
                             <div class="feature-content">
                                 <h3 class="feature-title">ARCHIVE HIGHLIGHTS</h3>
                                 <p class="feature-description">Explore the complete collection of maps, sponsors, and weapons from Spectre Divide. Our archive preserves the game's legacy for fans and newcomers alike.</p>
+
+                                <!-- Navigation buttons -->
+                                <div class="gallery-nav-buttons">
+                                    <button class="gallery-nav-btn" data-subtab="archive-maps">
+                                        <span class="btn-text">Maps</span>
+                                    </button>
+                                    <button class="gallery-nav-btn" data-subtab="archive-weapons">
+                                        <span class="btn-text">Sponsors</span>
+                                    </button>
+                                    <button class="gallery-nav-btn" data-subtab="archive-sponsors">
+                                        <span class="btn-text">Weapons</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -732,6 +746,19 @@
                         <div class="feature-content">
                             <h3 class="feature-title">OUR COMMUNITY</h3>
                             <p class="feature-description">The Spectre Divide community thrived across multiple platforms and testing phases. Explore the Discord server and memories from the Alpha and Beta tests.</p>
+
+                            <!-- Navigation buttons -->
+                            <div class="gallery-nav-buttons">
+                                <button class="gallery-nav-btn" data-subtab="community-discord">
+                                    <span class="btn-text">Discord</span>
+                                </button>
+                                <button class="gallery-nav-btn" data-subtab="community-alpha">
+                                    <span class="btn-text">Alpha Stage</span>
+                                </button>
+                                <button class="gallery-nav-btn" data-subtab="community-beta">
+                                    <span class="btn-text">Beta Stage</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -948,7 +975,6 @@
                             <h3 class="feature-title">VISUAL SHOWCASE</h3>
                             <p class="feature-description">Explore the visual legacy of Spectre Divide through our collection of official artworks and community-created fan art. Select a category to view specific collections.</p>
                         
-                            <!-- Gallery navigation buttons -->
                             <div class="gallery-nav-buttons">
                                 <button class="gallery-nav-btn" data-subtab="gallery-artworks">
                                     <span class="btn-text">Artworks</span>
@@ -1189,6 +1215,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Popup Modal -->
+    <div id="modal" class="modal">
+        <img id="expandedImage" class="expanded-image">
+    </div>
 
     <script src="js/tabs.js"></script>
     <script src="js/app.js"></script>
