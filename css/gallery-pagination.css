@@ -1,0 +1,114 @@
+/* Minimal pagination styling for gallery */
+.gallery-pagination {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 55px;
+}
+
+.page-buttons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: 8px;
+}
+
+.pagination-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 10px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s ease, text-shadow 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+/* Prev button arrow */
+.prev-btn::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-right: 8px;
+    position: relative;
+    top: -1px;
+    transition: border-color 0.2s ease;
+}
+
+/* Next button arrow */
+.next-btn::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-left: 8px;
+    position: relative;
+    top: -1px;
+    transition: border-color 0.2s ease;
+}
+
+/* Hover state */
+.pagination-btn:hover:not(:disabled) {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 203, 0, 0.4);
+    box-shadow: 0 0 8px 1px rgba(255, 203, 0, 0.4);
+}
+
+/* Active state */
+.pagination-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 0 5px rgba(255, 203, 0, 0.3);
+}
+
+/* Disabled state */
+.pagination-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.page-indicator {
+    color: var(--text-color-secondary);
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+}
+
+.pagination-above-comic {
+    margin: 0 0 var(--spacing-sm);
+    display: flex;
+    justify-content: center;
+}
+
+/* Animation for image transitions */
+@keyframes galleryPageFadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.artwork-item {
+    animation: galleryPageFadeIn 0.3s ease forwards;
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+    .pagination-btn { padding: 12px 10px; }
+    .page-indicator { font-size: 15px; }
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion) {
+    .artwork-item { animation: none; }
+    .pagination-btn { transition: none; }
+}

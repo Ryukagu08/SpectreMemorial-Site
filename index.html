@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/gallery.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/scrollbar.css">
+    <link rel="stylesheet" href="css/gallery-pagination.css">
 </head>
 <body>
     <!-- Header -->
@@ -961,7 +962,7 @@
         
         <!-- Artworks Subtab -->
         <div id="gallery-artworks" class="subtab-content">
-            <div class="container">
+            <div class="container" id="gallery-artworks-content">
                 <div class="section-header">
                     <h2 class="section-title">Official Artworks</h2>
                     <p class="section-description">Visual assets from Spectre Divide.</p>
@@ -969,8 +970,7 @@
 
                 <!-- Main Artworks Section -->
                 <h3 class="gallery-section-title">Concept & Promotional Artworks</h3>
-                <!-- Complete artwork-grid with numbered images (43-1) and no captions -->
-                <div class="artworks-grid">
+                <div class="artworks-grid concept-promotional-grid">
                     <!-- Row 1 -->
                     <div class="artwork-item">
                         <img src="assets/gallery/artwork/wallpaper/43.webp" alt="Art">
@@ -1147,6 +1147,9 @@
                         <img src="assets/gallery/artwork/wallpaper/0.webp" alt="Art">
                     </div>
                 </div>
+                
+                <!-- Pagination container above comic section -->
+                <div class="pagination-above-comic"></div>
                 
                 <!-- Comics Section -->
                 <h3 class="gallery-section-title">Comic</h3>
@@ -1363,6 +1366,8 @@
     <script src="js/maps.js"></script>
     <script src="js/sponsors.js"></script>
     <script src="js/weapon-template.js"></script>
+    <script src="js/gallery-pagination.js"></script>
     <script src="js/lazy-loader.js"></script>
+    <script src="js/init-gallery.js"></script>
 </body>
 </html>
