@@ -555,6 +555,11 @@
         grid-template-columns: 1fr;
     }
     
+    /* Make artwork grid single column on mobile */
+    .artworks-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .gallery-nav-buttons {
         flex-direction: column;
         gap: var(--spacing-sm);

@@ -1,11 +1,9 @@
 /* gallery.css - Styles for gallery components and layouts */
 
-/* Common gallery elements */
 .gallery-overview {
     margin-bottom: var(--spacing-xl);
 }
 
-/* Gallery Navigation Buttons */
 .gallery-nav-buttons {
     display: flex;
     gap: var(--spacing-md);
@@ -40,7 +38,6 @@
     outline: none;
 }
 
-/* Gallery Section Titles */
 .gallery-section-title {
     color: var(--primary-color);
     font-size: var(--font-size-sm);
@@ -74,7 +71,6 @@
     to { transform: translateX(0); }
 }
 
-/* Gallery Grid Layout */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -82,7 +78,6 @@
     margin-bottom: var(--spacing-xl);
 }
 
-/* Artwork Grid Layout - 16:9 Aspect Ratio */
 .artworks-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -90,7 +85,6 @@
     margin-bottom: var(--spacing-xl);
 }
 
-/* Archive mosaic layout */
 .archive-mosaic {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -99,38 +93,31 @@
     margin-bottom: var(--spacing-xl);
 }
 
-.archive-item-large {
-    grid-column: span 8;
-    grid-row: span 2;
-}
+.archive-item-large { grid-column: span 8; grid-row: span 2; }
+.archive-item-medium { grid-column: span 4; grid-row: span 2; }
+.archive-item-small { grid-column: span 4; grid-row: span 1; }
 
-.archive-item-medium {
-    grid-column: span 4;
-    grid-row: span 2;
-}
-
-.archive-item-small {
-    grid-column: span 4;
-    grid-row: span 1;
-}
-
-/* Gallery, artwork, and archive items */
-.gallery-item, .artwork-item, .archive-item, .fanart-item {
+.gallery-item, .archive-item, .fanart-item, .artwork-item {
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
-    border: 2px solid var(--border-color);
     animation: fadeIn var(--transition-medium) both;
+}
+
+.gallery-item, .archive-item, .fanart-item {
+    border: 2px solid var(--border-color);
+}
+
+.artwork-item {
+    border: none;
+    transition: box-shadow var(--transition-medium), transform var(--transition-fast);
+    aspect-ratio: 16/9;
+    height: auto;
 }
 
 .gallery-item, .archive-item {
     height: 250px;
-}
-
-.artwork-item {
-    aspect-ratio: 16/9;
-    height: auto;
 }
 
 .gallery-item img, .artwork-item img, .archive-item img, .fanart-item img {
@@ -140,8 +127,16 @@
     transition: transform 0.8s ease;
 }
 
-.gallery-item:hover img, .artwork-item:hover img, .archive-item:hover img, .fanart-item:hover img {
+.gallery-item:hover img, .archive-item:hover img, .fanart-item:hover img {
     transform: scale(1.1);
+}
+
+.artwork-item:hover {
+    box-shadow: 0 0 20px rgba(255, 203, 0, 0.7);
+}
+
+.artwork-item:hover img {
+    transform: scale(1.05);
 }
 
 .gallery-caption {
@@ -176,7 +171,6 @@
     margin: 0;
 }
 
-/* Archive content */
 .archive-content {
     position: absolute;
     bottom: 0;
@@ -201,7 +195,6 @@
     color: var(--text-color-secondary);
 }
 
-/* Comic Pages */
 .comic-pages {
     display: flex;
     gap: var(--spacing-lg);
@@ -217,17 +210,12 @@
     box-shadow: var(--shadow-md);
     flex: 0 0 calc(50% - var(--spacing-md));
     max-width: 500px;
-    transition: transform 0.8s ease;
+    transition: transform 0.8s ease, box-shadow 0.3s ease;
     animation: fadeIn var(--transition-medium) both;
 }
 
-.comic-page:first-child {
-    animation-delay: 0.1s;
-}
-
-.comic-page:last-child {
-    animation-delay: 0.2s;
-}
+.comic-page:first-child { animation-delay: 0.1s; }
+.comic-page:last-child { animation-delay: 0.2s; }
 
 .comic-page:hover {
     transform: translateY(-5px);
@@ -242,7 +230,6 @@
     transition: transform 1.2s ease;
 }
 
-/* Contest layout styles */
 .contest-container {
     margin-bottom: var(--spacing-xl);
     display: flex;
@@ -275,13 +262,8 @@
     height: 400px;
 }
 
-.contest-second-place {
-    animation-delay: 0.2s;
-}
-
-.contest-third-place {
-    animation-delay: 0.25s;
-}
+.contest-second-place { animation-delay: 0.2s; }
+.contest-third-place { animation-delay: 0.25s; }
 
 .contest-entry img {
     width: 100%;
@@ -294,7 +276,6 @@
     transform: scale(1.1);
 }
 
-/* Contest content (moved to top) */
 .contest-content-top {
     position: absolute;
     top: 0;
@@ -333,7 +314,6 @@
     margin: 0;
 }
 
-/* YouTube Embed Styling */
 .youtube-container {
     position: relative;
     width: 100%;
@@ -350,17 +330,39 @@
     border: 0;
 }
 
-/* Clean Fan Art Grid Layout with Consistent Gaps */
+/* Fanart Grid with easily tweakable parameters */
+:root {
+    /* Grid settings */
+    --fanart-gap: 12px;
+    --fanart-columns: 12;
+    
+    /* Item heights - adjust these to change layout */
+    --blitz-height: 300px;
+    --midas-height: 300px;
+    --muu-height: 300px;
+    --anti-tempest-height: 150px;
+    --ave-crew-height: 150px;
+    --raccoon-height: 400px;
+    --no-spectres-height: 200px;
+    --ballpittitan-height: 200px;
+    --ballpit-ceo-height: 200px;
+    
+    /* Width ratios (out of total grid width) */
+    --left-section-width: 0.42;    /* Left side width (fraction of total) */
+    --right-section-width: 0.58;   /* Right side width (fraction of total) */
+    --midas-width: 0.4;            /* Width of midas (fraction of right side) */
+    --muu-width: 0.6;              /* Width of muu (fraction of right side) */
+}
+
 .abstract-fanart-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--fanart-columns), 1fr);
     grid-auto-rows: auto;
-    gap: 12px; /* Uniform gap size for all grid items */
+    gap: var(--fanart-gap);
     margin-bottom: var(--spacing-xl);
     width: 100%;
 }
 
-/* Base styling for all fanart items */
 .fanart-item {
     position: relative;
     overflow: hidden;
@@ -397,144 +399,76 @@
     transform: translateY(0);
 }
 
-/* Mobile layout (default) - Stack items for cleaner mobile experience */
-.fanart-item {
-    grid-column: 1 / -1; /* Span all columns on mobile */
-    aspect-ratio: 16/9;
-    margin-bottom: 12px;
+/* Mobile layout - stack all items */
+@media (max-width: 767px) {
+    .fanart-item {
+        grid-column: 1 / -1;
+        height: var(--blitz-height);
+        margin-bottom: var(--fanart-gap);
+    }
 }
 
-/* Tablet layout (768px and up) */
+/* Tablet and desktop layout */
 @media (min-width: 768px) {
-    .abstract-fanart-grid {
-        grid-template-rows: repeat(3, auto);
-        grid-template-columns: repeat(12, 1fr);
-    }
-
-    /* First row */
+    /* First row - Blitz, Midas, Muu */
     .fanart-area-blitz {
-        grid-column: 1 / span 6;
+        grid-column: 1 / span calc(var(--fanart-columns) * var(--left-section-width));
         grid-row: 1;
-        aspect-ratio: 16/10;
+        height: var(--blitz-height);
     }
     
     .fanart-area-midas {
-        grid-column: 7 / span 2;
+        grid-column: calc(var(--fanart-columns) * var(--left-section-width) + 1) / span calc(var(--fanart-columns) * var(--right-section-width) * var(--midas-width));
         grid-row: 1;
-        aspect-ratio: 1/1.5;
+        height: var(--midas-height);
     }
     
     .fanart-area-muu {
-        grid-column: 9 / span 4;
+        grid-column: calc(var(--fanart-columns) * (var(--left-section-width) + var(--right-section-width) * var(--midas-width)) + 1) / span calc(var(--fanart-columns) * var(--right-section-width) * var(--muu-width));
         grid-row: 1;
-        aspect-ratio: 1/1;
-    }
-
-    /* Second row */    
-    .fanart-area-anti-tempest {
-        grid-column: 7 / span 6;
-        grid-row: 2;
-        aspect-ratio: 16/5;
-    }
-
-    /* Third row */
-    .fanart-area-ave-crew {
-        grid-column: 1 / span 6;
-        grid-row: 3;
-        aspect-ratio: 16/9;
+        height: var(--muu-height);
     }
     
-    .fanart-area-no-spectres {
-        grid-column: 7 / span 2;
-        grid-row: 3;
-        aspect-ratio: 3/4;
-    }
-    
-    .fanart-area-ballpittitan {
-        grid-column: 9 / span 2;
-        grid-row: 3;
-        aspect-ratio: 1/1;
-    }
-    
-    .fanart-area-ballpit-ceo {
-        grid-column: 11 / span 2;
-        grid-row: 3;
-        aspect-ratio: 1/1;
-    }
-    
-    /* Fourth row (place raccoon at bottom) */
+    /* Second row - Raccoon (spans 2 rows), Anti-Tempest */
     .fanart-area-raccoon {
-        grid-column: 1 / span 12;
+        grid-column: 1 / span calc(var(--fanart-columns) * var(--left-section-width));
+        grid-row: 2 / span 2;
+        height: var(--raccoon-height);
+    }
+    
+    .fanart-area-anti-tempest {
+        grid-column: calc(var(--fanart-columns) * var(--left-section-width) + 1) / span calc(var(--fanart-columns) * var(--right-section-width));
+        grid-row: 2;
+        height: var(--anti-tempest-height);
+    }
+    
+    /* Third row - Ave Crew */
+    .fanart-area-ave-crew {
+        grid-column: calc(var(--fanart-columns) * var(--left-section-width) + 1) / span calc(var(--fanart-columns) * var(--right-section-width));
+        grid-row: 3;
+        height: var(--ave-crew-height);
+    }
+    
+    /* Fourth row - No-Spectres, Ballpittitan, Ballpit-CEO */
+    .fanart-area-no-spectres {
+        grid-column: 1 / span 4;
         grid-row: 4;
-        aspect-ratio: 16/6;
-    }
-}
-
-/* Desktop layout (992px and up) */
-@media (min-width: 992px) {
-    .abstract-fanart-grid {
-        grid-template-rows: repeat(3, auto);
-    }
-    
-    /* First row */
-    .fanart-area-blitz {
-        grid-column: 1 / span 5;
-        grid-row: 1;
-        aspect-ratio: 1/1;
-    }
-    
-    .fanart-area-midas {
-        grid-column: 6 / span 3;
-        grid-row: 1;
-        aspect-ratio: 1/1.5;
-    }
-    
-    .fanart-area-muu {
-        grid-column: 9 / span 4;
-        grid-row: 1;
-        aspect-ratio: 1/1;
-    }
-    
-    /* Second row */
-    .fanart-area-anti-tempest {
-        grid-column: 1 / span 5;
-        grid-row: 2;
-        aspect-ratio: 16/5;
-    }
-    
-    .fanart-area-raccoon {
-        grid-column: 6 / span 7;
-        grid-row: 2;
-        aspect-ratio: 16/9;
-    }
-    
-    /* Third row */
-    .fanart-area-ave-crew {
-        grid-column: 1 / span 5;
-        grid-row: 3;
-        aspect-ratio: 16/9;
-    }
-    
-    .fanart-area-no-spectres {
-        grid-column: 6 / span 2;
-        grid-row: 3;
-        aspect-ratio: 3/4;
+        height: var(--no-spectres-height);
     }
     
     .fanart-area-ballpittitan {
-        grid-column: 8 / span 2;
-        grid-row: 3;
-        aspect-ratio: 1/1;
+        grid-column: 5 / span 4;
+        grid-row: 4;
+        height: var(--ballpittitan-height);
     }
     
     .fanart-area-ballpit-ceo {
-        grid-column: 10 / span 3;
-        grid-row: 3;
-        aspect-ratio: 16/9;
+        grid-column: 9 / -1;
+        grid-row: 4;
+        height: var(--ballpit-ceo-height);
     }
 }
 
-/* Special styling for fan art section */
 #gallery-fanart .quote-card {
     border: none;
     background: none;
@@ -545,14 +479,12 @@
     display: none;
 }
 
-/* Animation for gallery navigation buttons */
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(255, 203, 0, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(255, 203, 0, 0); }
     100% { box-shadow: 0 0 0 0 rgba(255, 203, 0, 0); }
 }
 
-/* Animation delays - consolidated and optimized using CSS variables */
 .gallery-item:nth-child(n), 
 .artwork-item:nth-child(n), 
 .archive-item:nth-child(n) {
@@ -569,7 +501,6 @@
 .gallery-item:nth-child(8), .artwork-item:nth-child(8), .archive-item:nth-child(8) { --item-index: 8; }
 .gallery-item:nth-child(9), .artwork-item:nth-child(9), .archive-item:nth-child(9) { --item-index: 9; }
 
-/* Animation delays for fanart items */
 .fanart-area-blitz { animation-delay: 0.1s; }
 .fanart-area-midas { animation-delay: 0.15s; }
 .fanart-area-muu { animation-delay: 0.2s; }
