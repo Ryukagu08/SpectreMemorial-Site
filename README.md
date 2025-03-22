@@ -1,5 +1,5 @@
 <p align="center">
-<img src="GH_README.png" alt="Spectre Divide Memorial Project Banner" width="894">
+<img src="docs/assets/GH_README.png" alt="Spectre Divide Memorial Project Banner" width="894">
 </p>
 
 # Spectre Divide Memorial Project
@@ -37,6 +37,8 @@ The project relies on a clean, well-designed website environment to host the mem
 
 - Web Development: Coding and implementing website features.
 - Design: Creating an intuitive and visually appealing user interface.
+
+### More information in [Setup](docs/SETUP.md)
 
 # How to Submit Contributions
 

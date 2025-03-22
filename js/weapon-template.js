@@ -5,7 +5,7 @@ const weaponsData = {
       id: "m25-hornet",
       name: "M25 HORNET",
       type: "Submachine Gun",
-      image: "assets/archive/weapons/m25_hornet.webp",
+      image: "assets/weapons/m25_hornet.webp",
       stats: {
         // Run Speed range: 4-6
         runSpeed: { value: 4.75, percent: 38 }, // (4.75 - 4) / (6 - 4) * 100
@@ -30,7 +30,7 @@ const weaponsData = {
       id: "buzzsaw",
       name: "Buzzsaw",
       type: "Submachine Gun",
-      image: "assets/archive/weapons/buzzsaw_rt40.webp",
+      image: "assets/weapons/buzzsaw_rt40.webp",
       stats: {
         runSpeed: { value: 4.75, percent: 38 }, // (4.75 - 4) / (6 - 4) * 100
         magazine: 40,
@@ -52,7 +52,7 @@ const weaponsData = {
       id: "whisper",
       name: "Whisper",
       type: "Submachine Gun",
-      image: "assets/archive/weapons/whisper.webp",
+      image: "assets/weapons/whisper.webp",
       stats: {
         runSpeed: { value: 5.04, percent: 52 }, // (5.04 - 4) / (6 - 4) * 100
         magazine: 25,
@@ -74,7 +74,7 @@ const weaponsData = {
       id: "m17-bouncer",
       name: "M17 Bouncer",
       type: "Shotgun",
-      image: "assets/archive/weapons/m17_bouncer.webp",
+      image: "assets/weapons/m17_bouncer.webp",
       stats: {
         runSpeed: { value: 4.36, percent: 18 }, // (4.36 - 4) / (6 - 4) * 100
         magazine: 5,
@@ -96,7 +96,7 @@ const weaponsData = {
       id: "m18-drummer",
       name: "M18 Drummer",
       type: "Shotgun",
-      image: "assets/archive/weapons/m18_drummer.webp",
+      image: "assets/weapons/m18_drummer.webp",
       stats: {
         runSpeed: { value: 4.36, percent: 18 }, // (4.36 - 4) / (6 - 4) * 100
         magazine: 18,
@@ -120,7 +120,7 @@ const weaponsData = {
       id: "trident",
       name: "Trident",
       type: "Rifle",
-      image: "assets/archive/weapons/trident.webp",
+      image: "assets/weapons/trident.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 18,
@@ -142,7 +142,7 @@ const weaponsData = {
       id: "cyclone",
       name: "Cyclone",
       type: "Rifle",
-      image: "assets/archive/weapons/cyclone.webp",
+      image: "assets/weapons/cyclone.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 30,
@@ -164,7 +164,7 @@ const weaponsData = {
       id: "crusader",
       name: "Crusader",
       type: "Rifle",
-      image: "assets/archive/weapons/crusader.webp",
+      image: "assets/weapons/crusader.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 30,
@@ -186,7 +186,7 @@ const weaponsData = {
       id: "m49-fury",
       name: "M49 Fury",
       type: "Light Machine Gun",
-      image: "assets/archive/weapons/m49_fury.webp",
+      image: "assets/weapons/m49_fury.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 50,
@@ -208,7 +208,7 @@ const weaponsData = {
       id: "berserker-rb3",
       name: "Berserker RB3",
       type: "Light Machine Gun",
-      image: "assets/archive/weapons/berserker_rb3.webp",
+      image: "assets/weapons/berserker_rb3.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 75,
@@ -230,7 +230,7 @@ const weaponsData = {
       id: "blackout",
       name: "Blackout",
       type: "Rifle",
-      image: "assets/archive/weapons/blackout.webp",
+      image: "assets/weapons/blackout.webp",
       stats: {
         runSpeed: { value: 4.77, percent: 39 }, // (4.77 - 4) / (6 - 4) * 100
         magazine: 25,
@@ -252,7 +252,7 @@ const weaponsData = {
       id: "m67-reaver",
       name: "M67 Reaver",
       type: "Rifle",
-      image: "assets/archive/weapons/m67_reaver.webp",
+      image: "assets/weapons/m67_reaver.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 25,
@@ -274,7 +274,7 @@ const weaponsData = {
       id: "tempest",
       name: "Tempest",
       type: "Rifle",
-      image: "assets/archive/weapons/tempest.webp",
+      image: "assets/weapons/tempest.webp",
       stats: {
         runSpeed: { value: 4.50, percent: 25 }, // (4.50 - 4) / (6 - 4) * 100
         magazine: 12,
@@ -296,7 +296,7 @@ const weaponsData = {
       id: "harpe",
       name: "Harpe",
       type: "Sniper",
-      image: "assets/archive/weapons/harpe.webp",
+      image: "assets/weapons/harpe.webp",
       stats: {
         runSpeed: { value: 4.36, percent: 18 }, // (4.36 - 4) / (6 - 4) * 100
         magazine: 5,
@@ -318,7 +318,7 @@ const weaponsData = {
       id: "prototype-op",
       name: "Prototype-OP",
       type: "Sniper",
-      image: "assets/archive/weapons/prototype-op.webp",
+      image: "assets/weapons/prototype-op.webp",
       stats: {
         runSpeed: { value: 4.36, percent: 18 }, // (4.36 - 4) / (6 - 4) * 100
         magazine: 5,
@@ -342,7 +342,7 @@ const weaponsData = {
       id: "m2-carbon",
       name: "M2 Carbon",
       type: "Pistol",
-      image: "assets/archive/weapons/m2_carbon.webp",
+      image: "assets/weapons/m2_carbon.webp",
       stats: {
         runSpeed: { value: 5.04, percent: 52 }, // (5.04 - 4) / (6 - 4) * 100
         magazine: 12,
@@ -364,7 +364,7 @@ const weaponsData = {
       id: "m10-brat",
       name: "M10 Brat",
       type: "Pistol",
-      image: "assets/archive/weapons/m10_brat.webp",
+      image: "assets/weapons/m10_brat.webp",
       stats: {
         runSpeed: { value: 5.04, percent: 52 }, // (5.04 - 4) / (6 - 4) * 100
         magazine: 12,
@@ -386,7 +386,7 @@ const weaponsData = {
       id: "shiv",
       name: "Shiv",
       type: "Pistol",
-      image: "assets/archive/weapons/shiv.webp",
+      image: "assets/weapons/shiv.webp",
       stats: {
         runSpeed: { value: 5.35, percent: 68 }, // (5.35 - 4) / (6 - 4) * 100
         magazine: 12,
@@ -408,7 +408,7 @@ const weaponsData = {
       id: "duster-rx6",
       name: "Duster RX6",
       type: "Pistol",
-      image: "assets/archive/weapons/duster_rx6.webp",
+      image: "assets/weapons/duster_rx6.webp",
       stats: {
         runSpeed: { value: 5.04, percent: 52 }, // (5.04 - 4) / (6 - 4) * 100
         magazine: 6,
@@ -430,7 +430,7 @@ const weaponsData = {
       id: "melee",
       name: "Melee",
       type: "Melee",
-      image: "assets/archive/weapons/melee.webp",
+      image: "assets/weapons/melee.webp",
       stats: {},
       description: "The Melee is a basic melee weapon. It is the default weapon that players start with.",
       damage: [
@@ -468,6 +468,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const img = document.createElement('img');
       img.src = weapon.image;
       img.alt = weapon.name;
+      img.loading = "lazy";
       imageContainer.appendChild(img);
 
       // Create the details container
