@@ -42,10 +42,15 @@
 /* Tab Content Containers */
 .tab-content {
     display: none;
+    padding-top: 70px;
 }
 
 .tab-content.active {
     display: block;
+}
+
+#home.tab-content {
+    padding-top: 0;
 }
 
 /* Section layouts */
