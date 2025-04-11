@@ -348,6 +348,14 @@
     color: var(--text-color-secondary);
 }
 
+.community-grid .ben-quote {
+    grid-column: span 2;
+}
+
+.community-grid .qkz-quote {
+    grid-column: span 2;
+}
+
 /* Footer Components */
 .footer-title {
     color: var(--primary-color);

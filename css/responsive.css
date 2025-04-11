@@ -761,6 +761,14 @@
     .stats-description {
         font-size: 13px;
     }
+
+    .community-grid .ben-quote {
+        grid-column: span 1; /* Reset to 1 column on mobile */
+    }
+
+    .community-grid .qkz-quote {
+        grid-column: span 1; /* Reset to 1 column on mobile */
+    }
 }
 
 /* ============================
