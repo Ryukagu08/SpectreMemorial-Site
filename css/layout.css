@@ -136,6 +136,11 @@
     transition: transform 1.2s ease;
 }
 
+/* Discord banner specific adjustment */
+.feature-grid-reverse .feature-media img[alt="Community Discord Server"] {
+    object-position: center right;
+}
+
 .feature-media:hover img {
     transform: scale(1.1);
 }
