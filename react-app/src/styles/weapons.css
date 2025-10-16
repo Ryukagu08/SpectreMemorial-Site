@@ -1,0 +1,405 @@
+/* weapons.css - Spectre Divide weapons section styles */
+
+.weapons-banner {
+    overflow: hidden;
+}
+
+.weapons-banner img {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    object-position: center 30%;
+    transform: scale(1.1);
+}
+
+.weapons-banner:hover img {
+    transform: scale(1.15);
+}
+
+/* Category description */
+.weapon-category-description {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color-secondary);
+    font-size: var(--font-size-sm);
+    max-width: 800px;
+}
+
+/* Weapons grid */
+.weapons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Weapon card */
+.weapon-card {
+    position: relative;
+    height: 350px;
+    overflow: visible;
+    transition: all var(--transition-medium);
+    cursor: pointer;
+    background-color: rgba(35, 35, 35, 0.8);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    animation: fadeIn var(--transition-medium) both;
+    z-index: 1;
+}
+
+.weapon-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(255, 203, 0, 0.3);
+    z-index: 10;
+}
+
+/* Weapon image styling */
+.weapon-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(25, 25, 25, 0.7);
+    padding: 10px;
+    z-index: 1;
+}
+
+.weapon-image img {
+    width: auto;
+    height: auto;
+    max-width: 85%;
+    max-height: 70%;
+    object-fit: contain;
+    transition: transform var(--transition-medium);
+}
+
+.weapon-card:hover .weapon-image img {
+    transform: scale(1.05);
+    filter: brightness(0.7);
+}
+
+/* Weapon details styling - now positioned from top */
+.weapon-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--spacing-md);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 30%, rgba(0, 0, 0, 0) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all var(--transition-medium);
+    box-sizing: border-box;
+    z-index: 2;
+    /* Fixed height for consistent title position */
+    height: 120px;
+    overflow: hidden;
+}
+
+/* Show full details on hover - now expands downward without any scaling */
+.weapon-card:hover .weapon-details {
+    height: auto;
+    min-height: 100%;
+    max-height: none;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.7) 100%);
+    overflow-y: auto;
+    z-index: 100;
+}
+
+/* Adjust weapon name and type to always be visible at top */
+.weapon-name {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition-fast);
+}
+
+.weapon-type {
+    font-size: var(--font-size-xs);
+    color: var(--text-color-secondary);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+}
+
+/* Make the stats panel only visible on hover with no scaling - just opacity and height change */
+.weapon-stats-panel {
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.3s ease, height 0.3s ease; /* Simplified transition, no transform */
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+    width: 100%;
+    border-radius: var(--border-radius);
+    background-color: #191919;
+    font-family: var(--font-family-secondary);
+    transform: none; /* No transform */
+}
+
+.weapon-card:hover .weapon-stats-panel {
+    opacity: 1;
+    height: auto;
+    margin-bottom: var(--spacing-sm);
+    transform: none; /* No transform */
+}
+
+/* Stats header */
+.stats-header {
+    background-color: #252525;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 24px;
+    font-size: 20px;
+}
+
+/* Stats rows */
+.stats-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    color: #dddddd;
+}
+
+.stat-name {
+    flex: 0 0 120px;
+    font-size: 14px;
+}
+
+.stat-bar-container {
+    flex: 1;
+    height: 6px;
+    margin-right: 15px;
+    position: relative;
+}
+
+.stat-bar-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #444444;
+    border-radius: 3px;
+}
+
+.stat-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.stat-value {
+    text-align: right;
+    font-size: 14px;
+    color: #ffffff;
+    flex: 0 0 60px;
+}
+
+/* Description */
+.stats-description {
+    padding: 8px 24px;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+/* Damage table */
+.damage-table {
+    margin-top: 8px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all var(--transition-medium);
+}
+
+.damage-header {
+    display: flex;
+    background-color: #b0b0b0;
+    color: #191919;
+    font-weight: bold;
+}
+
+.damage-header .damage-cell {
+    background-color: #b0b0b0;
+    color: #191919;
+    padding: 6px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.damage-header .damage-cell:first-child {
+    flex: 0 0 66px;
+}
+
+.damage-row {
+    display: flex;
+    align-items: center;
+}
+
+.damage-icon {
+    flex: 0 0 66px;
+    background-color: #444444;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.damage-cell {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 4px 0;
+    background-color: #333333;
+}
+
+.damage-row:nth-child(even) .damage-cell {
+    background-color: #222222;
+}
+
+/* Special styling for headshot, bodyshot, and legshot rows - UPDATED */
+.damage-row.headshot .damage-icon {
+    justify-content: center;
+    align-items: center;
+}
+
+.head-icon, .body-icon, .leg-icon {
+    transition: all var(--transition-fast);
+    background-color: #dddddd;
+}
+
+/* Head icon - simple circle */
+.head-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%; 
+}
+
+/* Body icon - torso with shoulders */
+.body-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* Create the main torso rectangle */
+.body-icon::before {
+    content: "";
+    width: 10px;
+    height: 14px;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+}
+
+/* Create the shoulders */
+.body-icon::after {
+    content: "";
+    width: 20px;
+    height: 6px;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+}
+
+/* Legs styling */
+.legshot .damage-icon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.leg-icon {
+    width: 5px;
+    height: 13px;
+}
+
+.weapon-card:hover .head-icon, 
+.weapon-card:hover .body-icon, 
+.weapon-card:hover .leg-icon,
+.weapon-card:hover .body-icon::before,
+.weapon-card:hover .body-icon::after {
+    background-color: white;
+}
+
+/* Category-specific colors for stat bars */
+/* Short Range */
+.short-range .stat-bar {
+    background-color: var(--spectre-pink);
+}
+
+/* Mid & Long Range */
+.mid-long-range .stat-bar {
+    background-color: var(--spectre-blue);
+}
+
+/* Pistol & Melee */
+.pistol-melee .stat-bar {
+    background-color: var(--spectre-green);
+}
+
+/* Category-specific styling for weapon cards on hover */
+/* Short Range */
+.weapon-card:hover.short-range {
+    box-shadow: 0 15px 30px rgba(247, 61, 114, 0.3);
+}
+
+.weapon-card:hover.mid-long-range {
+    box-shadow: 0 15px 30px rgba(75, 249, 252, 0.3);
+}
+
+.weapon-card:hover.pistol-melee {
+    box-shadow: 0 15px 30px rgba(36, 237, 174, 0.3);
+}
+
+/* Add a "View Stats" indicator - Now positioned at the top */
+.weapon-details::after {
+    content: "HOVER FOR STATS";
+    position: absolute;
+    top: 75px;
+    right: 15px;
+    font-size: 12px;
+    color: var(--primary-color);
+    opacity: 0.8;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 1px;
+    transition: all var(--transition-fast);
+}
+
+.weapon-card:hover .weapon-details::after {
+    opacity: 0;
+}
+
+/* Staggered animations for weapon cards */
+.weapons-grid .weapon-card:nth-child(1) { animation-delay: 0.1s; }
+.weapons-grid .weapon-card:nth-child(2) { animation-delay: 0.15s; }
+.weapons-grid .weapon-card:nth-child(3) { animation-delay: 0.2s; }
+.weapons-grid .weapon-card:nth-child(4) { animation-delay: 0.25s; }
+.weapons-grid .weapon-card:nth-child(5) { animation-delay: 0.3s; }
+.weapons-grid .weapon-card:nth-child(6) { animation-delay: 0.35s; }
+.weapons-grid .weapon-card:nth-child(7) { animation-delay: 0.4s; }
+.weapons-grid .weapon-card:nth-child(8) { animation-delay: 0.45s; }
+.weapons-grid .weapon-card:nth-child(9) { animation-delay: 0.5s; }
+.weapons-grid .weapon-card:nth-child(10) { animation-delay: 0.55s; }
+
+/* Hover effects for weapons */
+.weapon-card:hover .weapon-name {
+    color: var(--secondary-color);
+}

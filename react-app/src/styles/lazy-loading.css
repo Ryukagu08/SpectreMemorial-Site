@@ -1,0 +1,106 @@
+/* lazy-loading.css - Styles for lazy loaded images */
+
+/* Loading state for image containers */
+.artwork-item.is-loading,
+.gallery-item.is-loading,
+.fanart-item.is-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Loading animation */
+.artwork-item.is-loading::after,
+.gallery-item.is-loading::after,
+.fanart-item.is-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(35, 35, 35, 0.5) 0%, 
+        rgba(45, 45, 45, 0.7) 50%, 
+        rgba(35, 35, 35, 0.5) 100%);
+    background-size: 200% 100%;
+    animation: loadingPulse 1.5s infinite;
+    z-index: 2;
+}
+
+/* Loading icon */
+.artwork-item.is-loading::before,
+.gallery-item.is-loading::before,
+.fanart-item.is-loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 3px solid rgba(255, 203, 0, 0.1);
+    border-radius: 50%;
+    border-top: 3px solid var(--primary-color);
+    animation: spin 1s infinite linear;
+    z-index: 3;
+}
+
+/* Fade in animation for loaded images */
+.artwork-item.is-loaded img,
+.gallery-item.is-loaded img,
+.fanart-item.is-loaded img {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Error state */
+.artwork-item.error-loading::after,
+.gallery-item.error-loading::after,
+.fanart-item.error-loading::after {
+    content: '!';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    background-color: rgba(255, 0, 0, 0.7);
+    border-radius: 50%;
+    color: white;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    z-index: 3;
+}
+
+/* Animation keyframes */
+@keyframes loadingPulse {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* For browsers that support lazy loading natively */
+img.artwork-item img,
+.gallery-item img,
+.fanart-item img {
+    transition: opacity 0.3s ease;
+}
+
+/* Create a placeholder for the images */
+.artwork-item.is-loading img,
+.gallery-item.is-loading img,
+.fanart-item.is-loading img {
+    filter: blur(10px);
+    transform: scale(1.05);
+    opacity: 0.5;
+    transition: filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}

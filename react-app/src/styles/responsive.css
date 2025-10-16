@@ -1,0 +1,1338 @@
+/* responsive.css - Consolidated responsive design styles */
+
+/* ============================
+   Mobile Menu Fullscreen Styles 
+   ============================ */
+   .mobile-menu-active {
+    overflow: hidden;
+}
+
+.fullscreen-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: var(--z-index-high);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fullscreen-nav.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fullscreen-nav .tab-navigation {
+    flex-direction: column;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 400px;
+}
+
+.fullscreen-nav .tab-button {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/* Mobile Navigation Toggle Button */
+.nav-toggle-button {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: var(--z-index-high);
+    padding: 0;
+}
+
+.nav-toggle-button .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 6px 0;
+    transition: all 0.3s ease;
+}
+
+/* Animation for hamburger to X */
+.nav-toggle-button.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.nav-toggle-button.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle-button.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Dropdown styling for mobile subtabs */
+.fullscreen-nav .has-subtabs {
+    position: relative;
+}
+
+.fullscreen-nav .has-subtabs .tab-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Remove default arrow for buttons that will have toggle button */
+.fullscreen-nav .has-subtabs .tab-button.with-toggle-button::after {
+    display: none;
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.has-subtabs.subtabs-visible .dropdown-toggle {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Make dropdown icon white when tab is active with yellow glow */
+.has-subtabs .tab-button.active .dropdown-toggle,
+.has-subtabs .tab-button.active::after {
+    color: white;
+}
+
+.fullscreen-nav .has-subtabs.subtabs-visible .tab-button::after {
+    transform: rotate(180deg);
+}
+
+.fullscreen-nav .subtab-navigation {
+    position: static;
+    opacity: 0;
+    max-height: 0;
+    visibility: visible;
+    transform: none;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: none;
+    width: 100%;
+}
+
+.fullscreen-nav .has-subtabs.subtabs-visible .subtab-navigation {
+    opacity: 1;
+    max-height: 300px;
+    padding: var(--spacing-xs);
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.fullscreen-nav .subtab-button {
+    text-align: center;
+    padding: 12px;
+    margin: 3px 0;
+}
+
+/* ============================
+   Sponsor Responsive Styles
+   ============================ */
+
+/* Large Desktops (1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .section-title {
+        font-size: 42px;
+    }
+    
+    .logo-image {
+        height: 45px;
+    }
+    
+    .sponsor-showcase {
+        height: 700px;
+    }
+    
+    .sponsor-content-wrapper {
+        padding: var(--spacing-xl);
+    }
+    
+    .sponsor-logo-container {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .sponsor-content-section {
+        gap: var(--spacing-lg);
+    }
+    
+    .sponsor-abilities-section {
+        padding: var(--spacing-lg);
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .banner-overlay {
+        aspect-ratio: 16 / 11;
+    }
+}
+
+/* ============================
+   Medium Desktops (992px to 1199px)
+   ============================ */
+@media (max-width: 1199px) {
+    /* Layout */
+    
+    .feature-media, 
+    .feature-content {
+        grid-column: span 6;
+    }
+    
+    .feature-grid.feature-grid-reverse .feature-content {
+        grid-column: 1 / span 6;
+    }
+    
+    .feature-grid.feature-grid-reverse .feature-media {
+        grid-column: 7 / span 6;
+    }
+
+    .subtab-navigation {
+        min-width: 160px;
+    }
+    
+    /* Maps */
+    .map-featured-image,
+    .map-featured-content {
+        grid-column: span 6;
+    }
+    
+    .map-minimap-overlay {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Weapons */
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+    
+    .stat-name {
+        flex: 0 0 100px;
+    }
+    
+    /* Sponsors */
+    .sponsor-showcase {
+        height: 680px;
+    }
+    
+    .sponsor-content-wrapper {
+        padding: var(--spacing-lg);
+    }
+    
+    .sponsor-content-section {
+        grid-template-columns: minmax(250px, 30%) 1fr;
+    }
+    
+    .sponsor-name {
+        font-size: calc(var(--font-size-md) - 2px);
+    }
+    
+    .ability-card {
+        min-height: 80px;
+    }
+}
+
+/* ============================
+   Tablets and Small Desktops (768px to 991px)
+   ============================ */
+@media (max-width: 991px) {
+    /* Layout */
+    .feature-grid,
+    .feature-grid-reverse {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-media, 
+    .feature-content,
+    .feature-grid.feature-grid-reverse .feature-media,
+    .feature-grid.feature-grid-reverse .feature-content {
+        grid-column: span 12;
+    }
+    
+    .feature-grid.feature-grid-reverse .feature-content {
+        border-left: 5px solid var(--primary-color);
+        border-right: none;
+    }
+    
+    /* Use grid-row to control the visual order */
+    .feature-grid.feature-grid-reverse .feature-media {
+        grid-row: 1;
+    }
+    
+    .feature-grid.feature-grid-reverse .feature-content {
+        grid-row: 2;
+    }
+    
+    .section-title {
+        font-size: 32px;
+    }
+    
+    /* Timeline */
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding: 0 0 var(--spacing-xl) 60px !important;
+        text-align: left !important;
+    }
+    
+    .timeline-item::before {
+        left: 22px !important;
+        right: auto !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+        border-right: none;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    /* Community */
+    .community-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    /* Archive */
+    .archive-mosaic {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .archive-item-large {
+        grid-column: span 6;
+    }
+    
+    .archive-item-medium {
+        grid-column: span 3;
+    }
+    
+    .archive-item-small {
+        grid-column: span 3;
+    }
+
+    /* Subtabs need more space on tablets */
+    .subtab-navigation {
+        min-width: 200px;
+    }
+    
+    /* Maps */
+    .map-featured {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-featured-image,
+    .map-featured-content {
+        grid-column: span 12;
+    }
+    
+    .map-featured-image {
+        aspect-ratio: 16/9;
+        max-height: 400px;
+    }
+    
+    .maps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    
+    /* Gallery */
+    .artworks-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .comic-pages {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .comic-page {
+        flex: 0 0 100%;
+        max-width: 600px;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .contest-first-place {
+        height: 500px;
+    }
+    
+    .contest-second-place, .contest-third-place {
+        height: 300px;
+    }
+    
+    /* Sponsors */
+    .sponsor-showcase {
+        height: auto;
+        min-height: 750px;
+    }
+    
+    .sponsor-content-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .sponsor-art-section {
+        border-radius: var(--border-radius);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .ability-icon-container {
+        flex: 0 0 50px;
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .sponsor-thumb-logo {
+        height: 70px;
+    }
+    
+    /* Abilities section */
+    .abilities-art-bg {
+        opacity: 0.5;
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+    
+    .abilities-bg-image {
+        position: absolute;
+        left: 0;
+        transform: none;
+        object-position: center;
+    }
+    
+    .abilities-list {
+        max-width: 100%;
+    }
+    
+    .sponsor-header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .sponsor-logo-image {
+        margin-right: 0;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .sponsor-meta {
+        justify-content: center;
+    }
+    
+    /* Weapons */
+    .weapons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .weapon-card {
+        height: 320px;
+    }
+    
+    .stat-name {
+        flex: 0 0 90px;
+    }
+}
+
+/* ============================
+   Mobile - Show Burger Menu (767px and down)
+   ============================ */
+@media (max-width: 767px) {
+    /* Show the toggle button */
+    .nav-toggle-button {
+        display: block;
+    }
+    
+    /* Remove yellow border and adjust header for mobile */
+    .site-header {
+        border-bottom: none;
+        background-color: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+        height: 80px;
+    }
+    
+    /* Layout */
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        padding-top: 10px;
+    }
+    
+    .site-logo {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .logo-image {
+        height: 40px;
+    }
+    
+    .banner-title {
+        font-size: 40px;
+    }
+    
+    .banner-subtitle {
+        font-size: 20px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+    }
+    
+    .section-description {
+        font-size: 16px;
+    }
+    
+    .feature-title {
+        font-size: 22px;
+    }
+    
+    .feature-description {
+        font-size: 16px;
+    }
+    
+    /* Archive */
+    .archive-mosaic {
+        display: block;
+    }
+    
+    .archive-item {
+        margin-bottom: var(--spacing-md);
+        height: 250px;
+    }
+    
+    /* Gallery */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Make artwork grid single column on mobile */
+    .artworks-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-nav-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .gallery-nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Footer */
+    .footer-column {
+        flex: 0 0 100%;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    
+    .footer-content {
+        margin-bottom: 10px;
+    }
+    
+    .footer-title {
+        margin-bottom: 5px;
+    }
+    
+    .site-footer {
+        padding: 15px 0 8px;
+    }
+    
+    .footer-title:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Maps */
+    .map-featured-content {
+        padding: var(--spacing-md);
+    }
+    
+    .map-minimap-overlay {
+        width: 100px;
+        height: 100px;
+        bottom: var(--spacing-sm);
+        right: var(--spacing-sm);
+    }
+    
+    .maps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .map-details-features {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Sponsors */
+    .sponsor-showcase {
+        min-height: 680px;
+    }
+    
+    .sponsor-content-wrapper {
+        padding: var(--spacing-md);
+    }
+    
+    .sponsor-header-section {
+        height: auto;
+    }
+    
+    .sponsor-identity {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .sponsor-logo-container {
+        width: 80px;
+        height: 80px;
+        margin-bottom: var(--spacing-sm);
+        transform: translateY(0);
+    }
+    
+    .sponsor-meta {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .meta-item {
+        width: 100%;
+    }
+    
+    .sponsor-content-section {
+        grid-template-rows: 200px 1fr;
+    }
+    
+    .sponsor-art-section {
+        height: 200px;
+    }
+    
+    .sponsor-abilities-section {
+        padding: var(--spacing-sm);
+    }
+    
+    .ability-card {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    .sponsor-thumb {
+        min-height: 120px;
+    }
+    
+    .sponsor-thumb-logo {
+        height: 60px;
+    }
+    
+    .sponsor-thumb-info {
+        padding: var(--spacing-xs);
+    }
+    
+    .sponsor-thumb-name {
+        font-size: 12px;
+    }
+    
+    .sponsor-thumb-role {
+        font-size: 10px;
+    }
+    
+    .sponsor-banner-image {
+        object-fit: cover;
+    }
+    
+    /* Sponsor banner */
+    .sponsor-banner {
+        height: 150px;
+    }
+    
+    .sponsor-card-featured {
+        height: auto;
+        display: block;
+    }
+    
+    .sponsor-content-wrapper {
+        display: block;
+    }
+    
+    .sponsor-abilities {
+        display: block;
+        min-height: 350px;
+    }
+    
+    .abilities-list {
+        max-height: none;
+        overflow: visible;
+    }
+    
+    .ability-item {
+        flex-direction: column;
+    }
+    
+    .ability-icon {
+        width: 100%;
+        height: 60px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 203, 0, 0.3);
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .sponsor-thumb-logo {
+        height: 80px;
+    }
+    
+    /* Weapons */
+    .weapons-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .weapon-card {
+        max-width: 500px;
+        margin: 0 auto;
+        height: 300px;
+    }
+    
+    .stat-name {
+        flex: 0 0 90px;
+        font-size: 13px;
+    }
+    
+    .stat-value {
+        font-size: 13px;
+    }
+    
+    .stats-description {
+        font-size: 13px;
+    }
+
+    .community-grid .ben-quote {
+        grid-column: span 1; /* Reset to 1 column on mobile */
+    }
+
+    .community-grid .qkz-quote {
+        grid-column: span 1; /* Reset to 1 column on mobile */
+    }
+}
+
+/* ============================
+   Mobile Portrait (up to 575px)
+   ============================ */
+@media (max-width: 575px) {
+    /* Layout */
+    .logo-image {
+        height: 35px;
+    }
+    
+    .banner-subtitle {
+        font-size: 18px;
+    }
+    
+    .banner-date {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+    
+    /* Timeline */
+    .timeline-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .timeline-date {
+        font-size: 14px;
+    }
+    
+    .timeline-title {
+        font-size: 18px;
+    }
+    
+    .quote-text {
+        font-size: 15px;
+    }
+    
+    .archive-item-title {
+        font-size: 16px;
+    }
+    
+    .main-banner {
+        height: 60vh;
+    }
+    
+    .feature-media, .feature-content {
+        grid-column: span 12;
+    }
+    
+    .feature-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .feature-media {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .community-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Maps & Sponsors */
+    .maps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Sponsors */
+    .sponsor-content-wrapper {
+        padding: var(--spacing-sm);
+    }
+    
+    .sponsor-showcase {
+        min-height: 650px;
+    }
+    
+    .sponsor-name {
+        font-size: var(--font-size-sm);
+    }
+    
+    .ability-card {
+        flex-direction: column;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .ability-icon-container {
+        height: 60px;
+        width: 100%;
+        padding: var(--spacing-xs);
+    }
+    
+    .ability-details {
+        padding: var(--spacing-xs);
+    }
+    
+    .ability-name {
+        font-size: 14px;
+    }
+    
+    .ability-description {
+        font-size: 12px;
+    }
+    
+    .sponsors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sponsor-thumb-logo {
+        height: 50px;
+    }
+    
+    .sponsor-content-section {
+        grid-template-rows: 180px 1fr;
+    }
+    
+    .sponsor-art-section {
+        height: 180px;
+    }
+    
+    .sponsors-selector-title {
+        font-size: 16px;
+    }
+    
+    /* Contest */
+    .contest-first-place {
+        height: 350px;
+    }
+    
+    .contest-second-place, .contest-third-place {
+        height: 250px;
+    }
+    
+    .contest-content-top,
+    .contest-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .contest-title {
+        font-size: 16px;
+    }
+    
+    .contest-caption {
+        font-size: 14px;
+    }
+    
+    /* Weapons */
+    .weapon-card {
+        height: 280px;
+    }
+    
+    .weapon-details {
+        padding: var(--spacing-sm);
+    }
+    
+    .weapon-name {
+        font-size: 16px;
+    }
+    
+    .weapon-type {
+        font-size: 14px;
+    }
+    
+    .stats-row, .stats-header {
+        padding: 8px 15px;
+    }
+    
+    .stats-description {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .damage-cell {
+        font-size: 14px;
+    }
+}
+
+/* ============================
+   Landscape orientations
+   ============================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .main-banner {
+        height: 100vh;
+    }
+    
+    .banner-content {
+        padding-top: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+    }
+    
+    .banner-title {
+        font-size: 36px;
+    }
+    
+    .banner-subtitle {
+        font-size: 18px;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    /* Mobile fullscreen menu adjustments for landscape */
+    .fullscreen-nav .tab-navigation {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-height: 70vh;
+    }
+    
+    .fullscreen-nav .tab-button {
+        width: auto;
+        min-width: 200px;
+        margin: 5px;
+    }
+
+    /* Sponsor adjustments for landscape */
+    .sponsor-showcase {
+        height: auto;
+        min-height: 500px;
+    }
+
+    .sponsor-content-section {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+
+    .sponsor-art-section {
+        height: 220px;
+    }
+
+    .sponsor-identity {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+/* ============================
+   Touch Device Support - Remove hover effects
+   ============================ */
+@media (hover: none) {
+    /* Disable hover effects */
+    [class]:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    [class]:hover img {
+        transform: none !important;
+    }
+    
+    /* Make captions visible */
+    .gallery-caption,
+    .archive-content,
+    .contest-content,
+    .map-overlay,
+    .gallery-item .gallery-caption,
+    .artwork-item .gallery-caption,
+    .fanart-item .gallery-caption {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Hide rail indicator */
+    .button-rail-indicator {
+        display: none;
+    }
+    
+    /* Weapon card complete optimization */
+    .weapon-card {
+        height: auto !important;
+        pointer-events: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .weapon-stats-panel {
+        opacity: 1;
+        height: auto;
+        pointer-events: auto;
+        overflow-y: auto;
+    }
+    
+    .weapon-details {
+        position: relative;
+        height: auto !important;
+        min-height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.7) 100%) !important;
+    }
+    
+    .weapon-details::after {
+        display: none;
+    }
+    
+    .weapon-image {
+        position: relative;
+        height: 200px;
+    }
+
+    /* Sponsor hover adjustments for touch */
+    .ability-card:hover {
+        transform: none !important;
+    }
+
+    .sponsor-thumb:hover {
+        transform: none !important;
+    }
+
+    .sponsor-thumb:hover .sponsor-thumb-image {
+        transform: none !important;
+    }
+}
+
+/* ============================
+   Print styles
+   ============================ */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+    
+    .site-header, 
+    .tab-navigation, 
+    .main-banner, 
+    .footer-content {
+        display: none;
+    }
+    
+    .tab-content {
+        display: block !important;
+        page-break-after: always;
+    }
+    
+    .feature-media, 
+    .archive-item, 
+    .gallery-item {
+        border: 1px solid #ddd;
+    }
+    
+    .section-header::before {
+        background: #000;
+    }
+    
+    .section-title, 
+    .feature-title, 
+    .timeline-title, 
+    .archive-item-title, 
+    .footer-title, 
+    .author-name {
+        color: #000;
+    }
+    
+    .timeline::before {
+        background: #000;
+    }
+    
+    .timeline-date {
+        background-color: #eee;
+        color: #000;
+    }
+    
+    .footer-bottom {
+        display: block;
+        text-align: center;
+        margin-top: var(--spacing-xl);
+        color: #000;
+        border-top: 1px solid #ddd;
+    }
+    
+    /* Hide subtabs in print */
+    .subtab-navigation {
+        display: none;
+    }
+    
+    /* Show all subtab content in print */
+    .subtab-content {
+        display: block !important;
+        page-break-after: always;
+    }
+    
+    /* Specific styles for weapon cards */
+    .weapon-card {
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+    
+    .weapon-name {
+        color: #000;
+    }
+    
+    .weapon-stats-panel {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        color: #000;
+        height: auto;
+        opacity: 1;
+    }
+    
+    .stats-header {
+        background-color: #eee;
+        color: #000;
+    }
+    
+    .stats-row {
+        color: #333;
+    }
+    
+    .stat-bar-background {
+        background-color: #eee;
+    }
+    
+    .stat-bar {
+        background-color: #999 !important;
+    }
+
+    /* Print styles for sponsors */
+    .sponsor-showcase {
+        page-break-inside: avoid;
+        border: 1px solid #ddd;
+        height: auto;
+    }
+
+    .sponsor-banner-container {
+        display: none;
+    }
+
+    .sponsor-content-wrapper {
+        background-color: white;
+    }
+
+    .ability-card {
+        border: 1px solid #ddd;
+        border-left: 3px solid #999;
+    }
+
+    .sponsor-name, .ability-name {
+        color: #000;
+    }
+}
+
+/* ============================
+   High contrast mode
+   ============================ */
+@media (forced-colors: active) {
+    :root {
+        --primary-color: CanvasText;
+        --border-color: CanvasText;
+    }
+    
+    .tab-button.active,
+    .subtab-button.active {
+        border: 2px solid CanvasText;
+    }
+    
+    .timeline::before,
+    .timeline-item::before,
+    .section-header::before,
+    .footer-title:after {
+        background-color: CanvasText;
+    }
+    
+    .feature-media,
+    .archive-item,
+    .gallery-item,
+    .quote-card {
+        border: 2px solid CanvasText;
+    }
+
+    .subtab-navigation {
+        border: 2px solid CanvasText;
+    }
+    
+    .gallery-item, .artwork-item, .archive-item, .fanart-item, .comic-page, .contest-entry {
+        border: 2px solid CanvasText;
+    }
+    
+    .weapon-card {
+        border: 2px solid CanvasText;
+    }
+    
+    .stat-bar-background, .damage-icon, .damage-cell {
+        background-color: Canvas;
+        border: 1px solid CanvasText;
+    }
+    
+    .stat-bar {
+        background-color: Highlight !important;
+    }
+    
+    .head-icon, .body-icon, .leg-icon {
+        background-color: CanvasText;
+    }
+
+    /* High contrast mode for sponsors */
+    .sponsor-showcase {
+        border: 2px solid CanvasText;
+    }
+
+    .ability-card {
+        border: 1px solid CanvasText;
+        border-left: 3px solid CanvasText;
+    }
+
+    .sponsor-thumb {
+        border: 2px solid CanvasText;
+    }
+
+    .sponsor-thumb.active {
+        background-color: Canvas;
+        border: 2px solid Highlight;
+    }
+}
+
+/* ============================
+   Reduced motion preferences
+   ============================ */
+@media (prefers-reduced-motion) {
+    *, 
+    *::before, 
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .tab-content.active,
+    .feature-grid,
+    .timeline-item,
+    .quote-card,
+    .archive-item,
+    .gallery-item,
+    .banner-logo,
+    .banner-subtitle,
+    .banner-date,
+    .tab-button.active,
+    .timeline::before,
+    .gallery-section-title,
+    .gallery-section-title::after,
+    .feature-media img,
+    .archive-overview .feature-media img,
+    .archive-item img,
+    .gallery-item img,
+    .map-featured-image img,
+    .map-card .map-thumbnail,
+    .map-overlay-minimap,
+    .map-card,
+    .map-overlay,
+    .sponsor-banner-image,
+    .sponsor-logo-image,
+    .ability-icon-image,
+    .sponsor-thumb,
+    .ability-item,
+    .abilities-bg-image,
+    .sponsor-thumb-image {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    /* Disable sponsor animations */
+    .sponsor-showcase.updating-out,
+    .sponsor-showcase.updating-in,
+    .ability-card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

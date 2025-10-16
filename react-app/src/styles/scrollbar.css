@@ -1,0 +1,53 @@
+/* Webkit browsers (Chrome, Safari, newer Edge) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 0;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffdb44;
+    box-shadow: 0 0 8px rgba(255, 203, 0, 0.7);
+}
+
+::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.8);
+}
+
+/* For IE/Edge */
+body {
+    -ms-overflow-style: none;
+}
+
+/* Optional: Add a subtle pulse animation to the scrollbar thumb */
+@keyframes scrollPulse {
+    0% {
+        box-shadow: 0 0 5px 0 rgba(255, 203, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 10px 0 rgba(255, 203, 0, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px 0 rgba(255, 203, 0, 0.5);
+    }
+}
+
+::-webkit-scrollbar-thumb:active {
+    animation: scrollPulse 1.5s infinite;
+}
