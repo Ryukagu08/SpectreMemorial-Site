@@ -7,6 +7,7 @@ import ArchivePage from './pages/ArchivePage';
 import TimelinePage from './pages/TimelinePage';
 import CommunityPage from './pages/CommunityPage';
 import GalleryPage from './pages/GalleryPage';
+import ScrollToTop from './components/ScrollToTop';
 
 // Import all CSS files
 import './styles/variables.css';
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Header 
           isMobileMenuOpen={isMobileMenuOpen} 
